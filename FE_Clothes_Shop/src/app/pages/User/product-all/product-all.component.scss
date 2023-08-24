@@ -1,0 +1,21 @@
+.zoom {
+    transition: transform .2s;
+    /* Animation */
+    cursor: pointer;
+    height: 326px
+}
+
+.zoom:hover {
+    transform: scale(1.05);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+::ng-deep {
+    .mat-form-field-appearance-fill .mat-form-field-flex {
+        background: none !important;
+    }
+
+    .mat-form-field-infix {
+        padding: 0px !important;
+    }
+}

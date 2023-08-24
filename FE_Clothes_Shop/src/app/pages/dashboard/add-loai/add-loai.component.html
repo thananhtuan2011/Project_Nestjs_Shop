@@ -1,0 +1,14 @@
+<div style="display: flex;flex-direction: column;">
+    <mat-form-field appearance="outline">
+        <mat-label>Tên loại</mat-label>
+        <input [(ngModel)]="tenloai" matInput placeholder="Nhập tên loại">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Kí hiệu code</mat-label>
+        <input  [(ngModel)]="maloai" matInput placeholder="Nhập mã code">
+      </mat-form-field>
+      <div style="float: right;">
+        <button  (click)="submit()" class="btn btn-primary" type="submit" style="margin-right: 10px;">Lưu</button>
+        <button (click)="goBack()" type="button" class="btn btn-light">Quay lại</button>
+    </div>
+</div>

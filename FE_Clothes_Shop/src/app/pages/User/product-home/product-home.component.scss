@@ -1,0 +1,77 @@
+.zoom {
+    transition: transform .2s;
+    /* Animation */
+    cursor: pointer;
+    height: 326px
+}
+
+.zoom:hover {
+    transform: scale(1.05);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+
+ngb-carousel .wrapper {
+    position: relative;
+    height: 100%;
+    padding-top: 60%;
+    /* Keep ratio for 900x500 images */
+}
+
+ngb-carousel .wrapper>img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+}
+
+::ng-deep.carousel-inner {
+    width: 99.5% !important;
+    height: 100% !important;
+}
+
+::ng-deep.carousel-item {
+    height: 100% !important;
+}
+
+
+::ng-deep.carousel-caption {
+    top: 0 !important;
+}
+
+.slide1 {
+    background-image: url("/src/assets/media/gif/connect.gif");
+}
+
+.feature-block {
+    display: flex;
+    align-items: center;
+    padding: 40px 0px;
+}
+
+.feature-block i {
+    float: left;
+    font-size: 35px;
+    color: #fb5c42;
+    opacity: .7;
+}
+
+.feature-block .content {
+    padding-left: 20px;
+}
+
+.feature-block .content h5 {
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.feature-block .content p {
+    margin-bottom: 0px;
+}
+
+.feature-block.active {
+    background: #fff;
+}

@@ -1,0 +1,158 @@
+<style>
+
+    input[type=text] {
+          width: 280px;
+          box-sizing: border-box;
+          border: 1px solid #3e44f9b5;
+          border-radius: 15px;
+          font-size: 12px;
+          background-color: white;
+          /* background-image: url('./assets/search_icon.png'); */
+          background-position: 10px 10px; 
+          background-repeat: no-repeat;
+          padding:7px 12px 7px 40px;
+          -webkit-transition: width 0.4s ease-in-out;
+          transition: width 0.4s ease-in-out;
+        }
+        
+        input[type=text]:focus {
+          width: 480px;
+          outline: none;
+          border: 1px solid #3e44f9b5;
+          background-color: white;
+        }
+      .fullname{
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
+      }
+     
+    </style>
+    
+    
+    <div class="card card-custom card-sticky gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="card-label cssdanhsach" style="font-size: 22px;font-weight: bold;">Danh sách loại sản phẩm</span>
+          <button (click)="AddLoai()" style="margin-right: 20px;" mat-raised-button color="primary">
+            <span style="color: black;">Thêm Loại</span>
+            </button>
+        </div>
+        <div class="card-search">
+         
+          <!-- <app-jee-search-form (keywordEvent)="changeKeyword($event)" (filterEvent)="changeFilter($event)"></app-jee-search-form> -->
+        </div>
+ 
+      </div>
+      <!-- body -->
+      <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table" [ngStyle]="{ height: getHeight() }">
+          <table class="table table-head-custom table-vertical-center overflow-hidden">
+            <thead>
+              <th  >
+                <span>Id</span>
+                <app-sort-icon
+                  column="FullName"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th>
+                <span>Kí hiệu</span>
+                <app-sort-icon
+                  column="tendangnhap"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th >
+                <span>Tên loại</span>
+                <app-sort-icon
+                  column="phongbanid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th style="text-align: center;">
+                <span>Xóa</span>
+                <app-sort-icon
+                  column="chucvuid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+            
+              <th style="text-align: center;">
+                <span>Cập nhật</span>
+                <app-sort-icon
+                  column="chucvuid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+         
+            
+              <!-- <th style="min-width: 100px; text-align: center">
+                <span>nhân viên</span>
+              </th> -->
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let r of service.items$ | async">
+              <td>
+                <div>
+                  <span>{{ r.Fullname }}</span>
+                </div>
+              </td>
+              </tr> -->
+            <tr *ngFor="let r of product_services._itemsteamCate$ | async">
+              
+                <td>
+                  <div>
+                    <span class="cssusername">{{ r.category_id }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <span class="cssDepartment">{{ r.category_code }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.category_name }}</span>
+                </td>
+            
+              
+        
+                
+                <td style="text-align: center">
+                  <mat-icon (click)="RemoveLoai(r.category_id)"  mat style="cursor: pointer; color: #e43541; font-size: 16px" aria-hidden="false">
+                    delete_forever</mat-icon
+                  >
+                    
+                </td>
+                   
+                <td style="text-align: center">
+                  <mat-icon (click)="UpdateLoai(r)"  mat style="cursor: pointer; color: #1bc5bd; font-size: 16px" aria-hidden="false">
+                    update</mat-icon
+                  >
+                    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- end: Table -->
+        <app-paginator
+          class="d-flex justify-content-between align-items-center flex-wrap"
+          [paginator]="paginator"
+          [isLoading]="isLoading"
+          (paginate)="paginate($event)"
+        ></app-paginator>
+      </div>
+    </div>
+    
+    

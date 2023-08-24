@@ -1,0 +1,281 @@
+<section class="page-header">
+    <div class="overly"></div>   
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="content text-center">
+            <h1 class="mb-3">Chi tiết sản phẩm</h1>
+            <p>Cửa hàng của chúng tôi luôn luôn đặt chất lượng sản phẩm lên hàng đầu với 100% là hàng chính hãng.</p>
+  
+          <!-- <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-transparent justify-content-center">
+              <li class="breadcrumb-item"><a routerLink="/">Trang chủ</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Chi tiết sản phẩm {{product?.product_name}}</li>
+            </ol>
+          </nav> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <div *ngFor="let d of lstProducDetail">
+
+
+  <section class="single-product">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-5">
+          <div class="single-product-slider">
+            <div class="carousel slide" data-ride="carousel" id="single-product-slider">
+              <div class="carousel-inner">
+                <!-- <div class="carousel-item active" *ngFor="let img of listPImage">
+                  <img src="{{img.image}}" alt="" class="img-fluid">
+                </div> -->
+              </div>
+  
+              <ol class="carousel-indicators">
+                  <!-- <li data-target="#single-product-slider" data-slide-to="0" class="active" *ngFor="let img of listPImage; let i=index">
+                      <img src="{{img.image}}" style="width:100px;height:100px" alt="" class="img-fluid">
+                  </li> -->
+              </ol>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-7">
+            <!-- aaaaa -->
+    
+        </div>
+      </div>
+  
+      
+      <div class="row">
+  
+          <div class="col-md-8" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <h4>Thông tin mô tả</h4>
+           
+            <div class="" >
+                <div class="product-wrap">
+                    <img style="width: 90% !important;" class="img-fluid mb-3 img-first zoom"
+                         [src]="d.Img"  alt="product-img" />
+                   </div>
+              <li>{{d.product_name}}</li>
+            </div>
+  
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            
+            <ul class="list-unstyled info-desc">
+              <li class="d-flex">
+                <strong>Khối lượng </strong>  
+                <span>400 g</span>
+              </li>
+              <li class="d-flex">
+                <strong>Kích thước </strong>
+                <span>10 x 10 x 15 cm</span>
+              </li>
+              <li class="d-flex">
+                <strong>Chất liệu</strong>
+                <span >60% cotton, 40% kaki</span>
+              </li>
+              <!-- <li class="d-flex">
+                <strong>Màu sắc </strong>
+                <span>{{colorString}}</span>
+              </li>
+              <li class="d-flex">
+                <strong>Kích cỡ</strong>
+                <span>{{product?.size}}</span>
+              </li> -->
+            </ul>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <div class="row">
+              <div class="col-lg-7">
+                <!-- <div *ngFor="let cmt of lstCommentByAccount | paginate: {
+                  itemsPerPage: 3,
+                  currentPage: page,
+                  totalItems: count
+                }; let i=index" class="media review-block mb-4">
+                  <button (click)="deleteComment(cmt.comment_id)" *ngIf="accountId == cmt.account_id" class="btn-danger btn-sm">Delete</button>
+                  <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png  " alt="reviewimg" class="img-fluid mr-4">
+                  <div class="media-body">
+                    <div class="product-review">
+                      {{cmt.star}}/5<span><i class="tf-ion-android-star"></i></span>
+                    </div>
+                    <h6>{{cmt?.user_name}} <span class="text-sm text-muted font-weight-normal ml-3">{{cmt.created_at | date:'dd/MM/yyyy hh:mm:aa'}}</span></h6>
+                    <p>{{cmt.comment1}}</p>
+                  </div>  
+                </div> -->
+                <div class="col-12">
+                  <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                      <div class="d-flex justify-content-center">
+                        <!-- <pagination-controls previousLabel="Trước" nextLabel="Tiếp" (pageChange)="onTableDataChange($event)">
+                        </pagination-controls> -->
+                      </div>
+                    </ul>
+                  </nav>
+                </div>
+                
+              </div>
+  
+  
+              <div class="col-lg-5">
+                <div class="review-comment mt-5 mt-lg-0">
+                  <h4 class="mb-3">Thêm nhận xét</h4>
+  
+                  <!-- <form action="#">
+                    <div class="starrr"></div>
+                    <div class="form-group">
+                      <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index">
+                        <li (click)="countStar(star)" [ngClass]="{'selected': (star <= selectedValue)}"
+                          (mouseover)="addClass(star)" (mouseout)="removeClass()"> <span
+                            class="material-icons"><i class="fa fa-star"></i></span>
+                        </li>
+                      </ul>                     </div>
+                    <div class="form-group">
+                      <textarea name="comment" id="comment" class="form-control" cols="30"  [(ngModel)]="comment" [ngModelOptions]="{standalone: true}" rows="4" placeholder="Nhận xét"></textarea>
+                    </div>
+  
+                    <a href="javascript:void(0)" (click)="postCmt()" class="btn btn-main btn-small">Đăng</a>
+                  </form> -->
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="col-md-4 product-content-desc" id="detail-product">
+            <div class="product-title">
+                <h1>{{d.Mota}}</h1>
+                
+                <span id="pro_sku">SKU: POL003103</span>
+                
+                         
+            </div>
+            <div class="product-price" id="price-preview"><span class="pro-sale">-23%</span><span class="pro-price"> {{d.DonGia |number}} ₫</span><del>{{d.DonGiaGoc |number}}₫</del></div>
+            <div style=" font-size: 20px;">
+              <span>Số lượng còn lại: <label style="color: red;">{{d.amount}}</label></span>
+            </div>  
+            
+                
+            <form id="add-item-form" action="/cart/add" method="post" class="variants clearfix">				
+            
+             <div>
+                <span style="font-size: 15px;">Màu sắc</span>
+                <mat-chip-list class="mat-chip-list-stacked"  (change)="onChange($event)">
+                    <mat-chip
+                      #chipRef="matChip"
+                      *ngFor="let chip of ListColor"
+                      (click)="chipRef.selectViaInteraction()"
+                      [selected]="chip.selected"
+                    >
+                      {{chip.name}}
+                    </mat-chip>
+                  </mat-chip-list>
+             </div>
+             <div style="padding-bottom: 10px;">
+              
+                <span style="font-size: 15px;">  Kích thước</span>
+                <mat-chip-list class="mat-chip-list-stacked"  (change)="onChangeSize($event)">
+                    <mat-chip
+                      #chipReff="matChip"
+                      *ngFor="let chip of ListSize"
+                      (click)="chipReff.selectViaInteraction()"
+                      [selected]="chip.selected"
+                    >
+                      {{chip.name}}
+                    </mat-chip>
+                  </mat-chip-list>
+             </div>
+                <div *ngIf="d.amount>0" class="selector-actions">
+                    
+                    <div class="wrap-addcart clearfix">						
+                        <button (click)="AddGioHang(d.amount)"  style="border-radius: 10px;" type="button" id="add-to-cart" class="add-to-cartProduct button dark btn-addtocart addtocart-modal" name="add">Thêm vào giỏ</button>
+                    </div>	
+                </div>
+              
+                <div class="product-action-bottom visible-xs">
+                    <div class="d-flex align-items-center mt-2">
+                        <span style="padding-right: 10px; display: flex;
+                        align-items: center;font-size: 15px;" class="font-weight-bold mr-1 text-dark-75 font-size-lg"
+                          >Số lượng : <p style="margin-bottom: 0px !important;
+                          padding-left: 3px;
+                          padding-right: 10px;">{{sl}}</p></span
+                        >
+                        <a (click)="RemoveCount()" href="javascript:;" class="btn btn-xs btn-light-success btn-icon mr-2"
+                          ><i class="ki ki-minus icon-xs"></i
+                        ></a>
+                        <a (click)="AddCount()" href="javascript:;" class="btn btn-xs btn-light-success btn-icon"
+                          ><i class="ki ki-plus icon-xs"></i
+                        ></a>
+                      </div>
+                </div>
+            </form>
+            <div class="product-description" style="padding-top: 20px;">	
+                <div class="title-bl">
+                    <h2>Mô tả</h2>
+                </div>							
+                <div class="description-content">
+                    <div class="description-productdetail">
+                       {{d.Mota}}<br>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="d.amount==0" class="selector-actions">
+                    
+              <h2 style="margin-top: 15px;color: red;">Hết hàng !!!</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+
+</div>
+<section class="products related-products section">
+    <div>
+      <div>
+        <div >
+          <div class="title text-center">
+            <h2>Có thể bạn cũng thích</h2>
+            <p style="font-size: 15px;">Bán chạy nhất trong tuần</p>
+
+            <div style="display: flex;flex-wrap: wrap;justify-content: center;">
+                <div  *ngFor="let p of lstProductSeller ; let i=index">
+                  <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+                    <div class="product-wrap">
+                     <img style="width: 300px;height: 200px;padding: 10px;cursor: pointer;" class="img-fluid"
+                          src="{{p.Img}}"  alt="product-img" />
+                    </div>
+                  
+                  </div>
+                </div>
+          
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+         <!-- <div *ngFor="let p of lstProductRecommend" class="col-lg-3 col-6" >
+                <div class="product">
+            <div class="product-wrap">
+              <a routerLink="/product-single/{{p.product_id}}"><img style="height: 350px;" class="img-fluid w-100 mb-3 img-first" [src]="getImageProduct(p.product_id)" alt="product-img" /></a>
+              <a routerLink="/product-single/{{p.product_id}}"><img style="height: 350px;"  class="img-fluid w-100 mb-3 img-second" [src]="getImageProduct(p.product_id)" alt="product-img" /></a>
+            </div>
+  
+            <span class="onsale">Giảm giá</span>
+  
+            <div class="product-info">
+              <h2 class="product-title h5 mb-0"><a routerLink="/product-single">{{p.product_name}}</a></h2>
+              <span class="price">
+                {{p.price | number}} VNĐ
+              </span>
+            </div>
+          </div>
+           </div> -->
+      </div>
+    </div>
+  </section>

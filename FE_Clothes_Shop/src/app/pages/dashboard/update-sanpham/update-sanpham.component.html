@@ -1,0 +1,37 @@
+<div style="display: flex;flex-direction: column;">
+    <h2>Cập nhật sản phẩm </h2>
+    <mat-form-field appearance="outline">
+        <mat-label>Tên Sản phẩm</mat-label>
+        <input style="    padding: 10px;" [(ngModel)]="tensp" matInput placeholder="Nhập tên sản phẩm">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Số lượng</mat-label>
+        <input type="number" style="    padding: 10px;"  [(ngModel)]="sl" matInput placeholder="Nhập số lượng">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Đơn giá khuyến mãi</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="GiaKM" matInput placeholder="Nhập đơn giá sale">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Đơn giá gốc</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="GiaGoc" matInput placeholder="Nhập  đơn giá">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Mô tả</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="Mota" matInput placeholder="Nhập mô tả">
+      </mat-form-field>
+    
+   <hr>
+      <div style="float: right;">
+        <mat-form-field appearance="fill">
+          <mat-label>Chọn loại</mat-label>
+          <mat-select  [(ngModel)]="selected" (ngModelChange)="onGiaSelection()">
+            <mat-option *ngFor="let item of listCate" [value]="item.category_id">
+              {{ item.category_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button  (click)="submit()" class="btn btn-primary" type="submit" style="margin-right: 10px;">Lưu</button>
+        <button (click)="goBack()" type="button" class="btn btn-light">Quay lại</button>
+    </div>
+</div>

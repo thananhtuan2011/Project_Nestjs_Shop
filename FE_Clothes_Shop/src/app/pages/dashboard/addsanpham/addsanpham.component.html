@@ -1,0 +1,53 @@
+<div style="display: flex;flex-direction: column;">
+    <h2>Thêm sản phẩm </h2>
+    <mat-form-field appearance="outline">
+        <mat-label>Tên Sản phẩm</mat-label>
+        <input style="    padding: 10px;" [(ngModel)]="tensp" matInput placeholder="Nhập tên sản phẩm">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Số lượng</mat-label>
+        <input type="number" style="    padding: 10px;"  [(ngModel)]="sl" matInput placeholder="Nhập số lượng">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Đơn giá khuyến mãi</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="GiaKM" matInput placeholder="Nhập đơn giá sale">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Đơn giá gốc</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="GiaGoc" matInput placeholder="Nhập  đơn giá">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Mô tả</mat-label>
+        <input style="    padding: 10px;"  [(ngModel)]="Mota" matInput placeholder="Nhập mô tả">
+      </mat-form-field>
+      <div style="margin-bottom: 15px;margin-left: 5px;">
+
+      
+        <mat-label style="font-weight: bold;">Hình ảnh</mat-label>
+        <div>
+            <button style="height: 100%;
+            margin:auto;
+            border-radius: 10% !important;" (click)="hiddenfileinput_image.click()" matTooltip="Hỉnh ảnh"
+                mat-icon-button aria-label="Example icon button with a home icon">
+                <mat-icon class="sizeiconreaction">add_photo_alternate</mat-icon>
+              </button>
+            <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .heic, .heif, .tiff|image/*"
+            id="PDFInpdd" #hiddenfileinput_image (change)="onSelectFile_PDF($event)" multiple
+            style="display: none;">
+            <img style="width: 200px;" src="{{img}}" >
+        </div>
+    </div>
+   <hr>
+      <div style="float: right;">
+        <mat-form-field appearance="fill">
+          <mat-label>Chọn loại</mat-label>
+          <mat-select  [(ngModel)]="selected" (ngModelChange)="onGiaSelection()">
+            <mat-option *ngFor="let item of listCate" [value]="item.category_id">
+              {{ item.category_name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button  (click)="submit()" class="btn btn-primary" type="submit" style="margin-right: 10px;">Lưu</button>
+        <button (click)="goBack()" type="button" class="btn btn-light">Quay lại</button>
+    </div>
+</div>

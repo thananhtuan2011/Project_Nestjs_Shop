@@ -1,0 +1,42 @@
+<div style="display: flex;flex-direction: column;">
+    <h2>Cập nhật sản phẩm giỏ hàng  </h2>
+
+      <mat-form-field appearance="outline" style="margin-top: 20px;">
+        <mat-label>Số lượng</mat-label>
+        <input type="number" style="    padding: 10px;"  [(ngModel)]="sl" matInput placeholder="Nhập số lượng">
+      </mat-form-field>
+  
+      <span style="font-size: 15px;">Màu sắc</span>
+      <mat-chip-list class="mat-chip-list-stacked"  (change)="onChange($event)">
+          <mat-chip
+            #chipRef="matChip"
+            *ngFor="let chip of ListColor"
+            (click)="chipRef.selectViaInteraction()"
+            [selected]="chip.selected"
+          >
+            {{chip.name}}
+          </mat-chip>
+        </mat-chip-list>
+   </div>
+   <div style="padding-bottom: 10px;">
+    
+      <span style="font-size: 15px;">  Kích thước</span>
+      <mat-chip-list class="mat-chip-list-stacked"  (change)="onChangeSize($event)">
+          <mat-chip
+            #chipReff="matChip"
+            *ngFor="let chip of ListSize"
+            (click)="chipReff.selectViaInteraction()"
+            [selected]="chip.selected"
+          >
+            {{chip.name}}
+          </mat-chip>
+        </mat-chip-list>
+   </div>
+
+    
+   <hr>
+      <div style="float: right;">
+   
+        <button  (click)="submit()" class="btn btn-primary" type="submit" style="margin-right: 10px;">Lưu</button>
+        <button (click)="goBack()" type="button" class="btn btn-light">Quay lại</button>
+    </div>

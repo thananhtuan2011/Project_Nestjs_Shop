@@ -1,0 +1,85 @@
+
+<div style="text-align: center;">
+  <h2>Giỏ hàng của bạn </h2>
+  <span>Có {{listOrder.length}} sản phẩm trong giỏ hàng </span>
+</div>
+<hr>
+
+<div *ngFor="let item of listOrder" style="margin-left: 100px;">
+
+
+  <!--begin::Item-->
+  <div style="display: flex;" >
+      <img style="width: 250px;height: 250px;" src="{{item.Img}}" title="" alt="" />
+    <div style="margin-left: 30px;" class="d-flex flex-column mr-2">
+      <a style="font-weight: bold;"
+        href="javascritp:;"
+        class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"
+      >
+        {{item.product_name}}
+      </a>
+      <span class="text-muted">
+        Màu:{{item.color}}, Size: {{item.Size}}
+      </span>
+      <div class="d-flex align-items-center mt-2">
+        <span class="font-weight-bold mr-1 text-dark-75 font-size-lg"
+          >{{item.DonGia |number}} đ</span
+        >
+        <br>
+        <span class="text-muted mr-1">Số lượng:</span>
+        <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">{{item.soluong}}</span>
+        <!-- <a   href="javascript:;" class="btn btn-xs btn-light-success btn-icon mr-2"
+          ><i class="ki ki-minus icon-xs"></i
+        ></a>
+        <a   href="javascript:;" class="btn btn-xs btn-light-success btn-icon"
+          ><i class="ki ki-plus icon-xs"></i
+        ></a> -->
+      </div>
+    </div>
+    <button style="margin-top: -10px;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="XoaSPGioHang(item.order_id)" mat-menu-item>
+        <mat-icon>clear</mat-icon>
+        <span>Xóa sản phẩm</span>
+      </button>
+    
+      <button  (click)="UpdateSp(item)" mat-menu-item>
+        <mat-icon>create</mat-icon>
+        <span>Cập nhật sản phẩm</span>
+      </button>
+    </mat-menu>
+  </div>
+
+  <hr>
+  <!--end::Item-->
+
+  <!--begin::Separator-->
+
+  <!--end::Separator-->
+</div>
+  <!--begin::Item-->
+
+  <!--end::Item-->
+
+  <!--begin::Separator-->
+  <!--end::Separator-->
+
+  <!--end::Item-->
+
+<div class="p-8" style="    font-size: 20px;">
+         
+  <div  class="d-flex align-items-center justify-content-between mb-7">
+    <span style="font-size: 22px ;font-weight: bold;" class="font-weight-bold text-muted font-size-sm mr-2">Tổng tiền: {{tongtien |number}}  VNĐ</span>
+  </div>
+  <div >
+
+    <button style="margin-right: 40px;" (click)="thanhtoan()" routerLink="/Home/Pay" type="button" class="btn btn-success text-weight-bold">
+     Thanh toán
+    </button>
+    <button routerLink="/Home/All" type="button" class="btn btn-primary text-weight-bold">
+      <mat-icon>label_important</mat-icon> Tiếp tục mua hàng 
+     </button>
+  </div>
+</div>

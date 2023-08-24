@@ -1,0 +1,222 @@
+<style>
+
+    input[type=text] {
+          width: 280px;
+          box-sizing: border-box;
+          border: 1px solid #3e44f9b5;
+          border-radius: 15px;
+          font-size: 12px;
+          background-color: white;
+          /* background-image: url('./assets/search_icon.png'); */
+          background-position: 10px 10px; 
+          background-repeat: no-repeat;
+          padding:7px 12px 7px 40px;
+          -webkit-transition: width 0.4s ease-in-out;
+          transition: width 0.4s ease-in-out;
+        }
+        
+        input[type=text]:focus {
+          width: 480px;
+          outline: none;
+          border: 1px solid #3e44f9b5;
+          background-color: white;
+        }
+      .fullname{
+        display: flex;
+        align-items: center;
+        padding-left: 5px;
+      }
+     
+    </style>
+    
+    
+    <div class="card card-custom card-sticky gutter-b">
+      <div class="card-header">
+        <div class="card-title">
+          <span class="card-label cssdanhsach">Danh sách acount</span>
+        
+        </div>
+        <div class="card-search">
+          <!-- <app-jee-search-form (keywordEvent)="changeKeyword($event)" (filterEvent)="changeFilter($event)"></app-jee-search-form> -->
+        </div>
+ 
+      </div>
+      <!-- body -->
+      <div class="card-body">
+        <div class="table-responsive angular-bootstrap-table" [ngStyle]="{ height: getHeight() }">
+          <table class="table table-head-custom table-vertical-center overflow-hidden">
+            <thead>
+              <th  >
+                <span>Id</span>
+                <app-sort-icon
+                  column="FullName"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th>
+                <span>Address</span>
+                <app-sort-icon
+                  column="tendangnhap"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th >
+                <span>Quản trị</span>
+                <app-sort-icon
+                  column="phongbanid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th>
+                <span>Ngày tạo</span>
+                <app-sort-icon
+                  column="chucvuid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th >
+                <span>Email</span>
+                <app-sort-icon
+                  column="chucvuid"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+             
+              <th style="">
+                <span>Họ tên</span>
+                <app-sort-icon
+                  column="tinhtrang"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th>
+                <span>Phone</span>
+                <app-sort-icon
+                  column="tinhtrang"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th >
+                <span>User_name</span>
+                <app-sort-icon
+                  column="tinhtrang"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
+              <th >
+                <span>Action</span>
+              
+              </th>
+              <th >
+                <span>Phân quyền</span>
+              
+              </th>
+              <!-- <th style="min-width: 100px; text-align: center">
+                <span>nhân viên</span>
+              </th> -->
+            </thead>
+            <tbody>
+              <!-- <tr *ngFor="let r of service.items$ | async">
+              <td>
+                <div>
+                  <span>{{ r.Fullname }}</span>
+                </div>
+              </td>
+              </tr> -->
+            <tr *ngFor="let r of product_services._itemsteamAcount$ | async">
+                <!-- <td>
+                  <div class="pl-10" >
+                    <div class="row" style="cursor: pointer">
+                      <ngx-avatar [size]="40" src="{{ r.Avatar }}" *ngIf="r.Avatar"></ngx-avatar>
+                      <ngx-avatar
+                       
+                        [size]="40"
+                        [name]="r.Fullname.slice(0, 1)"
+                        bgColor="{{ r.BgColor }}"
+                        *ngIf="!r.Avatar"
+                      ></ngx-avatar>
+                      <span  class="cssfullname">
+                        {{ r.Fullname }}
+                      </span>
+                    </div>
+                  </div>
+                
+                </td> -->
+                <td>
+                  <div>
+                    <span class="cssusername">{{ r.account_id }}</span>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <span class="cssDepartment">{{ r.address }}</span>
+                  </div>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.admin }}</span>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.created_at| date : 'yyyy/M/dd h:mm' }}</span>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.email }}</span>
+                </td>
+               
+                <td>
+                  <span class="cssJobtitle">{{ r.full_name }}</span>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.phone }}</span>
+                </td>
+                <td>
+                  <span class="cssJobtitle">{{ r.user_name }}</span>
+                </td>
+              
+                <!-- <td style="text-align: center">
+                  <mat-slide-toggle (click)="changeTinhTrang(r.Username)" [checked]="r.IsActive"> </mat-slide-toggle>
+                </td> -->
+                
+                <td style="text-align: center">
+                  <mat-icon (click)="RemoveUser(r.account_id)"  mat style="cursor: pointer; color: #e43541; font-size: 16px" aria-hidden="false">
+                    delete_forever</mat-icon
+                  >
+                    
+                </td>
+                   
+                <td style="text-align: center">
+                  <mat-icon (click)="UpdateRoles(r)"  mat style="cursor: pointer; color: #1bc5bd; font-size: 16px" aria-hidden="false">
+                    settings</mat-icon
+                  >
+                    
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- end: Table -->
+        <app-paginator
+          class="d-flex justify-content-between align-items-center flex-wrap"
+          [paginator]="paginator"
+          [isLoading]="isLoading"
+          (paginate)="paginate($event)"
+        ></app-paginator>
+      </div>
+    </div>
+    
+    

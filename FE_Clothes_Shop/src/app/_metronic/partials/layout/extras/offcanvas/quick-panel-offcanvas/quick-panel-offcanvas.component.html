@@ -1,0 +1,259 @@
+<!--begin::Quick Panel-->
+<div
+  id="kt_quick_panel"
+  class="offcanvas pt-5 pb-10"
+  [ngClass]="extrasQuickPanelOffcanvasDirectionCSSClass"
+>
+  <!--begin::Header-->
+  <div
+    class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5"
+  >
+    <ul
+      class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10"
+      role="tablist"
+    >
+      <li class="nav-item">
+        <a
+          class="nav-link cursor-pointer"
+          data-toggle="tab"
+          [ngClass]="getActiveCSSClasses('kt_quick_panel_logs')"
+          (click)="setActiveTabId('kt_quick_panel_logs')"
+          >Đơn hàng</a
+        >
+      </li>
+
+      <li class="nav-item">
+        <a
+          class="nav-link cursor-pointer"
+          data-toggle="tab"
+          [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')"
+          (click)="setActiveTabId('kt_quick_panel_notifications')"
+          >Đang vận chuyển</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link cursor-pointer"
+          [ngClass]="getActiveCSSClasses('kt_quick_panel_settings')"
+          (click)="setActiveTabId('kt_quick_panel_settings')"
+          data-toggle="tab"
+          >Chưa xác nhận</a
+        >
+      </li>
+     
+    </ul>
+    <div class="offcanvas-close mt-n1 pr-5">
+      <a
+        href="#"
+        class="btn btn-xs btn-icon btn-light btn-hover-primary"
+        id="kt_quick_panel_close"
+      >
+        <i class="ki ki-close icon-xs text-muted"></i>
+      </a>
+    </div>
+  </div>
+  <!--end::Header-->
+
+  <!--begin::Content-->
+  <div class="offcanvas-content px-10">
+    <div class="tab-content">
+      <!--begin::Tabpane-->
+      <div
+        class="tab-pane fade pt-3 pr-5 mr-n5"
+        id="kt_quick_panel_logs"
+        [ngClass]="getActiveCSSClasses('kt_quick_panel_logs')"
+        role="tabpanel"
+      >
+        <!--begin::Section-->
+        <div class="mb-15">
+          <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
+          <!--begin: Item-->
+          <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listNotify">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+              <span class="symbol-label">
+               <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
+              </span>
+            </div>
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+              <span class="symbol-label" style="    color: red;
+              background: lightgoldenrodyellow;
+              height: 30px  !important">
+                Await
+              </span>
+            </div>
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==null">
+              <span class="symbol-label" style="    color: red;
+              background: lightgoldenrodyellow;
+              height: 30px  !important">
+                Từ chối
+              </span>
+            </div>
+            <div class="d-flex flex-column flex-grow-1 mr-2">
+              <a
+                href="javascript:;"
+                [routerLink]="['/Home/','CartDetail',item.Id_Donhang]"
+                class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"
+                >Mã đơn hàng :{{item.Id_Donhang}}</a
+              >
+              <span class="text-muted font-weight-bold"
+                >{{item.Product.length}} sản phẩm</span
+              >
+            </div>
+            <span
+              class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
+              >{{item.TongTien}}</span
+            >
+          </div>
+          <!--end: Item-->
+
+          <!--begin: Item-->
+        
+          <!--end: Item-->
+
+          <!--begin: Item-->
+    
+          <!--end: Item-->
+
+          <!--begin: Item-->
+         
+          <!--end: Item-->
+
+          <!--begin: Item-->
+        
+          <!--end: Item-->
+        </div>
+        <!--end::Section-->
+
+        <!--begin::Section-->
+      
+
+        <!--end::Section-->
+      </div>
+      <!--end::Tabpane-->
+
+      <!--begin::Tabpane-->
+      <div
+        class="tab-pane fade pt-2 pr-5 mr-n5"
+        id="kt_quick_panel_notifications"
+        [ngClass]="getActiveCSSClasses('kt_quick_panel_notifications')"
+        role="tabpanel"
+      >
+        <!--begin::Nav-->
+        <div class="mb-15">
+          <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
+          <!--begin: Item-->
+          <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listVanChuyen">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+              <span class="symbol-label">
+               <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
+              </span>
+            </div>
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+              <span class="symbol-label" style="    color: red;
+              background: lightgoldenrodyellow;
+              height: 30px  !important">
+                Await
+              </span>
+            </div>
+            <div class="d-flex flex-column flex-grow-1 mr-2">
+              <a
+                href="javascript:;"
+                [routerLink]="['/Home/','CartDetail',item.Id_Donhang]"
+                class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"
+                >Mã đơn hàng :{{item.Id_Donhang}}</a
+              >
+              <span class="text-muted font-weight-bold"
+                >{{item.Product.length}} sản phẩm</span
+              >
+            </div>
+            <span
+              class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
+              >{{item.TongTien}}</span
+            >
+          </div>
+          <!--end: Item-->
+
+          <!--begin: Item-->
+        
+          <!--end: Item-->
+
+          <!--begin: Item-->
+    
+          <!--end: Item-->
+
+          <!--begin: Item-->
+         
+          <!--end: Item-->
+
+          <!--begin: Item-->
+        
+          <!--end: Item-->
+        </div>
+        <!--end::Nav-->
+      </div>
+      <!--end::Tabpane-->
+
+      <!--begin::Tabpane-->
+      <div
+        class="tab-pane fade pt-3 pr-5 mr-n5"
+        id="kt_quick_panel_settings"
+        [ngClass]="getActiveCSSClasses('kt_quick_panel_settings')"
+        role="tabpanel"
+      >
+      <div class="mb-15">
+        <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
+        <!--begin: Item-->
+        <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listXacNhan">
+          <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+            <span class="symbol-label">
+             <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
+            </span>
+          </div>
+          <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+            <span class="symbol-label" style="    color: red;
+            background: lightgoldenrodyellow;
+            height: 30px  !important">
+              Await
+            </span>
+          </div>
+          <div class="d-flex flex-column flex-grow-1 mr-2">
+            <a
+              href="javascript:;"
+              [routerLink]="['/Home/','CartDetail',item.Id_Donhang]"
+              class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"
+              >Mã đơn hàng :{{item.Id_Donhang}}</a
+            >
+            <span class="text-muted font-weight-bold"
+              >{{item.Product.length}} sản phẩm</span
+            >
+          </div>
+          <span
+            class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
+            >{{item.TongTien}}</span
+          >
+        </div>
+        <!--end: Item-->
+
+        <!--begin: Item-->
+      
+        <!--end: Item-->
+
+        <!--begin: Item-->
+  
+        <!--end: Item-->
+
+        <!--begin: Item-->
+       
+        <!--end: Item-->
+
+        <!--begin: Item-->
+      
+        <!--end: Item-->
+      </div>
+      </div>
+      <!--end::Tabpane-->
+    </div>
+  </div>
+  <!--end::Content-->
+</div>
+<!--end::Quick Panel-->

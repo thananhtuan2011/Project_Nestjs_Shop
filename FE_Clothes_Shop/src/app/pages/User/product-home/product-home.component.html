@@ -1,0 +1,287 @@
+<style>
+  .body
+  {
+    height: 650px;
+    margin-left: -3%;
+    margin-right: -3%;
+  }
+
+  @media screen and (max-width: 1200px) and (min-width: 1000px){
+    .body
+  {
+    /* padding-left:31%;  */
+    height: 650px;
+    margin-left: -3%;
+    margin-right: -3%;
+  }
+
+  }
+
+  @media screen and (max-width: 1000px) and (min-width: 700px){
+    .body
+  {
+    /* padding-left:40%;  */
+    height: 100vh;
+  }
+
+  }
+  h3{
+    color: #007DFA;
+  }
+  .txt
+  {
+    color: black;
+  }
+</style>
+<div  class="body"
+ >
+
+    <ngb-carousel style="height: 100%;">
+      <ng-template ngbSlide>
+        <div class="wrapper">
+
+          <img  src="../../../../assets/images/bia3.jpg" alt="Random first slide">
+        </div>
+        <div class="carousel-caption">
+          <!-- <a routerLink="/Home/All" class="btn btn-main">Mua sắm ngay!!!</a> -->
+        </div>
+
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="wrapper">
+      
+          <img  src="../../../../assets/images/bia2.webp" alt="Random second slide">
+        </div>
+        <div class="carousel-caption">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-12 offset-lg-6 offset-md-6">
+                <div class="slider-caption">
+                  <span class="lead">Siêu tốt</span>
+                  <h1 class="mt-2 mb-5"><span class="text-color">Winter </span>Collection</h1>
+                  <a routerLink="/Home/All" class="btn btn-main" style="color: aquamarine;">Mua sắm ngay!!!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="wrapper">
+          <img src="../../../../assets/images/bia5.webp" alt="Random third slide">
+        </div>
+        <div class="carousel-caption">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-12 offset-lg-6 offset-md-6">
+                <div class="slider-caption">
+                  <div class="slider-caption">
+                    <span class="lead"></span>
+                    <h1 class="mt-2 mb-5"><span class="text-color">Tận tình </span></h1>
+                  </div>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="wrapper">
+          <img src="../../../../assets/images/bia4.webp" alt="Random four slide">
+        </div>
+        <div class="carousel-caption">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-12 offset-lg-6 offset-md-6">
+                <div class="slider-caption">
+                  <span class="lead"></span>
+                  <h1 class="mt-2 mb-5"><span class="text-color">Chuyên nghiệp </span></h1>
+                  <a routerLink="/Home/All" class="btn btn-main" style="color: blueviolet;">Mua sắm ngay!!!</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+    </ngb-carousel>
+    </div>
+<section class="category section pt-3 pb-0" style="  background: radial-gradient(black, transparent);">
+    <div class="container" style="margin-bottom: 15px;">
+      <div class="row" >
+        <div class="col-lg-4 col-sm-12 col-md-6" *ngFor="let slide of listSlide">
+          <div class="cat-item mb-4 mb-lg-0" [routerLink]="['/Home/','Product',slide.product_id]">
+            <img style="width: 400px;border-radius: 10px;cursor: pointer;height: 400px;" src="{{slide.Img}}" alt="" class="img-fluid cusimg">
+            <div class="item-info">
+              <p class="mb-0">{{slide.product_name.slice(0,50)}}</p>
+              <h4 class="mb-4">Lên đến <strong>50% </strong></h4>
+              <a href="#" class="read-more">Mua ngay!!!</a>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-lg-4 col-sm-12 col-md-6">
+          <div class="cat-item mb-4 mb-lg-0">
+            <img src="assets/images/cat-2.jpg" alt="" class="img-fluid cusimg">
+            <div class="item-info">
+              <p class="mb-0">Túi xách quý cô</p>
+              <h4 class="mb-4">Lên đến <strong>40% </strong></h4>
+              <a href="#" class="read-more">Mua ngay!!!</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-md-6">
+          <div class="cat-item">
+            <img src="assets/images/cat-3.jpg" alt="" class="img-fluid cusimg">
+            <div class="item-info">
+              <p class="mb-0">Giày Trendy</p>
+              <h4 class="mb-4">Lên đến <strong>50% </strong></h4>
+              <a href="#" class="read-more">Mua ngay!!!</a>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+<section class="section products-main">
+    <div class="container">
+      <!-- <input type="text" placeholder="Tìm kiếm nhanh..." class="form-control" [(ngModel)]="searchString" style="margin-bottom: 20px;"> -->
+  
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="title text-center">
+            <h2 style="font-size: 20px;">NEW !!! Docker Update docker Docker compose</h2>
+            <p style="font-size: 18px;">Những mẫu sản phẩm giảm giá được săn nhiều nhất trong tuần!</p>
+          </div>
+        </div>
+      </div>
+  
+  
+      <div class="row">
+        <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let p of listProduct ; let i=index">
+          <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+            <div class="product-wrap">
+             <img class="img-fluid w-100 mb-3 img-first zoom"
+                  src="{{p.Img}}"  alt="product-img" />
+            </div>
+            <div class="product-info">
+              <h2 class="product-title h5 mb-0"><a style=" font-weight: 100;
+                font-family: 'Quicksand', sans-serif!important;color: black;" [routerLink]="['/Home/','Product',p.product_id]"
+                  >{{p.product_name}}</a></h2>
+              <span class="price" style="color: red;">
+                {{p.DonGia  |number}} đ 
+              </span>
+              <del class="price" style="padding-left: 15px;">
+                {{p.DonGiaGoc  |number }} đ
+              </del>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <div class="col-12" style="padding-bottom: 15px;">
+          <div class="d-flex justify-content-center">
+            <a  routerLink="/Home/All" style="width: 300px;
+            height: 40px;" class="btn btn-sm btn-light-primary font-weight-bolder py-2 px-5 cursor-pointer" >
+                
+                   <label style="    font-size: 16px;margin-top: 3px; cursor: pointer;">   Xem thêm</label>
+        </a>
+          </div>
+    </div>
+  </section>
+
+  <section class="ads section" style="margin-bottom: 20px;">
+    <div class="">
+      <img src="../../../../assets/images/bia2.webp" alt="Snow" style="width:100%;">
+      <div class="row align-items-center" style="  position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);">
+        <div class="col-lg-6 offset-lg-6">
+          <div class="ads-content">
+        
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section products-list">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-md-12" >
+          <img src="../../../../assets/images/bia.webp" alt="Product big thumb" class="img-fluid w-100">
+        </div>
+        <div class="col-lg-4 col-sm-6 col-md-6">
+          <div class="widget-featured-entries mt-5 mt-lg-0">
+            <h4 class="mb-4 pb-3">Best selllers</h4>
+          
+      <div class="row">
+        <div  *ngFor="let p of lstProductSeller ; let i=index">
+          <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+            <div class="product-wrap">
+             <img style="width: 200px;padding: 10px;cursor: pointer;" class="img-fluid"
+                  src="{{p.Img}}"  alt="product-img" />
+            </div>
+          
+          </div>
+        </div>
+  
+      </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6 col-md-6">
+          <div class="widget-featured-entries mt-5 mt-lg-0">
+            <h4 class="mb-4 pb-3">Sản phẩm mới</h4>
+            <img  routerLink="/Home/All" style="width: 500px; cursor: pointer;" src="//product.hstatic.net/1000401164/product/upload_bfbaaae4e76444ff9b1c7eeccdfb1a40_grande.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="features border-top" style="    margin-top: 20px;
+  background: antiquewhite;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-sm-6 col-md-6">
+          <div class="feature-block">
+            <i class="tf-ion-android-bicycle"></i>
+            <div class="content">
+              <h5>Miễn phí vận chuyển</h5>
+              <p>Cho đơn hàng trên 500.000</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-md-6">
+          <div class="feature-block">
+            <i class="tf-wallet"></i>
+            <div class="content">
+              <h5>Đổi trả trong 30 ngày</h5>
+              <p>Chi phí được hoàn trả</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-md-6">
+          <div class="feature-block">
+            <i class="tf-key"></i>
+            <div class="content">
+              <h5>Bảo mật đơn hàng</h5>
+              <p>100% bảo mật danh tính</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 col-md-6">
+          <div class="feature-block">
+            <i class="tf-clock"></i>
+            <div class="content">
+              <h5>Hỗ trợ 24/7</h5>
+              <p>Hỗ trợ khách hàng mọi lúc </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

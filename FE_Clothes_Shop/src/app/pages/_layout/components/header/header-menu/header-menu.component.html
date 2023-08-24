@@ -1,0 +1,132 @@
+<!-- begin::Header Nav -->
+<ul class="menu-nav" [ngClass]="ulCSSClasses">
+  <!-- begin::1 Level -->
+  <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
+    <a class="menu-link" routerLink="/Home" routerLinkActive="active">
+      <span style="font-family: 'Quicksand', sans-serif!important;" class="menu-text" translate="MENU.DASHBOARD"></span>
+      <ng-container *ngIf="rootArrowEnabled">
+        <i class="menu-arrow"></i>
+      </ng-container>
+    </a>
+  </li>
+  <!-- end::1 Level -->
+
+  <!-- begin::1 Level -->
+  <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
+    <a class="menu-link" routerLink="/Infor" routerLinkActive="active">
+      <span style="font-family: 'Quicksand', sans-serif!important;" class="menu-text">Giới Thiệu</span>
+      <ng-container *ngIf="rootArrowEnabled">
+        <i class="menu-arrow"></i>
+      </ng-container>
+    </a>
+  </li>
+  <!-- end::1 Level -->
+
+  <!-- Classic submenu -->
+  <!-- begin::1 Level -->
+  <li
+    [attr.data-menu-toggle]="headerMenuDesktopToggle"
+    aria-haspopup="true"
+    class="menu-item menu-item-submenu menu-item-rel"
+    routerLinkActive="menu-item-active"
+  >
+    <a class="menu-link menu-toggle" href="/material" routerLinkActive="active">
+      <span style="font-family: 'Quicksand', sans-serif!important;" class="menu-text">Danh Mục</span>
+      <mat-icon class="menu-text" style="   margin-top: 1px;
+     ">keyboard_arrow_right</mat-icon>
+    </a>
+    <div class="menu-submenu menu-submenu-classic menu-submenu-left">
+      <ul class="menu-subnav" *ngFor="let item of listLoai">
+        <!-- Form Controls -->
+        <!-- begin::2 Level -->
+                <!-- Form Controls -->
+        <!-- begin::2 Level -->
+       
+
+<li
+class="menu-item menu-item-submenu"
+data-menu-toggle="hover"
+aria-haspopup="true"
+routerLinkActive="menu-item-active"
+>
+<a *ngIf="item.category_id!=6"
+  class="menu-link menu-toggle"
+  href="javascript:;"
+  routerLinkActive="active"
+  [routerLink]="['/CateGory/',item.category_id,item.category_name]"
+>
+  <span
+    [inlineSVG]="'./assets/media/svg/icons/Design/Picker.svg'"
+    cacheSVG="true"
+    class="svg-icon menu-icon"
+  ></span>
+  <span class="menu-text">{{item.category_name}}</span>
+  <i  *ngIf="item.submenu.length>0" class="menu-arrow"></i>
+</a>
+<a *ngIf="item.category_id==6"
+  class="menu-link menu-toggle"
+  href="javascript:;"
+  routerLinkActive="active"
+  
+>
+  <span
+    [inlineSVG]="'./assets/media/svg/icons/Design/Picker.svg'"
+    cacheSVG="true"
+    class="svg-icon menu-icon"
+  ></span>
+  <span class="menu-text">{{item.category_name}}</span>
+  <i  *ngIf="item.submenu.length>0" class="menu-arrow"></i>
+</a>
+<div *ngIf="item.submenu.length>0" class="menu-submenu menu-submenu-classic menu-submenu-right">
+  <ul class="menu-subnav" *ngFor="let sub of item.submenu">
+    <!-- begin::3 Level -->
+    <li class="menu-item" routerLinkActive="menu-item-active">
+      <a
+        class="menu-link"
+        [routerLink]="['/CateGory/Phukien',sub.category_subid,sub.category_name]"
+        routerLinkActive="active"
+      >
+        <i class="menu-bullet menu-bullet-dot"><span></span></i>
+        <span class="menu-text">{{sub.category_name}} </span>
+      </a>
+    </li>
+    <!-- end::3 Level -->
+
+
+
+    <!-- end::3 Level -->
+  </ul>
+</div>
+</li>
+
+
+        <!-- end::2 Level -->
+
+     
+        <!-- end::2 Level -->
+      
+
+        <!-- end::2 Level -->
+      </ul>
+    </div>
+  </li>
+  <li class="menu-item menu-item-rel" routerLinkActive="menu-item-active">
+    <a class="menu-link" routerLink="/New2023" routerLinkActive="active">
+      <span style="font-family: 'Quicksand', sans-serif!important;" class="menu-text" translate="MENU.NEWProduct"></span>
+      <ng-container *ngIf="rootArrowEnabled">
+        <i class="menu-arrow"></i>
+      </ng-container>
+    </a>
+  </li>
+  <!-- end::1 Level -->
+
+  <!-- Mega submenu -->
+  <!-- begin::1 Level -->
+  <!-- end::1 Level -->
+
+  <!-- Classic submenu -->
+  <!-- begin::1 Level -->
+
+  <!-- end::1 Level -->
+</ul>
+<!-- end::Header Nav -->

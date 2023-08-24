@@ -1,0 +1,460 @@
+
+<style>   .input2[type=text] {
+    width: 380px;
+    margin: 20px;
+    height: 50px !important;
+    box-sizing: border-box;
+    /* border: 1px solid #3e44f9b5; */
+    border-radius: 10px;
+    font-size: 12px;
+    border-color:none;
+    background-color: white;
+    /* background-image: url('./assets/search_icon.png'); */
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding:7px 12px 7px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .input2[type=text]:focus {
+    outline: none;
+    border: 1px solid #268fe5b5;
+    background-color: white;
+  }
+  .input1[type=text] {
+    width: 180px;
+    margin: 20px;
+    height: 50px !important;
+    box-sizing: border-box;
+    /* border: 1px solid #3e44f9b5; */
+    border-radius: 10px;
+    font-size: 12px;
+    border-color:none;
+    background-color: white;
+    /* background-image: url('./assets/search_icon.png'); */
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding:7px 12px 7px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  .input1[type=text]:focus {
+    outline: none;
+    border: 1px solid #268fe5b5;
+    background-color: white;
+  }
+  </style>
+<div style="padding-bottom: 15px;">
+    <div class="row">
+     
+       <div class="col-md-6" style="justify-content: center;display: flex;background: aliceblue;">
+        <form
+        class="form"
+        style="    width: 470px;"
+        novalidate="novalidate"
+        id="kt_login_signup_form"
+        [formGroup]="registrationForm"
+        (ngSubmit)="CreatedPay()"
+      >
+        <!--begin::Title-->
+        <div class=" pt-lg-0 pt-5">
+          <h3 class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg" style="text-align: center;">
+            <h2 style="text-align: center;">Thời trang Mando</h2>
+            <img style="width: 100px;" src="../../../../assets/media/logos/logoshop.png">
+          </h3>
+      
+        </div>
+        <!--end::Title-->
+    
+        <!-- begin::Alert error-->
+        <ng-container *ngIf="hasError">
+          <div
+            class="mb-10 alert alert-custom alert-light-danger alert-dismissible"
+          >
+            <div class="alert-text">The registration details are incorrect</div>
+          </div>
+        </ng-container>
+        <!-- end::Alert error-->
+    
+        <!--begin::Form group-->
+        <div class="form-group">
+          <label class="font-size-h6 font-weight-bolder text-dark">Fullname</label>
+          <input
+            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+            type="text"
+            name="fullname"
+            style="background-color: #FFF !important"
+            formControlName="fullname"
+            placeholder="Fullname"
+            autocomplete="off"
+            [ngClass]="{
+              'is-invalid': registrationForm.controls['fullname'].invalid
+            }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Fullname is required',
+              control: registrationForm.controls['fullname']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'minlength',
+              message: 'Fullname should have at least 3 symbols',
+              control: registrationForm.controls['fullname']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'maxLength',
+              message: 'Fullname should have maximum 100 symbols',
+              control: registrationForm.controls['fullname']
+            }"
+          ></ng-container>
+        </div>
+        <div class="form-group">
+          <label class="font-size-h6 font-weight-bolder text-dark">Phone</label>
+          <input
+            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+            type="number"
+            name="phone"
+            maxlength="10"
+            style="background-color: #FFF !important"
+            formControlName="phone"
+            placeholder="phone"
+            autocomplete="off"
+            
+            [ngClass]="{
+              'is-invalid': registrationForm.controls['phone'].invalid
+            }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'phone is required',
+              control: registrationForm.controls['phone']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'maxLength',
+              message: 'phone should have at least 9 symbols',
+              control: registrationForm.controls['phone']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'maxLength',
+              message: 'phone should have maximum 11 symbols',
+              control: registrationForm.controls['phone']
+            }"
+          ></ng-container>
+        </div>
+        
+        <div class="form-group">
+          <label class="font-size-h6 font-weight-bolder text-dark">Address</label>
+          <input
+            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+            type="text"
+            name="address"
+            formControlName="address"
+            placeholder="address"
+            style="background-color: #FFF !important"
+            autocomplete="off"
+            [ngClass]="{
+              'is-invalid': registrationForm.controls['address'].invalid
+            }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'address is required',
+              control: registrationForm.controls['address']
+            }"
+          ></ng-container>
+    
+        </div>
+        <!--end::Form group-->
+    
+        <!--begin::Form group-->
+        <div class="form-group">
+          <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
+          <input
+            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
+            type="email"
+            placeholder="Email"
+            name="email"
+            style="background-color: #FFF !important"
+            formControlName="email"
+            autocomplete="off"
+            [ngClass]="{ 'is-invalid': registrationForm.controls['email'].invalid }"
+          />
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'required',
+              message: 'Email is required',
+              control: registrationForm.controls['email']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'email',
+              message: 'Email is invalid',
+              control: registrationForm.controls['email']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'minlength',
+              message: 'Email should have at least 3 symbols',
+              control: registrationForm.controls['email']
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="formError"
+            [ngTemplateOutletContext]="{
+              validation: 'maxLength',
+              message: 'Email should have maximum 360 symbols',
+              control: registrationForm.controls['email']
+            }"
+          ></ng-container>
+        </div>
+        <!--end::Form group-->
+    
+        <!--begin::Form group-->
+      
+        <!--end::Form group-->
+    
+        <!--begin::Form group-->
+      
+        <!--end::Form group-->
+    
+        <!--begin::Form group-->
+       
+        <!--end::Form group-->
+    
+        <!--begin::Form group-->
+        <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
+          <button
+          *ngIf="!isKeyXaNhan" 
+            type="submit"
+            id="kt_login_signup_submit"
+            [disabled]="
+              registrationForm.invalid
+            "
+            class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+          >
+           Đặt hàng
+          </button>
+          <a
+            routerLink="/Home/All"
+            type="button"
+            id="kt_login_signup_cancel"
+            class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
+          >
+            Cancel
+          </a>
+    
+          <ng-container *ngIf="isLoading$ | async">
+            <span class="spinner spinner-primary ml-5"></span>
+          </ng-container>
+        </div>
+        <!--end::Form group-->
+      </form>
+           
+            <!-- <div style="padding-bottom: 15px;">
+                <div style="padding: 20px;">
+                    <h2 style="text-align: center;">Thời trang Mando</h2>
+                </div>
+                <div>
+                    <input
+                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg input2"
+                    type="text"
+                    name="username"
+                    [(ngModel)]="hoten"
+                    placeholder="Họ và tên"
+                  />
+                </div>
+                <div>
+                    <input
+                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg input1"
+                    type="text"
+                    name="username"
+                    [(ngModel)]="email"
+                    placeholder="Email"
+                  />
+                  <div>
+                    <input
+        class="form-control form-control-solid h-auto py-7 px-6 rounded-lg input1"
+        type="text"
+        name="username"
+        [(ngModel)]="sdt"
+        placeholder="SĐT"
+      />
+                </div>
+                </div>
+              
+                <div>
+                    <input
+                    class="form-control form-control-solid h-auto py-7 px-6 rounded-lg input2"
+                    type="text"
+                    name="username"
+                    [(ngModel)]="diachi"
+                    placeholder="Địa chỉ"
+                  />
+                </div>
+                <span style="font-size: 23px ;font-weight: bold;">Phương thức thanh toán</span>   <mat-icon>payment</mat-icon>
+                <div style="    border: 1px solid;
+                border-radius: 10px;">
+                <div style="padding: 20px;">
+
+             
+                  
+                    <div>
+                        <img src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=4">
+                     
+                        <span>   Thanh toán khi giao hàng (COD)</span>
+
+                      
+                    </div>
+                </div>
+                    </div>
+                   
+            </div> -->
+
+          
+        </div> 
+        <div class="col-md-6">
+            <perfect-scrollbar
+            [perfectScrollbar]="{wheelPropagation: false}"
+              class="scroll scroll-push"
+              style=" max-height: 350px;height: 350px;"
+            >
+            <div *ngFor="let item of listOrder">
+  
+           
+              <!--begin::Item-->
+              <div class=" p-8" style="display: flex;">
+                  <mat-icon (click)="RemoveOrderIteam(item.order_id)" style="cursor: pointer;">clear</mat-icon>
+                <div class="symbol symbol-70 flex-shrink-0">
+                    <img style="width: 150px;" src="{{item.Img}}" title="" alt="" />
+                  </div>
+                <div style="padding-left: 20px;" class="d-flex flex-column mr-2">
+                  <span
+                        style="font-size: 25px;"
+                    class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"
+                  >
+                    {{item.product_name}}
+                  </span>
+                  <span class="text-muted">
+                    Màu:{{item.color}}, Size: {{item.Size}}
+                  </span>
+                  <div class="d-flex align-items-center mt-2">
+                    <span class="font-weight-bold mr-1 text-dark-75 font-size-lg"
+                      >{{item.DonGia |number}} đ</span
+                    >
+                
+                  </div>
+                  <div class="d-flex align-items-center mt-2">
+                    <span>Số lượng: </span>
+                    <span class="font-weight-bold mr-2 text-dark-75 font-size-lg">{{item.soluong}}</span>
+                
+                  </div>
+                </div>
+               
+              </div>
+              <!--end::Item-->
+            
+              <!--begin::Separator-->
+              <div class="separator separator-solid"></div>
+              <!--end::Separator-->
+            </div>
+              <!--begin::Item-->
+            
+              <!--end::Item-->
+            
+              <!--begin::Separator-->
+              <!--end::Separator-->
+            
+              <!--end::Item-->
+            </perfect-scrollbar>
+            <!--end::Scroll-->
+            <div class="p-8" >
+           
+                <div class="d-flex align-items-center justify-content-between ">
+                  <span class="font-weight-bold text-muted font-size-sm mr-2" >Phí vấn chuyển:</span>
+                  <span class="font-weight-bolder text-primary text-right">{{ship}} </span>
+                </div>
+              
+              </div>
+            <!--begin::Summary-->
+            <div class="p-8" style="    font-size: 20px;">
+           
+              <div class="d-flex align-items-center justify-content-between mb-7">
+                <span class="font-weight-bold text-muted font-size-sm mr-2" style="font-size: 22px;">Tổng tiền:</span>
+                <span class="font-weight-bolder text-primary text-right">{{tongtien |number}}</span>
+              </div>
+              <!-- <div class="text-right">
+                <button (click)="CreatedPay()" style="padding: 20px;" routerLink="/Home/Pay" type="button" class="btn btn-primary text-weight-bold">
+                 Thanh toán
+                </button>
+              </div> -->
+            </div>
+            <div *ngIf="isKeyXaNhan" >
+           <div>
+              <hr>
+              <h2>Mã đã được gửi về gmail của bạn</h2>
+      
+                <mat-label>Mã xác nhận</mat-label>
+                <input style=" padding: 10px;
+                margin-left: 20px;
+                border-radius: 10px;" type="number" maxlength="5" [(ngModel)]="maxacnhan" matInput placeholder="Nhập mã xác nhận">
+            </div>
+            <button
+              (click)="SubmitXacNhan()"
+              type="submit"
+              id="kt_login_signup_submit"
+              [disabled]="
+                registrationForm.invalid
+              "
+              class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+            >
+            Xác nhận
+            </button>
+          </div>
+
+        </div>
+
+    </div>
+  
+</div>
+
+<ng-template
+  #formError
+  let-control="control"
+  let-message="message"
+  let-validation="validation"
+>
+  <ng-container
+    *ngIf="control.hasError(validation) && (control.dirty || control.touched)"
+  >
+    <div class="fv-plugins-message-container">
+      <div class="fv-help-block">
+        {{ message }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

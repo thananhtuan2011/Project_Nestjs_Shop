@@ -1,0 +1,8 @@
+mat-chip {
+    max-width: 60px;
+    border-radius: 10px;
+}
+
+::ng-deep .mat-chip-list-stacked .mat-chip-list-wrapper {
+    flex-direction: row !important;
+}

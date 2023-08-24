@@ -3,7 +3,7 @@ import { Body, Controller, HttpException, HttpStatus, Param, Post, UseGuards } f
 import { LoginModel, LoginUserDto } from 'src/dto/login.dto';
 import { LoginService } from './services/login/login.service';
 import { AuthGuard } from '@nestjs/passport';
-
+import { ApiBearerAuth } from '@nestjs/swagger';
 @Controller('login')
 export class LoginController {
 
@@ -22,6 +22,10 @@ export class LoginController {
 
 
         return await this.login_services.create(user)
+    }
+    @Post('refresh')
+    async refresh(@Body() body) {
+        return await this.login_services.refresh(body.refresh_token);
     }
     @Post("Login")
     async Login(@Body() user: LoginUserDto) {
@@ -64,6 +68,7 @@ export class LoginController {
 
     @Post("FindUserById/:id")
     @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth('JWT')
     FindUserById(@Param("id") id: string) {
         return this.login_services.findById(id)
     }

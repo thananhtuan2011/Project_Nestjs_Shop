@@ -21,20 +21,24 @@ export class LoginService extends BaseRepository<User> {
 
     public async _createToken(
 
-        user
+        { username, _id, createdAt, updatedAt }
     ) {
-        const accessToken = this.jwtService.sign({
-            user
-        });
+
+        const accessToken = this.jwtService.sign(
+            {
+                username, _id, createdAt, updatedAt
+            }
+
+        );
         const refreshToken = this.jwtService.sign(
-            { user },
+            { username },
             {
                 secret: process.env.SECRETKEY_REFRESH,
                 expiresIn: process.env.EXPIRESIN_REFRESH,
             },
         );
-        await this.loginmodel.findByIdAndUpdate(
-            { username: user.username },
+        await this.loginmodel.findOneAndUpdate(
+            { username: username },
             // phần body update
             {
                 refreshToken: refreshToken,
@@ -57,17 +61,16 @@ export class LoginService extends BaseRepository<User> {
             const payload = await this.jwtService.verify(refresh_token, {
                 secret: process.env.SECRETKEY_REFRESH,
             });
-            const user = await this.loginmodel.findOne(
-                refresh_token,
-                payload.email,
+            const user: any = await this.loginmodel.findOne(
+                { username: payload.username }
             );
             const token = await this._createToken(user);
             return {
-                email: user.email,
+                username: user.username,
                 ...token,
             };
         } catch (e) {
-            throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+            throw new HttpException('Invalid refresh_token', HttpStatus.UNAUTHORIZED);
         }
     }
     async validateUser(username) {

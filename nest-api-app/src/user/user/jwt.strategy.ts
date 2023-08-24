@@ -13,7 +13,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate({ username }) {
-    console.log("username")
     const user = await this.login_services.validateUser(username);
 
     if (!user) {

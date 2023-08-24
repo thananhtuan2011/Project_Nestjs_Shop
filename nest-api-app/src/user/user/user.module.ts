@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from 'src/model/UserModel';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtStrategy } from './jwt.strategy';
 
 @Module({
   controllers: [LoginController],
@@ -28,7 +29,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     inject: [ConfigService],
   }),
   ],
-  providers: [LoginService]
+  providers: [LoginService, JwtStrategy]
 
 })
 export class UserModule {

@@ -127,7 +127,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   }
   login(us, pass) {
     const loginSubscr = this.authService
-      .loginAcount(us, pass)
+      .loginAcount(us)
       .pipe(first())
       .subscribe((user: any) => {
         if (user && user.data.length > 0) {

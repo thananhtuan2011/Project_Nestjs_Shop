@@ -1,4 +1,4 @@
-import { User } from 'src/model/UserModel';
+import { User } from 'src/model/UserModelSchema';
 import { Body, Controller, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { LoginModel, LoginUserDto } from 'src/dto/login.dto';
 import { LoginService } from './services/login/login.service';

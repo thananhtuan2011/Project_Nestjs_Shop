@@ -9,8 +9,8 @@ export class AuthController {
     }
 
 
-    @Post("login")
-    login() {
-        return process.env.MONGODB_URL
-    }
+    // @Post("login")
+    // login() {
+    //     return process.env.MONGODB_URL
+    // }
 }

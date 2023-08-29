@@ -17,6 +17,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ChangepassComponent } from './changepass/changepass.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { MatInputModule } from '@angular/material/input';
     ChangepassComponent,
   ],
   entryComponents: [ActionNotificationComponent],
-  providers: [LayoutUtilsService],
+  providers: [LayoutUtilsService, CookieService],
   imports: [
     CommonModule,
     TranslationModule,

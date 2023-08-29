@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class AuthService implements OnDestroy {
   // private fields
-  baseUrlAcount = environment.apiUrl + 'acount/';
+  baseUrlAcount = environment.apiUrl + 'login/';
 
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
@@ -56,9 +56,10 @@ export class AuthService implements OnDestroy {
     });
     return result;
   }
-  loginAcount(username: string, password: string) {
+  loginAcount(item) {
+
     const httpHeader = this.getHttpHeaders();
-    return this.http.get(this.baseUrlAcount + `Login?username=${username}&pass=${password}`, { headers: httpHeader });
+    return this.http.post(this.baseUrlAcount + `Login`, item, { headers: httpHeader });
   }
   CreateUser(item: any) {
     const httpHeader = this.getHttpHeaders();
@@ -140,7 +141,7 @@ export class AuthService implements OnDestroy {
       map(() => {
         this.isLoadingSubject.next(false);
       }),
-      switchMap(() => this.loginAcount(user.email, user.password)),
+      switchMap(() => this.loginAcount(user)),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);
@@ -165,6 +166,7 @@ export class AuthService implements OnDestroy {
     }
     return false;
   }
+
 
   private getAuthFromLocalStorage(): AuthModel {
     try {

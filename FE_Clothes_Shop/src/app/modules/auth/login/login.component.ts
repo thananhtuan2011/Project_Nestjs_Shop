@@ -6,6 +6,7 @@ import { UserModel } from '../_models/user.model';
 import { AuthService } from '../_services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LayoutUtilsService, MessageType } from '../crud/utils/layout-utils.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -33,6 +34,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private layoutUtilsService: LayoutUtilsService,
     private fb: FormBuilder,
+    private cookieService: CookieService,
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
@@ -89,7 +91,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.remmber = event.checked;
   }
   submit() {
-    console.log("his.remmber", this.remmber)
     if (this.remmber == true) {
       let itemremember = [{
         username: this.f.username.value,
@@ -102,19 +103,26 @@ export class LoginComponent implements OnInit, OnDestroy {
       localStorage.removeItem("UserRemember");
     }
     this.hasError = false;
+    let item = {
+      username: this.f.username.value,
+      password: this.f.password.value
+    }
     const loginSubscr = this.authService
-      .loginAcount(this.f.username.value, this.f.password.value)
+      .loginAcount(item)
       .pipe(first())
-      .subscribe((user: any) => {
-        if (user && user.data.length > 0) {
-          localStorage.setItem("User", JSON.stringify(user.data));
-          if (user.data[0].role_code != '1') {
-            this.router.navigate(['/Home']);
-          }
-          else {
-            this.router.navigate(['/dashboard']);
+      .subscribe((data: any) => {
+        console.log("TTTTT", data)
+        if (data) {
+          this.cookieService.set("accessToken", data.accessToken)
+          this.cookieService.set("refreshToken", data.refreshToken)
+          localStorage.setItem("User", JSON.stringify(data.user));
+          // if (user.data[0].role_code != '1') {
+          //   this.router.navigate(['/Home']);
+          // }
+          // else {
+          //   this.router.navigate(['/dashboard']);
 
-          }
+          // }
 
 
 

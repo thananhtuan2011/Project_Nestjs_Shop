@@ -1,18 +1,15 @@
 import { Document, Schema } from "mongoose";
 import { User } from "./UserModelSchema";
+import { Product } from "./ProductModelSchema";
 
 const OrderSchema = new Schema(
     {
         amount: Number,
-        DonGia: Number,
-        product_name: String,
         size: String,
         DiaChi: String,
         SĐT: Number,
         Sale: Number,
-        DonGiaGoc: Number,
-        Img: String,
-        Mota: String,
+        Product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
         User: { type: Schema.Types.ObjectId, ref: 'User' },
     },
 
@@ -27,16 +24,12 @@ const OrderSchema = new Schema(
 export { OrderSchema }
 
 export interface Order extends Document {
-    amount: number
-    DonGia: number
-    product_name: string
-    size: string
-    SĐT: number
-    Sale: number
-    DonGiaGoc: number
-    Img: string
-    Mota: string
+    amount: number,
+    size: string,
+    DiaChi: string,
+    SĐT: number,
+    Sale: number,
     User: User,
-    DiaChi: string
+    Product: Product
 
 }

@@ -16,14 +16,24 @@ export class ProductController {
         return await this._product_service.create(body)
     }
     @Post("OrderProduct")
-    async OrderProduct(@Req() red: any, @Body() body: OrderModel) {
-
-        return await this._order_service.CreaedOrder(red, body)
+    async OrderProduct(@Body() body: OrderModel) {
+        return await this._order_service.CreaedOrder(body)
     }
 
     @Post("GetOrder/:id")
     async GetOrder(@Param("id") id: string) {
         return await this._order_service.OrderDetail(id)
+    }
+
+
+    @Post("DeleteProductInOrder/:id/:id_pro")
+    async DeleteProductInOrder(@Param("id") id: string, @Param("id_pro") id_pro: string) {
+        return await this._order_service.DeleteProductInOrder(id, id_pro)
+    }
+
+    @Post("UpdateProductInOrder/:id/:id_pro")
+    async UpdateProductInOrder(@Param("id") id: string, @Param("id_pro") id_pro: string) {
+        return await this._order_service.UpdateProductInOrder(id, id_pro)
     }
 }
 

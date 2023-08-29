@@ -24,7 +24,7 @@ export class OrderService extends BaseRepository<Order> {
         const order = this.ordermodel.findById(order_id);
         if (order) {
             order.populate({ path: "User", select: "username createdAt" })
-            order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota" })
+            order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota Media" })
             return order;
         }
         else {

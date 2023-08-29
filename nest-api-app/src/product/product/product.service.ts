@@ -12,4 +12,9 @@ export class ProductService extends BaseRepository<Product> {
     private loginmodel: Model<Product>) {
         super(loginmodel)
     }
+
+    async UpdateProduct(objectId: string, media_id: number) {
+        return await this.loginmodel.updateOne({ _id: objectId, "Media._id": Number.parseInt(media_id.toString()) }, { $set: { "Media.$.url": "cccccccccccc" } });
+
+    }
 }

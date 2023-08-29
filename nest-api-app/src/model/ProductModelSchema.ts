@@ -10,7 +10,9 @@ const ProductSchema = new Schema(
         Sale: Number,
         DonGiaGoc: Number,
         Img: String,
-        Mota: String
+        Mota: String,
+        Media: []
+
     },
     {
         timestamps: true,
@@ -32,5 +34,5 @@ export interface Product extends Document {
     DonGiaGoc: number
     Img: string
     Mota: string
-
+    Media: any[]
 }

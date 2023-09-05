@@ -7,6 +7,8 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ShareModule } from './share/share.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
+import { KafkaModule } from './kafka/kafka/kafka.module';
+import { KafkaConsumer } from './kafka/kafka.consumer';
 
 @Module({
   imports: [AuthModule,
@@ -14,7 +16,8 @@ import { ProductModule } from './product/product.module';
     UserModule,
     MongooseModule.forRoot(process.env.MONGODB_URL),
     ShareModule,
-    ProductModule
+    ProductModule,
+    KafkaModule
   ],
 
   controllers: [AppController],

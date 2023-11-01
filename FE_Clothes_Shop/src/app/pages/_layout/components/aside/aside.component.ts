@@ -24,7 +24,7 @@ export class AsideComponent implements OnInit {
   User: any
   ngOnInit(): void {
     this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
-
+    console.log("User", this.User)
     // load view settings
     this.disableAsideSelfDisplay =
       this.layout.getProp('aside.self.display') === false;

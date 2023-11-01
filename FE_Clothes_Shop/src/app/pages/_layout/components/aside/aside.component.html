@@ -1,7 +1,7 @@
 <!--begin::Brand-->
 <div *ngIf="User" class="brand flex-column-auto" id="kt_brand" [ngClass]="brandClasses">
   <!--begin::Logo-->
-  <a *ngIf="User[0].role_code!=1" routerLink="/" class="brand-logo">
+  <a *ngIf="User.role_code!=1" routerLink="/" class="brand-logo">
     <img alt="Logo" [attr.src]="headerLogo" />
   </a>
   <!--end::Logo-->
@@ -53,7 +53,7 @@
             cacheSVG="true"
             class="svg-icon menu-icon"
           ></span>
-          <span class="menu-text" >Admin</span>
+          <span class="menu-text" style="font-size: 22px;">Admin</span>
         </a>
       </li>
       <!-- end::1 Level -->

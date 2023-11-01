@@ -17,7 +17,7 @@ import { KafkaConsumer } from './kafka/kafka.consumer';
     MongooseModule.forRoot(process.env.MONGODB_URL),
     ShareModule,
     ProductModule,
-    KafkaModule
+    // KafkaModule
   ],
 
   controllers: [AppController],

@@ -65,18 +65,19 @@ export class UpdateSanphamComponent implements OnInit {
   submit() {
 
     var item = {
+      product_id: this.data.item.product_id,
       amount: Number.parseInt(this.sl.toString()),
       product_name: this.tensp,
       category_id: this.selected,
-      DonGia: Number.parseInt(this.GiaKM.toString()) * 1000,
-      DonGiaGoc: Number.parseInt(this.GiaGoc.toString()) * 1000,
+      DonGia: Number.parseInt(this.GiaKM.toString()),
+      DonGiaGoc: Number.parseInt(this.GiaGoc.toString()),
       Mota: this.Mota,
-      base64: this.base64,
-      filename: this.filename
+      base64: !this.base64 ? "" : this.base64,
+      filename: !this.filename ? "" : this.filename
     }
-    console.log("item", item)
 
-    this.admin_services.UpdateProduct(item, this.data.item.product_id).subscribe(res => {
+    console.log("item", item)
+    this.admin_services.UpdateProduct(item).subscribe(res => {
       if (res) {
         this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
         this.CloseDia(res);

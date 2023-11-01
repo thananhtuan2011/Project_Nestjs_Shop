@@ -262,7 +262,7 @@
             <!--end::Form group-->
         
             <!--begin::Form group-->
-            <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
+            <div class="form-group d-flex flex-wrap pb-lg-0 pb-3" *ngIf="status!=null">
               <button
                 type="submit"
                 id="kt_login_signup_submit"
@@ -339,6 +339,14 @@
                           font-weight: bold;
                           color: rgb(9, 168, 134);
                       ">Đang vận chuyển</span>
+                 <span *ngIf="item.status==null" style="  padding: 5px;
+                 margin-left: 20px;
+                 border-radius: 5px;
+                 border: 1px solid;
+                 font-weight: bold;
+                 color: rgb(225, 23, 50);
+             ">Từ chối</span>
+
                   </div>
                   <!-- <div class="d-flex align-items-center mt-2">
                     <span>Số lượng: </span>
@@ -356,6 +364,8 @@
            <hr>
               <!--end::Separator-->
             </div>
+
+
               <!--begin::Item-->
             
               <!--end::Item-->

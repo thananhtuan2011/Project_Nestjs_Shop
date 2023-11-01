@@ -35,13 +35,16 @@ export class DetailCartComponent implements OnInit {
   }
   tien: number = 0;
   tongtien: string;
+  status: number;
   GetDonHangAcountDetail(id) {
-    this.order_services.GetDonHangAcountDetail(this.User[0].account_id, id).subscribe((res: any) => {
+    this.order_services.GetDonHangAcountDetail(this.User.account_id, id).subscribe((res: any) => {
       this.listOrder = res.data;
+
       localStorage.setItem("DetailCart", JSON.stringify(this.listOrder));
       this.changeDetectorRefs.detectChanges();
       if (this.listOrder) {
 
+        this.status = this.listOrder[0].status;
         if (this.listOrder.length > 0) {
           this.notify.getInforDetailCart.next('load')
 
@@ -68,7 +71,7 @@ export class DetailCartComponent implements OnInit {
   ItemDonHang(): DonHangModel {
 
     const item = new DonHangModel();
-    item.account_id = this.User[0].account_id;
+    item.account_id = this.User.account_id;
     item.address = this.registrationForm.controls["address"].value;;
     item.phone = this.registrationForm.controls["phone"].value;;
     item.full_name = this.registrationForm.controls["fullname"].value;;

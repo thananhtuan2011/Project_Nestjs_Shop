@@ -7,16 +7,16 @@ export class KafkaConsumer implements OnModuleInit {
 
     }
     async onModuleInit() {
-        await this.consumer_services.consum({ topics: ["test"] }, {
-            eachMessage: async ({ topic, partition, message }) => {
-                console.log({
-                    topic: topic.toString(),
-                    partition: partition.toString(),
-                    value: message.value.toString()
+        // await this.consumer_services.consum({ topics: ["test"] }, {
+        //     eachMessage: async ({ topic, partition, message }) => {
+        //         console.log({
+        //             topic: topic.toString(),
+        //             partition: partition.toString(),
+        //             value: message.value.toString()
 
-                })
-            }
-        })
+        //         })
+        //     }
+        // })
     }
 
 }

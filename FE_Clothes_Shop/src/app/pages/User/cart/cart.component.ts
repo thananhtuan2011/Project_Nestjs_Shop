@@ -28,7 +28,7 @@ export class CartComponent implements OnInit {
   tien: number = 0;
   tongtien: string;
   GetDonHangXacNhanByAcountDetail() {
-    this.order_services.GetDonHangXacNhanByAcountDetail(this.User[0].account_id).subscribe((res: any) => {
+    this.order_services.GetDonHangXacNhanByAcountDetail(this.User.account_id).subscribe((res: any) => {
       this.listOrder = res.data;
       console.log(" this.listOrder", this.listOrder)
 

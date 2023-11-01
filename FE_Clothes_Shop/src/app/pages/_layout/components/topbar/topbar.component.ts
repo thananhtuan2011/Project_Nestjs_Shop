@@ -47,9 +47,11 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   GetCountCart() {
     if (this.User) {
 
-      this.topbar_services.GetCountCart(this.User[0].account_id).subscribe((res: any) => {
+      this.topbar_services.GetCountCart().subscribe((res: any) => {
+        console.log("ress", res)
         if (res) {
-          this.countorder = res.data.count;
+
+          this.countorder = res.data;
           this.changeDetectorRefs.detectChanges();
         }
       })
@@ -67,7 +69,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   GetCartByAcount() {
     if (this.User) {
 
-      this.topbar_services.GetCartByAcount(this.User[0].account_id).subscribe((res: any) => {
+      this.topbar_services.GetCartByAcount().subscribe((res: any) => {
         this.tongtien = 0
         this.tien = 0
         this.listOrder = res.data;
@@ -99,7 +101,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   GetDSNotify() {
     if (this.User) {
 
-      this.topbar_services.GetDonHangXacNhanByAcount(this.User[0].account_id).subscribe((res: any) => {
+      this.topbar_services.GetDonHangXacNhanByAcount(this.User.account_id).subscribe((res: any) => {
         if (res) {
           this.slthongbao = res.data.length;
           console.log(" this.slthongbao", this.slthongbao)
@@ -111,7 +113,7 @@ export class TopbarComponent implements OnInit, AfterViewInit {
   }
   EventXacNhan() {
     this.notyfi.xacnhan.subscribe((res: any) => {
-      if (res == this.User[0].account_id) {
+      if (res == this.User.account_id) {
         this.GetDSNotify()
       }
 

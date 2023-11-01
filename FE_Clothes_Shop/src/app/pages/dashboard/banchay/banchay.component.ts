@@ -57,12 +57,13 @@ export class BanchayComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.catogy_id = +params.id;
-      this.namecatego = params.type;
-      this.LoadAllProductType()
+    this.LoadAllProductType()
+    // this.route.params.subscribe(params => {
+    //   this.catogy_id = +params.id;
+    //   this.namecatego = params.type;
+    //   this.LoadAllProductType()
 
-    })
+    // })
 
     this.grouping = this.product_services.grouping;
     this.paginator = this.product_services.paginator;
@@ -89,21 +90,21 @@ export class BanchayComponent implements OnInit {
       const filter = {};
       filter['product_name'] = value
 
-      this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct);
     }
     else {
 
       const filter = {};
 
 
-      this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct);
     }
 
   }
 
   LoadAllProductType() {
     const filter = {};
-    this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateBanChayNhat({ filter }, this.apiproduct);
 
   }
   getHeight(): any {
@@ -113,7 +114,7 @@ export class BanchayComponent implements OnInit {
   }
 
   paginate(paginator: PaginatorState) {
-    this.product_services.patchStateBanChayNhat({ paginator }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateBanChayNhat({ paginator }, this.apiproduct);
   }
   sort(column: string) {
     const sorting = this.sorting;

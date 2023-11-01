@@ -209,7 +209,6 @@ export abstract class TableService<T> {
     return this.http.post<any>(url, tableState, { headers: httpHeader }).pipe(
       catchError(err => {
         this._errorMessage.next(err);
-        console.error('FIND ITEMS', err);
         return of({ status: 0, data: [], panigator: null, error: null });
       })
     );
@@ -284,7 +283,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           console.log("cate", resItems)
           this._itemsteamCate$.next(resItems);
@@ -329,7 +328,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           console.log("Acccc", resItems)
           this._itemsteamAcount$.next(resItems);
@@ -374,7 +373,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           console.log("RẺEE", resItems)
           this._itemsteamDonHang$.next(resItems);
@@ -419,7 +418,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           console.log("RẺEE", resItems)
           this._itemsteamtype$.next(resItems);
@@ -464,7 +463,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           this._itemsteamHangTon$.next(resItems);
           this.__responseData$.next(res);
@@ -508,7 +507,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
           this._itemsteamHetHang$.next(resItems);
           this.__responseData$.next(res);
@@ -553,9 +552,8 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
-          console.log("Chay nhat", resItems)
           this._itemsuser$.next(resItems);
           this.__responseData$.next(res);
           this.patchStateWithoutFetch({
@@ -598,9 +596,9 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
           }
-          console.log("Chay nhat", resItems)
+          console.log("resItems", resItems)
           this._itemschay$.next(resItems);
           this.__responseData$.next(res);
           this.patchStateWithoutFetch({
@@ -643,9 +641,9 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.panigator.total;
+            resTotalRow = res.total;
+
           }
-          console.log("RẺEE ALL san phẩm", resItems)
           this._itemsteam$.next(resItems);
           this.__responseData$.next(res);
           this.patchStateWithoutFetch({

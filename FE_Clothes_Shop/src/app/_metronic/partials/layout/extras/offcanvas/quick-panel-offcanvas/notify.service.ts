@@ -19,7 +19,7 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
 })
 export class NotifyService {
-    hubUrl = 'http://localhost:5000' + '/hubs';
+    hubUrl = environment.hubUrl + '/hubs';
     private hubConnection: HubConnection;
     private onlineUsersSource = new BehaviorSubject<any[]>([]);
     onlineUsers$ = this.onlineUsersSource.asObservable();
@@ -122,11 +122,10 @@ export class NotifyService {
         return this.http.get(this.baseUrlDonhang + `GetDonHangXacNhanByAcountDangVanChuyen?acount_id=${acount_id}`, { headers: httpHeader });
     }
     connectToken() {
-        console.log("ưsssss", this.hubUrl + '/shop')
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(this.hubUrl + '/shop', {
-                // skipNegotiation: true,
-                // transport: signalR.HttpTransportType.WebSockets
+                skipNegotiation: true,
+                transport: signalR.HttpTransportType.WebSockets
                 // accessTokenFactory: () => data.access_token
             }).withAutomaticReconnect()
             // .configureLogging(LogLevel.Information)

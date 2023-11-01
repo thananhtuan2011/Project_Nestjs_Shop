@@ -3,3 +3,26 @@
     background: transparent !important;
   }
 }
+
+// mobile
+@media only screen and (max-width:739px) {
+
+  .info {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .imginfo {
+
+    width: 100%;
+  }
+}
+
+// Desktop
+@media only screen and (min-width:1024px) {
+  .info {
+    font-size: 18px;
+    display: flex;
+  }
+}

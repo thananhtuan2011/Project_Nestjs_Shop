@@ -53,30 +53,29 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     this.initService.init();
   }
   User: any
+  role: string
 
   ngOnInit(): void {
 
-    this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
-    if (this.User) {
+    this.role = localStorage.getItem("role")
+    if (this.role) {
 
-      if (this.User.length > 0) {
-        if (this.User[0].role_code == "1") {
-          this.model = this.layout.getConfig();
-          this.model.aside.self.display = true
-          this.layout.setConfig(this.model);
+      if (this.role == "1") {
+        this.model = this.layout.getConfig();
+        this.model.aside.self.display = true
+        this.layout.setConfig(this.model);
 
-          // this.router.navigate(['/dashboard']);
-        }
-        else {
-          this.model = this.layout.getConfig();
-          this.model.aside.self.display = false
-          this.layout.setConfig(this.model);
+        // this.router.navigate(['/dashboard']);
+      }
+      else {
+        this.model = this.layout.getConfig();
+        this.model.aside.self.display = false
+        this.layout.setConfig(this.model);
 
-          document.body.classList.remove('aside-fixed');
+        document.body.classList.remove('aside-fixed');
 
+        // this.router.navigate(['/Home']);
 
-
-        }
       }
 
     }

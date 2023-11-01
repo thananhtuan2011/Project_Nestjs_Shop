@@ -52,7 +52,7 @@ export class DonHangComponent implements OnInit {
   EventDonHang() {
     this.notyfi.thanhtoan.subscribe((res: any) => {
 
-      if (res.account_id != this.User[0].account_id && this.User[0].role_code == "1") {
+      if (res.account_id != this.User.account_id && this.User.role_code == "1") {
         this.LoadAllProductType();
       }
 

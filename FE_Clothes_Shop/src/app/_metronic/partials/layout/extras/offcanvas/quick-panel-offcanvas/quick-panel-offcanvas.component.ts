@@ -28,7 +28,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   GetDSNotify() {
     if (this.User) {
 
-      this.notyfi.GetDonHangXacNhanByAcount(this.User[0].account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangXacNhanByAcount(this.User.account_id).subscribe((res: any) => {
         if (res) {
           this.listNotify = res.data;
           console.log(" this.listNotify", this.listNotify)
@@ -41,9 +41,10 @@ export class QuickPanelOffcanvasComponent implements OnInit {
 
   }
   GetDSNotifyVanchuyen() {
+    console.log()
     if (this.User) {
 
-      this.notyfi.GetDonHangXacNhanByAcountDangVanChuyen(this.User[0].account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangXacNhanByAcountDangVanChuyen(this.User.account_id).subscribe((res: any) => {
         if (res) {
           this.listVanChuyen = res.data;
           this.changeDetectorRefs.detectChanges();
@@ -57,7 +58,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   GetDSNotifyXacNhan() {
     if (this.User) {
 
-      this.notyfi.GetDonHangChoXacNhan(this.User[0].account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangChoXacNhan(this.User.account_id).subscribe((res: any) => {
         if (res) {
           this.listXacNhan = res.data;
           this.changeDetectorRefs.detectChanges();
@@ -80,7 +81,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   EventDonHang() {
     this.notyfi.thanhtoan.subscribe((res: any) => {
       console.log("res", res)
-      if (res.account_id != this.User[0].account_id && this.User[0].role_code == "1") {
+      if (res.account_id != this.User.account_id && this.User.role_code == "1") {
         this.GetDSNotify()
         this.GetDSNotifyVanchuyen();
         this.GetDSNotifyXacNhan()
@@ -92,7 +93,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   EventXacNhan() {
     this.notyfi.xacnhan.subscribe((res: any) => {
       console.log("res xac nhãn", res)
-      if (res == this.User[0].account_id) {
+      if (res == this.User.account_id) {
         this.GetDSNotify()
         this.GetDSNotifyVanchuyen();
         this.GetDSNotifyXacNhan()

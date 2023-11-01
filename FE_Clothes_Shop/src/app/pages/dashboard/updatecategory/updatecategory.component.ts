@@ -39,11 +39,12 @@ export class UpdatecategoryComponent implements OnInit {
   submit() {
 
     var item = {
+      category_id: this.data.item.category_id,
       category_name: this.tenloai,
       category_code: this.maloai
     }
 
-    this.admin_services.UpdateCategory(item, this.data.item.category_id).subscribe(res => {
+    this.admin_services.UpdateCategory(item).subscribe(res => {
       if (res) {
         this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
         this.CloseDia(res);

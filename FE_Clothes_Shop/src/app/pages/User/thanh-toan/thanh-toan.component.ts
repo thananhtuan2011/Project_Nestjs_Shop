@@ -39,7 +39,7 @@ export class ThanhToanComponent implements OnInit {
   tien: number = 0;
   tongtien: string;
   GetCartByAcount() {
-    this.topbar_services.GetCartByAcount(this.User[0].account_id).subscribe((res: any) => {
+    this.topbar_services.GetCartByAcount().subscribe((res: any) => {
       this.tien = 0;
       this.listOrder = res.data;
       console.log(" this.listOrder", this.listOrder)
@@ -94,7 +94,7 @@ export class ThanhToanComponent implements OnInit {
     // item.user_name = this.registrationForm.controls["username"].value;
 
 
-    item.account_id = this.User[0].account_id;
+    item.account_id = this.User.account_id;
     item.Tongtien = this.tongtien;
     item.address = this.registrationForm.controls["address"].value;
     item.phone = this.registrationForm.controls["phone"].value.toString();
@@ -135,7 +135,7 @@ export class ThanhToanComponent implements OnInit {
         else {
 
           let item = this.ItemDonHang();
-          this.order_services.InsertDonHang(item, this.User[0].account_id).subscribe((res: any) => {
+          this.order_services.InsertDonHang(item, this.User.account_id).subscribe((res: any) => {
             console.log("resss", res)
             if (res && res.status == 1) {
 
@@ -248,10 +248,10 @@ export class ThanhToanComponent implements OnInit {
   }
   ngOnInit(): void {
     this.isKeyXaNhan = false
-    this.hoten = this.User[0].full_name
-    this.email = this.User[0].email
-    this.diachi = this.User[0].address
-    this.sdt = this.User[0].phone
+    this.hoten = this.User.full_name
+    this.email = this.User.email
+    this.diachi = this.User.address
+    this.sdt = this.User.phone
     this.GetCartByAcount();
     this.initForm();
   }

@@ -48,13 +48,13 @@ export class AdminService {
         const httpHeader = this.getHttpHeaders();
         return this.http.post(this.baseUrlLoai + `AddCateGory`, item, { headers: httpHeader });
     }
-    UpdateCategory(item, category_id) {
+    UpdateCategory(item) {
         const httpHeader = this.getHttpHeaders();
-        return this.http.post(this.baseUrlLoai + `UpdateCategory?category_id=${category_id}`, item, { headers: httpHeader });
+        return this.http.post(this.baseUrlLoai + `UpdateCategory`, item, { headers: httpHeader });
     }
-    UpdateProduct(item, product_id) {
+    UpdateProduct(item) {
         const httpHeader = this.getHttpHeaders();
-        return this.http.post(this.baseUrlProduct + `UpdateProduct?product_id=${product_id}`, item, { headers: httpHeader });
+        return this.http.post(this.baseUrlProduct + `UpdateProduct`, item, { headers: httpHeader });
     }
 
     GetCategory() {

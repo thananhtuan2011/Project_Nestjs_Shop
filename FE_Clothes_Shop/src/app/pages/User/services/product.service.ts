@@ -6,12 +6,13 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TableService } from 'src/app/_metronic/shared/crud-table/services/table.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService extends TableService<any>  {
-  constructor(@Inject(HttpClient) http, @Inject(HttpUtilsService) httpUtils) {
+  constructor(@Inject(HttpClient) http, @Inject(HttpUtilsService) httpUtils, private cookie: CookieService) {
     super(http);
   }
   public RecountCart$ = new BehaviorSubject<boolean>(false);
@@ -20,10 +21,10 @@ export class ProductService extends TableService<any>  {
   getHttpHeaders() {
 
 
-    // console.log('auth.token',auth.access_token)
     let result = new HttpHeaders({
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
+      Authorization: `Bearer ${this.cookie.get("accessToken")}`,
       'Access-Control-Allow-Headers': 'Content-Type'
     });
     return result;

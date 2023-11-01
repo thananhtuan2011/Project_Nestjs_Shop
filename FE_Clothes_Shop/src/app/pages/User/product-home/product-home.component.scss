@@ -75,3 +75,22 @@ ngb-carousel .wrapper>img {
 .feature-block.active {
     background: #fff;
 }
+
+// mobile
+@media only screen and (max-width:739px) {
+    .imgbest {
+        width: 190px;
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+
+// Desktop
+@media only screen and (min-width:1024px) {
+
+    .imgbest {
+        width: 200px;
+        padding: 10px;
+        cursor: pointer;
+    }
+}

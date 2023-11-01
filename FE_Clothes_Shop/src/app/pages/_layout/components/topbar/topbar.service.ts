@@ -6,12 +6,13 @@ import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TableService } from 'src/app/_metronic/shared/crud-table/services/table.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TopbarService extends TableService<any>  {
-    constructor(@Inject(HttpClient) http, @Inject(HttpUtilsService) httpUtils) {
+    constructor(@Inject(HttpClient) http, @Inject(HttpUtilsService) httpUtils, private cookie: CookieService) {
         super(http);
     }
 
@@ -25,22 +26,22 @@ export class TopbarService extends TableService<any>  {
     getHttpHeaders() {
 
 
-        // console.log('auth.token',auth.access_token)
         let result = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${this.cookie.get("accessToken")}`,
             'Access-Control-Allow-Headers': 'Content-Type'
         });
         return result;
     }
 
-    GetCartByAcount(id) {
+    GetCartByAcount() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlAcount + `GetCartByAcount?account_id=${id}`, { headers: httpHeader });
+        return this.http.get(this.baseUrlAcount + `GetCartByAcount`, { headers: httpHeader });
     }
-    GetCountCart(id) {
+    GetCountCart() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlAcount + `GetCountCart?account_id=${id}`, { headers: httpHeader });
+        return this.http.get(this.baseUrlAcount + `GetCountCart`, { headers: httpHeader });
     }
 
 

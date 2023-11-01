@@ -34,10 +34,10 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private layoutUtilsService: LayoutUtilsService,
     private fb: FormBuilder,
-    private cookieService: CookieService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cookie_services: CookieService
   ) {
     this.isLoading$ = this.authService.isLoading$;
     // redirect to home if already logged in
@@ -103,26 +103,23 @@ export class LoginComponent implements OnInit, OnDestroy {
       localStorage.removeItem("UserRemember");
     }
     this.hasError = false;
-    let item = {
-      username: this.f.username.value,
-      password: this.f.password.value
-    }
     const loginSubscr = this.authService
-      .loginAcount(item)
+      .loginAcount(this.f.username.value, this.f.password.value)
       .pipe(first())
-      .subscribe((data: any) => {
-        console.log("TTTTT", data)
-        if (data) {
-          this.cookieService.set("accessToken", data.accessToken)
-          this.cookieService.set("refreshToken", data.refreshToken)
-          localStorage.setItem("User", JSON.stringify(data.user));
-          // if (user.data[0].role_code != '1') {
-          //   this.router.navigate(['/Home']);
-          // }
-          // else {
-          //   this.router.navigate(['/dashboard']);
+      .subscribe((user: any) => {
+        console.log("user", user)
+        if (user) {
+          localStorage.setItem("User", JSON.stringify(user.User))
+          this.cookie_services.set("accessToken", user.accessToken);
+          this.cookie_services.set("refreshToken", user.refreshToken);
+          localStorage.setItem("role", user.role)
+          if (user.role != '1') {
+            this.router.navigate(['/Home']);
+          }
+          else {
+            this.router.navigate(['/dashboard']);
 
-          // }
+          }
 
 
 

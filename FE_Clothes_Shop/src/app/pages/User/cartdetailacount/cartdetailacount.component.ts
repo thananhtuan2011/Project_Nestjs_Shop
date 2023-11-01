@@ -45,7 +45,7 @@ export class CartdetailacountComponent implements OnInit {
   GetCountCart() {
     if (this.User) {
 
-      this.topbar_services.GetCountCart(this.User[0].account_id).subscribe((res: any) => {
+      this.topbar_services.GetCountCart().subscribe((res: any) => {
         if (res) {
           this.countorder = res.data.count;
           this.changeDetectorRefs.detectChanges();
@@ -77,7 +77,7 @@ export class CartdetailacountComponent implements OnInit {
   GetCartByAcount() {
     if (this.User) {
 
-      this.topbar_services.GetCartByAcount(this.User[0].account_id).subscribe((res: any) => {
+      this.topbar_services.GetCartByAcount().subscribe((res: any) => {
         this.tongtien = 0
         this.tien = 0
         this.listOrder = res.data;

@@ -7,13 +7,14 @@ import { AuthHTTPService } from './auth-http';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnDestroy {
   // private fields
-  baseUrlAcount = environment.apiUrl + 'login/';
+  baseUrlAcount = environment.apiUrl + 'acount/';
 
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
@@ -36,7 +37,8 @@ export class AuthService implements OnDestroy {
   constructor(
     private authHttpService: AuthHTTPService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private cookie_services: CookieService
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.currentUserSubject = new BehaviorSubject<UserModel>(undefined);
@@ -56,10 +58,9 @@ export class AuthService implements OnDestroy {
     });
     return result;
   }
-  loginAcount(item) {
-
+  loginAcount(username: string, password: string) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlAcount + `Login`, item, { headers: httpHeader });
+    return this.http.get(this.baseUrlAcount + `Login?username=${username}&pass=${password}`, { headers: httpHeader });
   }
   CreateUser(item: any) {
     const httpHeader = this.getHttpHeaders();
@@ -93,7 +94,8 @@ export class AuthService implements OnDestroy {
 
   logout() {
     localStorage.removeItem("User");
-
+    this.cookie_services.delete("accessToken")
+    this.cookie_services.delete("refreshToken")
     this.router.navigate(['/auth/login'], {
       queryParams: {},
     });
@@ -141,7 +143,7 @@ export class AuthService implements OnDestroy {
       map(() => {
         this.isLoadingSubject.next(false);
       }),
-      switchMap(() => this.loginAcount(user)),
+      switchMap(() => this.loginAcount(user.email, user.password)),
       catchError((err) => {
         console.error('err', err);
         return of(undefined);
@@ -167,7 +169,6 @@ export class AuthService implements OnDestroy {
     return false;
   }
 
-
   private getAuthFromLocalStorage(): AuthModel {
     try {
       const authData = JSON.parse(
@@ -178,6 +179,10 @@ export class AuthService implements OnDestroy {
       console.error(error);
       return undefined;
     }
+  }
+  Gettoken() {
+    const accessToken = this.cookie_services.get("accessToken")
+    return accessToken;
   }
 
   ngOnDestroy() {

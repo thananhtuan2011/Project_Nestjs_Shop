@@ -13,6 +13,7 @@ export class LoginController {
 
     @Post("Register")
     async CreatedUser(@Body() user: LoginModel) {
+
         const userInDb = await this.login_services.findByCondition({
             username: user.username
         })

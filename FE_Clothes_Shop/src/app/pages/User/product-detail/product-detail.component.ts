@@ -73,16 +73,16 @@ export class ProductDetailComponent implements OnInit {
   ItemOrder(sl): OrderModel {
 
     const item = new OrderModel();
-    item.account_id = this.User[0].account_id;
+    item.account_id = this.User.account_id;
     item.DonGia = Number.parseInt(this.lstProducDetail[0].DonGia);
     item.Size = this.Size;
-    item.phone = this.User[0].phone
+    item.phone = this.User.phone
     item.category_id = this.lstProducDetail[0].category_id
     item.color = this.color;
     item.product_name = this.lstProducDetail[0].product_name
     item.Img = this.lstProducDetail[0].Img
-    item.address = this.User[0].address;
-    item.full_name = this.User[0].full_name;
+    item.address = this.User.address;
+    item.full_name = this.User.full_name;
     item.soluong = sl
     item.product_id = this.product_id;
 
@@ -115,7 +115,7 @@ export class ProductDetailComponent implements OnInit {
 
 
         let item = this.ItemOrder(this.sl);
-        this.order_services.InsertOrder(item, this.User[0].account_id).subscribe((res: any) => {
+        this.order_services.InsertOrder(item, this.User.account_id).subscribe((res: any) => {
           if (res) {
 
             // update lượt mua 

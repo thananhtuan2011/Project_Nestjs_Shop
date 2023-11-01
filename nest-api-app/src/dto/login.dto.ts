@@ -5,6 +5,7 @@ export class LoginModel {
     email: string
     SĐT: number
     refreshToken: string;
+    roles: string;
 }
 
 export class LoginUserDto {

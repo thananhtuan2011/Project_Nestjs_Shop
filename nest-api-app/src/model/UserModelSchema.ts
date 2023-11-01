@@ -6,8 +6,9 @@ const UserSchema = new Schema(
         password: Number,
         fullname: String,
         email: String,
-        SĐT: Number,
-        refreshToken: String
+        phone: Number,
+        refreshToken: String,
+        roles: String
     },
     {
         timestamps: true,
@@ -24,7 +25,8 @@ export interface User extends Document {
     password: number,
     fullname: string,
     email: string,
-    SĐT: number,
+    phone: number,
+    roles: string,
     refreshToken: string
 
 }

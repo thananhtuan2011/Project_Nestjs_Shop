@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AuthService implements OnDestroy {
   // private fields
-  baseUrlAcount = environment.apiUrl + 'acount/';
+  baseUrlAcount = environment.apiUrl + 'login/';
 
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
   private authLocalStorageToken = `${environment.appVersion}-${environment.USERDATA_KEY}`;
@@ -58,9 +58,14 @@ export class AuthService implements OnDestroy {
     });
     return result;
   }
-  loginAcount(username: string, password: string) {
+  loginAcount(usernameinput: string, passwordinput: string) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.get(this.baseUrlAcount + `Login?username=${username}&pass=${password}`, { headers: httpHeader });
+    let item =
+    {
+      username: usernameinput,
+      password: passwordinput
+    }
+    return this.http.post(this.baseUrlAcount + `Login`, item, { headers: httpHeader });
   }
   CreateUser(item: any) {
     const httpHeader = this.getHttpHeaders();

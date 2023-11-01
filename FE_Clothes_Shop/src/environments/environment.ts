@@ -7,7 +7,7 @@ export const environment = {
   appVersion: 'v717demo1',
   USERDATA_KEY: 'authf649fc9a5f55',
   isMockEnabled: true,
-  apiUrl: 'http://localhost:5001/api/',
+  apiUrl: 'http://localhost:3000/',
   hubUrl: 'http://localhost:5001'
 
 };

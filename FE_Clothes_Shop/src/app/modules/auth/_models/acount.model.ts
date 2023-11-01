@@ -1,14 +1,15 @@
 
 export class AcountModel {
-    user_name: string;
-    password: string;
-    full_name: string;
-    email: string;
-    address: string;
-    phone: string;
+  username: string
+  password: number
+  fullname: string
+  email: string
+  phone: number
+  roles: string
+  refreshToken: string
 
 };
-  // email settings
+// email settings
 
 
 

@@ -38,8 +38,13 @@ export class LoginController {
             throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
         }
         const authen = await this.login_services._createToken(userInDb)
+        let data = {
+            username: userInDb.username,
+            roles: userInDb.roles,
+            _id: userInDb._id
+        }
         return {
-            user: user,
+            user: data,
             accessToken: authen.accessToken,
             refreshToken: authen.refreshToken,
         };

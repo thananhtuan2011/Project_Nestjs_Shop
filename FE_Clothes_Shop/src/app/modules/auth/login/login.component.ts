@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .subscribe((user: any) => {
         console.log("user", user)
         if (user) {
-          localStorage.setItem("User", JSON.stringify(user.User))
+          localStorage.setItem("User", JSON.stringify(user.user))
           this.cookie_services.set("accessToken", user.accessToken);
           this.cookie_services.set("refreshToken", user.refreshToken);
           localStorage.setItem("role", user.role)

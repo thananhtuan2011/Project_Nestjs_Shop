@@ -116,12 +116,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const item = new AcountModel();
 
 
-    item.full_name = this.registrationForm.controls["fullname"].value;
+    item.fullname = this.registrationForm.controls["fullname"].value;
     item.password = this.registrationForm.controls["password"].value;
     item.phone = this.registrationForm.controls["phone"].value.toString();
     item.email = this.registrationForm.controls["email"].value;
-    item.address = this.registrationForm.controls["address"].value;
-    item.user_name = this.registrationForm.controls["username"].value;
+    item.username = this.registrationForm.controls["username"].value;
 
     return item
   }

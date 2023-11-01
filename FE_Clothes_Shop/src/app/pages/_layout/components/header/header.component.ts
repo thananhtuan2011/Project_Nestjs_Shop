@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private layout: LayoutService, private router: Router) {
     this.loader$ = this.loaderSubject;
-    this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
+    // this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
     // page progress bar percentage
     const routerSubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {

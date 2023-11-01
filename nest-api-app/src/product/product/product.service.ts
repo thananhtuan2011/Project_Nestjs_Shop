@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
 import { Model } from 'mongoose';
 import { BaseRepository } from 'src/base.model';
-import { Product } from 'src/model/ProductModelSchema';
+import { Product } from 'src/modelSchema/ProductModelSchema';
 
 @Injectable()
 export class ProductService extends BaseRepository<Product> {

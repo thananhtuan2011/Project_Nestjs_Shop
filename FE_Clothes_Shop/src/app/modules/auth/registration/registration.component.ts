@@ -8,6 +8,7 @@ import { UserModel } from '../_models/user.model';
 import { first } from 'rxjs/operators';
 import { AcountModel } from '../_models/acount.model';
 import { LayoutUtilsService, MessageType } from '../crud/utils/layout-utils.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +23,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   // private fields
   private unsubscribe: Subscription[] = []; // Read more: => https://brianflove.com/2016/12/11/anguar-2-unsubscribe-observables/
 
-  constructor(
+  constructor(private cookie_services: CookieService,
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
@@ -71,13 +72,13 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
           ]),
         ],
-        address: [
-          '',
-          Validators.compose([
-            Validators.required,
+        // address: [
+        //   '',
+        //   Validators.compose([
+        //     Validators.required,
 
-          ]),
-        ],
+        //   ]),
+        // ],
 
         email: [
           '@gmail.com',
@@ -115,7 +116,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
     const item = new AcountModel();
 
-
+    item.roles = "0";
     item.fullname = this.registrationForm.controls["fullname"].value;
     item.password = this.registrationForm.controls["password"].value;
     item.phone = this.registrationForm.controls["phone"].value.toString();
@@ -128,10 +129,21 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     const loginSubscr = this.authService
       .loginAcount(us, pass)
       .pipe(first())
-      .subscribe((user: any) => {
-        if (user && user.data.length > 0) {
-          localStorage.setItem("User", JSON.stringify(user.data));
-          this.router.navigate(['/']);
+      .subscribe((res: any) => {
+        if (res) {
+          localStorage.setItem("User", JSON.stringify(res.user))
+          this.cookie_services.set("accessToken", res.accessToken);
+          this.cookie_services.set("refreshToken", res.refreshToken);
+
+          if (res.roles != '1') {
+            this.router.navigate(['/Home']);
+          }
+          else {
+            this.router.navigate(['/dashboard']);
+
+            localStorage.setItem("User", JSON.stringify(res.user));
+            this.router.navigate(['/']);
+          }
         } else {
           this.hasError = true;
           this.layoutUtilsService.showActionNotification("Tài khoản không chính xác", MessageType.Delete, 4000, true, false, 3000, 'top', 0);
@@ -150,7 +162,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       if (res && res.status == 1) {
         this.layoutUtilsService.showActionNotification("Thành Công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
         setTimeout(() => {
-          this.login(res.data.user_name, res.data.password)
+          this.login(res.data.username, res.data.password)
         }, 500);
 
 

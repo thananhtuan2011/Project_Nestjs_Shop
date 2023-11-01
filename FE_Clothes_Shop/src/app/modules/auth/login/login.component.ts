@@ -107,13 +107,13 @@ export class LoginComponent implements OnInit, OnDestroy {
       .loginAcount(this.f.username.value, this.f.password.value)
       .pipe(first())
       .subscribe((user: any) => {
-        console.log("user", user)
         if (user) {
+
           localStorage.setItem("User", JSON.stringify(user.user))
           this.cookie_services.set("accessToken", user.accessToken);
           this.cookie_services.set("refreshToken", user.refreshToken);
-          localStorage.setItem("role", user.role)
-          if (user.role != '1') {
+          localStorage.setItem("roles", user.user.roles)
+          if (user.user.roles != '1') {
             this.router.navigate(['/Home']);
           }
           else {

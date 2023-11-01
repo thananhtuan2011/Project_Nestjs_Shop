@@ -1,4 +1,4 @@
-import { Media } from './../../../../model/MediaModelSchema';
+import { Media } from '../../../../modelSchema/MediaModelSchema';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';

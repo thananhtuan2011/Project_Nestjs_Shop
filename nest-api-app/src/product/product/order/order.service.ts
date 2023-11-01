@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { BaseRepository } from 'src/base.model';
 import { LoginModel } from 'src/dto/login.dto';
 import { OrderModel } from 'src/dto/order.dto';
-import { Order } from 'src/model/OrderModelSchema';
+import { Order } from 'src/modelSchema/OrderModelSchema';
 
 @Injectable()
 export class OrderService extends BaseRepository<Order> {

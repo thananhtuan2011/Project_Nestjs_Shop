@@ -17,7 +17,6 @@ export class UserOffcanvasComponent implements OnInit {
 
   ngOnInit(): void {
     this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
-    console.log("User", this.User)
     this.extrasUserOffcanvasDirection = `offcanvas-${this.layout.getProp(
       'extras.user.offcanvas.direction'
     )}`;

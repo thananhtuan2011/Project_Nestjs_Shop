@@ -1,9 +1,11 @@
-import { User } from 'src/model/UserModelSchema';
+import { User } from 'src/modelSchema/UserModelSchema';
 import { Body, Controller, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
 import { LoginModel, LoginUserDto } from 'src/dto/login.dto';
 import { LoginService } from './services/login/login.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
+import { catchError } from 'rxjs';
+import { error } from 'console';
 @Controller('login')
 export class LoginController {
 
@@ -13,16 +15,24 @@ export class LoginController {
 
     @Post("Register")
     async CreatedUser(@Body() user: LoginModel) {
+        try {
 
-        const userInDb = await this.login_services.findByCondition({
-            username: user.username
-        })
-        if (userInDb) {
-            throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+            const userInDb = await this.login_services.findByCondition({
+                username: user.username
+            })
+            if (userInDb) {
+                throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+            }
+
+
+            await this.login_services.create(user)
+            var dt = await this.login_services.findByCondition({ username: user.username })
+            return { status: 1, data: dt }
+
         }
-
-
-        return await this.login_services.create(user)
+        catch (e) {
+            return { status: HttpStatus.NOT_FOUND, message: e.message || 'my error' }
+        }
     }
     @Post('refresh')
     async refresh(@Body() body) {
@@ -35,13 +45,14 @@ export class LoginController {
             password: user.password
         })
         if (!userInDb) {
-            throw new HttpException('User already exists', HttpStatus.BAD_REQUEST);
+            return null;
         }
         const authen = await this.login_services._createToken(userInDb)
         let data = {
             username: userInDb.username,
             roles: userInDb.roles,
-            _id: userInDb._id
+            _id: userInDb._id,
+            fullname: userInDb.fullname
         }
         return {
             user: data,

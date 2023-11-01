@@ -2,10 +2,10 @@ import { Module } from '@nestjs/common';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ProductSchema } from 'src/model/ProductModelSchema';
-import { OrderSchema } from 'src/model/OrderModelSchema';
+import { ProductSchema } from 'src/modelSchema/ProductModelSchema';
+import { OrderSchema } from 'src/modelSchema/OrderModelSchema';
 import { OrderService } from './product/order/order.service';
-import { MediaSchema } from 'src/model/MediaModelSchema';
+import { MediaSchema } from 'src/modelSchema/MediaModelSchema';
 import { MediaService } from './product/media/media/media.service';
 
 @Module({

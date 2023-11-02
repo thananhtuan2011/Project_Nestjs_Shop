@@ -112,7 +112,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem("User", JSON.stringify(user.user))
           this.cookie_services.set("accessToken", user.accessToken);
           this.cookie_services.set("refreshToken", user.refreshToken);
-          localStorage.setItem("roles", user.user.roles)
+          localStorage.setItem("role", user.user.roles)
           if (user.user.roles != '1') {
             this.router.navigate(['/Home']);
           }

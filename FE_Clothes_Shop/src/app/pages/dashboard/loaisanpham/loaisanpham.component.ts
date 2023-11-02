@@ -124,7 +124,7 @@ export class LoaisanphamComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
 
       if (res) {
-        this.LoadAllCate()
+        // this.LoadAllCate()
       }
     })
 

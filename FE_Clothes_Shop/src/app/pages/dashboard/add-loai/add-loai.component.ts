@@ -39,8 +39,8 @@ export class AddLoaiComponent implements OnInit {
       category_code: this.maloai
     }
 
-    this.admin_services.Addloai(item).subscribe(res => {
-      if (res) {
+    this.admin_services.Addloai(item).subscribe((res: any) => {
+      if (res && res.status == 1) {
         this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
         this.CloseDia(res);
       }

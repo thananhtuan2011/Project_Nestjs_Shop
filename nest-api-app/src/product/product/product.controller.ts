@@ -1,9 +1,11 @@
-import { Body, Controller, NotFoundException, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, NotFoundException, Param, Post, Query, Req } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductModel } from 'src/dto/product.dto';
 import { OrderModel } from 'src/dto/order.dto';
 import { OrderService } from './order/order.service';
 import { MediaService } from './media/media/media.service';
+import { PageOptionsDto } from 'src/share/Pagination/PageOption';
+
 
 @Controller('product')
 export class ProductController {
@@ -24,6 +26,11 @@ export class ProductController {
             throw new NotFoundException(data)
         }
 
+    }
+    @Post("AllProduct")
+    async AllProduct(@Query() pageOptionsDto: PageOptionsDto,) {
+        console.log("gggg", pageOptionsDto)
+        return await this._product_service.GetAllProduct(pageOptionsDto)
     }
     @Post("OrderProduct")
     async OrderProduct(@Body() body: OrderModel) {

@@ -85,7 +85,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       this.layout.setConfig(this.model);
 
       document.body.classList.remove('aside-fixed');
-      this.router.navigate(['/Home']);
+      // this.router.navigate(['/Home']);
     }
     // build view by layout config settings
     this.selfLayout = this.layout.getProp('self.layout');

@@ -1,8 +1,8 @@
 <!--begin::Brand-->
 <div *ngIf="User" class="brand flex-column-auto" id="kt_brand" [ngClass]="brandClasses">
   <!--begin::Logo-->
-  <a *ngIf="User.role_code!=1" routerLink="/" class="brand-logo">
-    <img alt="Logo" [attr.src]="headerLogo" />
+  <a *ngIf="User.roles==1" routerLink="/" class="brand-logo">
+    <img style="width: 100px;"  alt="Logo" [attr.src]="headerLogo" />
   </a>
   <!--end::Logo-->
 
@@ -25,7 +25,7 @@
   <ng-container *ngIf="disableAsideSelfDisplay">
     <!--begin::Header Logo-->
     <a routerLink="/">
-      <img alt="Logo" [attr.src]="headerLogo" />
+      <img  alt="Logo" [attr.src]="headerLogo" />
     </a>
     <!--end::Header Logo-->
   </ng-container>

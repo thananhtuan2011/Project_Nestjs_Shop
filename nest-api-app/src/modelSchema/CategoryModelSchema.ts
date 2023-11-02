@@ -6,7 +6,7 @@ const CategorySchema = new Schema(
         category_code: String,
         category_name: String,
         status: String,
-        Media: []
+        // Sub: []
 
     },
     {

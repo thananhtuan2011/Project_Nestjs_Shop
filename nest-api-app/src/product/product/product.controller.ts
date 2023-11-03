@@ -29,8 +29,7 @@ export class ProductController {
     }
     @Post("AllProduct")
     async AllProduct(@Query() pageOptionsDto: PageOptionsDto,) {
-        console.log("gggg", pageOptionsDto)
-        return await this._product_service.GetAllProduct(pageOptionsDto)
+        return await this._product_service.GetAllProduct(pageOptionsDto.page, pageOptionsDto.take)
     }
     @Post("OrderProduct")
     async OrderProduct(@Body() body: OrderModel) {

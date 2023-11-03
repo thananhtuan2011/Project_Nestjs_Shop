@@ -54,6 +54,7 @@ export class LoaisanphamComponent implements OnInit {
 
     this.grouping = this.product_services.grouping;
     this.paginator = this.product_services.paginator;
+    console.log("   this.paginator", this.paginator)
     this.sorting = this.product_services.sorting;
   }
 
@@ -80,14 +81,14 @@ export class LoaisanphamComponent implements OnInit {
       const filter = {};
 
 
-      this.product_services.patchStateCategory({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateCategory({ filter }, this.apiproduct);
     }
 
   }
 
   LoadAllCate() {
     const filter = {};
-    this.product_services.patchStateCategory({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateCategory({ filter }, this.apiproduct);
 
   }
   getHeight(): any {
@@ -97,7 +98,7 @@ export class LoaisanphamComponent implements OnInit {
   }
 
   paginate(paginator: PaginatorState) {
-    this.product_services.patchStateCategory({ paginator }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateCategory({ paginator }, this.apiproduct);
   }
   sort(column: string) {
     const sorting = this.sorting;
@@ -124,7 +125,7 @@ export class LoaisanphamComponent implements OnInit {
     dialogRef.afterClosed().subscribe(res => {
 
       if (res) {
-        // this.LoadAllCate()
+        this.LoadAllCate()
       }
     })
 

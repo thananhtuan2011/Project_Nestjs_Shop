@@ -1,6 +1,7 @@
-import { Body, Controller, HttpStatus, Post } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Post, Query } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from 'src/dto/category';
+import { PageOptionsDto } from 'src/share/Pagination/PageOption';
 
 @Controller('loai')
 export class CategoryController {
@@ -9,7 +10,10 @@ export class CategoryController {
     ) {
 
     }
-
+    @Post("AllCategory")
+    async AllCategory(@Query() pageOptionsDto: PageOptionsDto,) {
+        return await this._cate_service.AllCategory(pageOptionsDto.page, pageOptionsDto.take)
+    }
     @Post("AddCateGory")
     async AddCateGory(@Body() cate: CategoryDto) {
         try {

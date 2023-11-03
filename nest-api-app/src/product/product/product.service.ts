@@ -5,9 +5,7 @@ import { Model } from 'mongoose';
 import { BaseRepository } from 'src/base.model';
 import { ProductModel } from 'src/dto/product.dto';
 import { Product } from 'src/modelSchema/ProductModelSchema';
-import { PageOptionsDto } from 'src/share/Pagination/PageOption';
-import { PageMetaDto } from 'src/share/Pagination/page-meta.dto';
-import { PageDto } from 'src/share/Pagination/page.dto';
+
 
 
 @Injectable()
@@ -25,18 +23,17 @@ export class ProductService extends BaseRepository<Product> {
     }
 
     public async GetAllProduct(
-        pageOptionsDto: PageOptionsDto,
+        page: number, limit: number
     ) {
-        console.log("pageOptionsDto", pageOptionsDto)
-        var dt = await this.promodel.find()
-            .skip(pageOptionsDto.skip)
-            .limit(pageOptionsDto.take);
+        const itemCount = await this.promodel.countDocuments();
+        const count_page = (itemCount / limit).toFixed()
+        const dt = await this.promodel.find()
+            .skip((page - 1) * limit)
+            .limit(limit);
 
 
-        const itemCount = await this.promodel.find().countDocuments();
 
-        const pageMetaDto = new PageMetaDto({ itemCount, pageOptionsDto });
+        return { count_page, dt }
 
-        return new PageDto(dt, pageMetaDto);
     }
 }

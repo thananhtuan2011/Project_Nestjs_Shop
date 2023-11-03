@@ -250,7 +250,7 @@ export abstract class TableService<T> {
     );
   }
   find_AllCategory(tableState: ITableState, routeFind: string = '',): Observable<any> {
-    const url = routeFind;
+    const url = routeFind + `?&page=${tableState.paginator.page}&take=${tableState.paginator.pageSize}`;
     const httpHeader = this.getHttpHeaders();
     this._errorMessage.next('');
     return this.http.post<any>(url, tableState, { headers: httpHeader }).pipe(
@@ -283,9 +283,8 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
-          console.log("cate", resItems)
           this._itemsteamCate$.next(resItems);
           this.__responseData$.next(res);
           this.patchStateWithoutFetch({

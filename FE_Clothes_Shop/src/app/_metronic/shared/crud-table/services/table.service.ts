@@ -327,7 +327,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           console.log("Acccc", resItems)
           this._itemsteamAcount$.next(resItems);
@@ -372,7 +372,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           console.log("RẺEE", resItems)
           this._itemsteamDonHang$.next(resItems);
@@ -417,7 +417,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           console.log("RẺEE", resItems)
           this._itemsteamtype$.next(resItems);
@@ -462,7 +462,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           this._itemsteamHangTon$.next(resItems);
           this.__responseData$.next(res);
@@ -506,7 +506,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           this._itemsteamHetHang$.next(resItems);
           this.__responseData$.next(res);
@@ -551,7 +551,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           this._itemsuser$.next(resItems);
           this.__responseData$.next(res);
@@ -595,7 +595,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
           }
           console.log("resItems", resItems)
           this._itemschay$.next(resItems);
@@ -640,7 +640,7 @@ export abstract class TableService<T> {
         tap((res: any) => {
           if (res && res.status == 1) {
             resItems = res.data;
-            resTotalRow = res.total;
+            resTotalRow = res.panigator.total;
 
           }
           this._itemsteam$.next(resItems);

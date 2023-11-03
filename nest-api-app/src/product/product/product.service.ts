@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
 import { Model } from 'mongoose';
+import { range } from 'rxjs';
 import { BaseRepository } from 'src/base.model';
 import { ProductModel } from 'src/dto/product.dto';
 import { Product } from 'src/modelSchema/ProductModelSchema';
@@ -21,19 +22,48 @@ export class ProductService extends BaseRepository<Product> {
         return await this.promodel.updateOne({ _id: objectId, "Media._id": Number.parseInt(media_id.toString()) }, { $set: { "Media.$.url": "cccccccccccc" } });
 
     }
+    async GetDSSPHome() {
+        var data = await this.promodel.find().limit(8);
+        return { status: 1, data }
+    }
 
-    public async GetAllProduct(
+    async GetProductDetail(id) {
+        var data = await this.promodel.findById(id);
+        return { status: 1, data }
+    }
+
+
+    public async AllProduct(
         page: number, limit: number
     ) {
-        const itemCount = await this.promodel.countDocuments();
-        const count_page = (itemCount / limit).toFixed()
-        const dt = await this.promodel.find()
-            .skip((page - 1) * limit)
-            .limit(limit);
+        try {
+            let pageSizes = [];
+            const itemCount = await this.promodel.countDocuments();
+            let count_page = (itemCount / limit).toFixed()
+            const data = await this.promodel.find()
+                .skip((page - 1) * limit)
+                .limit(limit);
 
-
-
-        return { count_page, dt }
-
+            if (!Number.isNaN(count_page)) {
+                count_page = "0";
+            }
+            range(1, Number(count_page == "0" ? 1 : count_page)).subscribe(res => {
+                pageSizes.push(res)
+            });
+            let panigator =
+            {
+                "total": itemCount,
+                "totalpage": limit,
+                "page": page,
+                "pageSize": count_page,
+                "pageSizes": pageSizes
+            }
+            // console.log("ffff", panigator)
+            return { status: 1, panigator, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
     }
+
 }

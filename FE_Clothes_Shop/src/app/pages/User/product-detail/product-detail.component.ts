@@ -43,16 +43,11 @@ export class ProductDetailComponent implements OnInit {
     this.product_services.GetProductDetail(id).subscribe((res: any) => {
       if (res) {
         this.lstProducDetail = res.data;
-        console.log("lstProducDetail", this.lstProducDetail)
         this.changeDetectorRefs.detectChanges();
       }
     })
   }
-  GetGia(x) {
 
-    x = x.toLocaleString('it-IT', { style: 'currency', currency: '₫' });
-    return x
-  }
   onChangeSize($event: any) {
 
     this.Size = $event.value
@@ -142,9 +137,9 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.GetDSBest();
-      this.product_id = +params.id_product;
+
+      this.product_id = params.id_product;
       this.GetProduct_Detail(this.product_id)
-      console.log("product_id", this.product_id)
 
 
     })

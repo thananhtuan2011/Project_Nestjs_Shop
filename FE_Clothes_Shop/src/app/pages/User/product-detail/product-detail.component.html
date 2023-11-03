@@ -19,7 +19,7 @@
     </div>
   </section>
   
-  <div *ngFor="let d of lstProducDetail">
+  <div>
 
 
   <section class="single-product">
@@ -59,9 +59,9 @@
             <div class="" >
                 <div class="product-wrap">
                     <img style="width: 90% !important;" class="img-fluid mb-3 img-first zoom"
-                         [src]="d.Img"  alt="product-img" />
+                         [src]="lstProducDetail.Img"  alt="product-img" />
                    </div>
-              <li>{{d.product_name}}</li>
+              <li>{{lstProducDetail.product_name}}</li>
             </div>
   
             </div>
@@ -148,15 +148,15 @@
           </div>
           <div class="col-md-4 product-content-desc" id="detail-product">
             <div class="product-title">
-                <h1>{{d.Mota}}</h1>
+                <h1>{{lstProducDetail.Mota}}</h1>
                 
                 <span id="pro_sku">SKU: POL003103</span>
                 
                          
             </div>
-            <div class="product-price" id="price-preview"><span class="pro-sale">-23%</span><span class="pro-price"> {{d.DonGia |number}} ₫</span><del>{{d.DonGiaGoc |number}}₫</del></div>
+            <div class="product-price" id="price-preview"><span class="pro-sale">-23%</span><span class="pro-price"> {{lstProducDetail.DonGia |number}} ₫</span><del>{{lstProducDetail.DonGiaGoc |number}}₫</del></div>
             <div style=" font-size: 20px;">
-              <span>Số lượng còn lại: <label style="color: red;">{{d.amount}}</label></span>
+              <span>Số lượng còn lại: <label style="color: red;">{{lstProducDetail.amount}}</label></span>
             </div>  
             
                 
@@ -189,10 +189,10 @@
                     </mat-chip>
                   </mat-chip-list>
              </div>
-                <div *ngIf="d.amount>0" class="selector-actions">
+                <div *ngIf="lstProducDetail.amount>0" class="selector-actions">
                     
                     <div class="wrap-addcart clearfix">						
-                        <button (click)="AddGioHang(d.amount)"  style="border-radius: 10px;" type="button" id="add-to-cart" class="add-to-cartProduct button dark btn-addtocart addtocart-modal" name="add">Thêm vào giỏ</button>
+                        <button (click)="AddGioHang(lstProducDetail.amount)"  style="border-radius: 10px;" type="button" id="add-to-cart" class="add-to-cartProduct button dark btn-addtocart addtocart-modal" name="add">Thêm vào giỏ</button>
                     </div>	
                 </div>
               
@@ -219,11 +219,11 @@
                 </div>							
                 <div class="description-content">
                     <div class="description-productdetail">
-                       {{d.Mota}}<br>
+                       {{lstProducDetail.Mota}}<br>
                     </div>
                 </div>
             </div>
-            <div *ngIf="d.amount==0" class="selector-actions">
+            <div *ngIf="lstProducDetail.amount==0" class="selector-actions">
                     
               <h2 style="margin-top: 15px;color: red;">Hết hàng !!!</h2>
           </div>
@@ -245,7 +245,7 @@
 
             <div style="display: flex;flex-wrap: wrap;justify-content: center;">
                 <div  *ngFor="let p of lstProductSeller ; let i=index">
-                  <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+                  <div class="product" [routerLink]="['/Home/','Product',p._id]">
                     <div class="product-wrap">
                      <img style="width: 300px;height: 200px;padding: 10px;cursor: pointer;" class="img-fluid"
                           src="{{p.Img}}"  alt="product-img" />

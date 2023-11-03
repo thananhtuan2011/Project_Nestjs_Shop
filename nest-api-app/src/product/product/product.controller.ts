@@ -1,4 +1,4 @@
-import { Body, Controller, NotFoundException, Param, Post, Query, Req } from '@nestjs/common';
+import { Body, Controller, NotFoundException, Param, Post, Query, Req, Get } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductModel } from 'src/dto/product.dto';
 import { OrderModel } from 'src/dto/order.dto';
@@ -27,14 +27,24 @@ export class ProductController {
         }
 
     }
+
+    @Get("GetDSSPHome")
+    async GetDSSPHome() {
+        return await this._product_service.GetDSSPHome();
+    }
     @Post("AllProduct")
     async AllProduct(@Query() pageOptionsDto: PageOptionsDto,) {
-        return await this._product_service.GetAllProduct(pageOptionsDto.page, pageOptionsDto.take)
+        return await this._product_service.AllProduct(pageOptionsDto.page, pageOptionsDto.take)
     }
     @Post("OrderProduct")
     async OrderProduct(@Body() body: OrderModel) {
         return await this._order_service.CreaedOrder(body)
     }
+    @Get("GetProductDetail/:id")
+    async GetProductDetail(@Param("id") id: string) {
+        return await this._product_service.GetProductDetail(id)
+    }
+
 
     @Post("GetOrder/:id")
     async GetOrder(@Param("id") id: string) {

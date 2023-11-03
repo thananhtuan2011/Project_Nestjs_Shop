@@ -39,7 +39,7 @@ export class ProductService extends TableService<any>  {
   }
   GetProductDetail(product_id: number) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.get(this.baseUrlAcount + `GetProductDetail?product_id=${product_id}`, { headers: httpHeader });
+    return this.http.get(this.baseUrlAcount + `GetProductDetail/${product_id}`, { headers: httpHeader });
   }
   GetDSBest() {
     const httpHeader = this.getHttpHeaders();

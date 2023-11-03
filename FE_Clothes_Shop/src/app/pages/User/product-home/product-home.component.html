@@ -113,7 +113,7 @@
     <div class="container" style="margin-bottom: 15px;">
       <div class="row" >
         <div class="col-lg-4 col-sm-12 col-md-6" *ngFor="let slide of listSlide">
-          <div class="cat-item mb-4 mb-lg-0" [routerLink]="['/Home/','Product',slide.product_id]">
+          <div class="cat-item mb-4 mb-lg-0" [routerLink]="['/Home/','Product',slide._id]">
             <img style="width: 400px;border-radius: 10px;cursor: pointer;height: 400px;" src="{{slide.Img}}" alt="" class="img-fluid cusimg">
             <div class="item-info">
               <p class="mb-0">{{slide.product_name.slice(0,50)}}</p>
@@ -162,14 +162,14 @@
   
       <div class="row">
         <div class="col-lg-3 col-12 col-md-6 col-sm-6 mb-5" *ngFor="let p of listProduct ; let i=index">
-          <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+          <div class="product" [routerLink]="['/Home/','Product',p._id]">
             <div class="product-wrap">
              <img class="img-fluid w-100 mb-3 img-first zoom"
                   src="{{p.Img}}"  alt="product-img" />
             </div>
             <div class="product-info">
               <h2 class="product-title h5 mb-0"><a style=" font-weight: 100;
-                font-family: 'Quicksand', sans-serif!important;color: black;" [routerLink]="['/Home/','Product',p.product_id]"
+                font-family: 'Quicksand', sans-serif!important;color: black;" [routerLink]="['/Home/','Product',p._id]"
                   >{{p.product_name}}</a></h2>
               <span class="price" style="color: red;">
                 {{p.DonGia  |number}} đ 
@@ -221,7 +221,7 @@
           
       <div class="row">
         <div  *ngFor="let p of lstProductSeller ; let i=index">
-          <div class="product" [routerLink]="['/Home/','Product',p.product_id]">
+          <div class="product" [routerLink]="['/Home/','Product',p._id]">
             <div class="product-wrap">
              <img style="width: 200px;padding: 10px;cursor: pointer;" class="img-fluid imgbest"
                   src="{{p.Img}}"  alt="product-img" />

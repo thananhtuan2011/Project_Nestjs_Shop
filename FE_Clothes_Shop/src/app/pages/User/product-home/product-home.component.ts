@@ -24,7 +24,6 @@ export class ProductHomeComponent implements OnInit {
     this.product_services.getListSPHome().subscribe((res: any) => {
       if (res) {
         this.listProduct = res.data;
-        console.log("getListSPHome", this.listProduct)
         this.changeDetectorRefs.detectChanges();
       }
     })
@@ -35,7 +34,6 @@ export class ProductHomeComponent implements OnInit {
     this.product_services.GetDSSlideMini().subscribe((res: any) => {
       if (res) {
         this.listSlide = res.data;
-        console.log("listSlide", this.listSlide)
         this.changeDetectorRefs.detectChanges();
       }
     })

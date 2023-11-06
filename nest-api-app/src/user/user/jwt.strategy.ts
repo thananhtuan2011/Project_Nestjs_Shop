@@ -5,20 +5,23 @@ import { LoginService } from './login/services/login/login.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(private readonly login_services: LoginService) {
+  constructor() {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       secretOrKey: process.env.SECRETKEY,
     });
   }
+  // async validate({ username }) {
+  //   const user = await this.login_services.validateUser(username);
 
-  async validate({ username }) {
-    const user = await this.login_services.validateUser(username);
+  //   if (!user) {
+  //     throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
+  //   }
 
-    if (!user) {
-      throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
-    }
+  //   return user;
+  // }
+  async validate(payload: any) {
+    return { payload };
 
-    return user;
   }
 }

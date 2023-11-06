@@ -29,6 +29,10 @@ export class ProductService extends TableService<any>  {
     });
     return result;
   }
+  UpdateLuotMua(product_id, amount) {
+    const httpHeader = this.getHttpHeaders();
+    return this.http.post(this.baseUrlAcount + `UpdateLuotMua/${product_id}/${amount}`, null, { headers: httpHeader });
+  }
   getListSPHome() {
     const httpHeader = this.getHttpHeaders();
     return this.http.get(this.baseUrlAcount + `GetDSSPHome`, { headers: httpHeader });

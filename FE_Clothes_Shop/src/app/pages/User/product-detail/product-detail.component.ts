@@ -30,14 +30,13 @@ export class ProductDetailComponent implements OnInit {
     { name: 'M', selected: false },
     { name: 'L', selected: false },
   ];
-  lstProducDetail: any = [];
+  lstProducDetail: any;
   User: any;
   constructor(private route: ActivatedRoute,
     private layoutUtilsService: LayoutUtilsService,
     private product_services: ProductService,
     private changeDetectorRefs: ChangeDetectorRef,
     private order_services: OrderService,
-    private topbar_services: TopbarService,
     private router: Router,) { this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User')))); }
   GetProduct_Detail(id) {
     this.product_services.GetProductDetail(id).subscribe((res: any) => {
@@ -69,16 +68,17 @@ export class ProductDetailComponent implements OnInit {
 
     const item = new OrderModel();
     item.account_id = this.User.account_id;
-    item.DonGia = Number.parseInt(this.lstProducDetail[0].DonGia);
+    item.DonGia = Number.parseInt(this.lstProducDetail.DonGia);
     item.Size = this.Size;
     item.phone = this.User.phone
-    item.category_id = this.lstProducDetail[0].category_id
+    item.category_id = this.lstProducDetail.category_id
     item.color = this.color;
-    item.product_name = this.lstProducDetail[0].product_name
-    item.Img = this.lstProducDetail[0].Img
+    item.product_name = this.lstProducDetail.product_name
+    item.Img = this.lstProducDetail.Img
     item.address = this.User.address;
     item.full_name = this.User.full_name;
     item.soluong = sl
+    item.Pay = false;
     item.product_id = this.product_id;
 
     return item
@@ -110,14 +110,14 @@ export class ProductDetailComponent implements OnInit {
 
 
         let item = this.ItemOrder(this.sl);
-        this.order_services.InsertOrder(item, this.User.account_id).subscribe((res: any) => {
+        this.order_services.InsertOrder(item).subscribe((res: any) => {
           if (res) {
+            this.product_services.UpdateLuotMua(this.product_id, this.lstProducDetail.amount).subscribe(res => {
 
-            // update lượt mua 
-            this.GetProduct_Detail(this.product_id)
+              // update lượt mua 
+              this.GetProduct_Detail(this.product_id)
 
-            this.layoutUtilsService.showActionNotification("Thành Công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
-            this.order_services.UpdateLuotMua(this.product_id).subscribe(res => {
+              this.layoutUtilsService.showActionNotification("Thành Công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
 
             })
             this.product_services.RecountCart$.next(true);

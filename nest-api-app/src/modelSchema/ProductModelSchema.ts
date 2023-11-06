@@ -11,7 +11,6 @@ const ProductSchema = new Schema(
         DonGiaGoc: Number,
         Img: String,
         Mota: String,
-        Media: []
 
     },
     {
@@ -34,5 +33,4 @@ export interface Product extends Document {
     DonGiaGoc: number
     Img: string
     Mota: string
-    Media: any[]
 }

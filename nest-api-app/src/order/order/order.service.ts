@@ -16,14 +16,19 @@ export class OrderService extends BaseRepository<Order> {
     }
 
     CreaedOrder(body: OrderModel) {
-        // body.user = user._id
-        return this.ordermodel.create(body)
+        try {
+            this.ordermodel.create(body)
+            return { status: 1 }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
     }
 
     OrderDetail(order_id: string) {
         const order = this.ordermodel.findById(order_id);
         if (order) {
-            order.populate({ path: "User", select: "username createdAt" })
+            order.populate({ path: "User", options: { strictPopulate: false }, select: "username createdAt" })
             order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota Media" })
             return order;
         }
@@ -32,6 +37,9 @@ export class OrderService extends BaseRepository<Order> {
         }
     }
 
+    async GetCartByAcount() {
+
+    }
     async DeleteProductInOrder(objectId: string, _id: string) {
         const order = await this.ordermodel.updateMany({ _id: objectId }, { $pull: { Product: { $in: [_id] } } });
 

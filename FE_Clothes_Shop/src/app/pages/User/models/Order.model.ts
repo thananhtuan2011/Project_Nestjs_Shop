@@ -1,12 +1,13 @@
 export class OrderModel {
-    account_id: number;
-    product_id: number
+    account_id: string;
+    product_id: string
     soluong: number
     address: string
+    Pay: boolean;
     full_name: string;
     phone: string;
     DonGia: number
-    category_id: number;
+    category_id: string;
     Size: string;
     Img: string;
     color: string;

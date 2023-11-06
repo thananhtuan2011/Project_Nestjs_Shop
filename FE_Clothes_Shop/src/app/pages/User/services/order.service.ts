@@ -25,14 +25,11 @@ export class OrderService {
     });
     return result;
   }
-  InsertOrder(item, acount_id) {
+  InsertOrder(item) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlorder + `AddOrder?acount_id=${acount_id}`, item, { headers: httpHeader });
+    return this.http.post(this.baseUrlorder + `AddOrder`, item, { headers: httpHeader });
   }
-  UpdateLuotMua(product_id) {
-    const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlorder + `UpdateLuotMua?produtct_id=${product_id}`, null, { headers: httpHeader });
-  }
+
 
   SendGmail(title, body, gmail) {
     const httpHeader = this.getHttpHeaders();

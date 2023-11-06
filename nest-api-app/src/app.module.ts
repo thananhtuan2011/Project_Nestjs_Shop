@@ -10,6 +10,7 @@ import { ProductModule } from './product/product.module';
 import { KafkaModule } from './kafka/kafka/kafka.module';
 import { KafkaConsumer } from './kafka/kafka.consumer';
 import { CategoryModule } from './category/category/category.module';
+import { OrderModule } from './order/order/order.module';
 
 @Module({
   imports: [AuthModule,
@@ -18,6 +19,7 @@ import { CategoryModule } from './category/category/category.module';
     MongooseModule.forRoot(process.env.MONGODB_URL),
     ShareModule,
     ProductModule,
+    OrderModule,
     CategoryModule,
     // KafkaModule
   ],

@@ -3,8 +3,6 @@ import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ProductSchema } from 'src/modelSchema/ProductModelSchema';
-import { OrderSchema } from 'src/modelSchema/OrderModelSchema';
-import { OrderService } from './product/order/order.service';
 import { MediaSchema } from 'src/modelSchema/MediaModelSchema';
 import { MediaService } from './product/media/media/media.service';
 
@@ -14,10 +12,6 @@ import { MediaService } from './product/media/media/media.service';
       {
         name: 'Product',
         schema: ProductSchema
-      },
-      {
-        name: 'Order',
-        schema: OrderSchema
       },
 
       {
@@ -29,6 +23,6 @@ import { MediaService } from './product/media/media/media.service';
   ),
   ],
   controllers: [ProductController],
-  providers: [ProductService, OrderService, MediaService]
+  providers: [ProductService, MediaService]
 })
 export class ProductModule { }

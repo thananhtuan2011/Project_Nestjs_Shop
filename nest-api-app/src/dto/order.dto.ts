@@ -1,16 +1,16 @@
-import { LoginModel } from "./login.dto"
 
 export class OrderModel {
-    amount: number
+    account_id: number;
+    product_id: number
+    soluong: number
+    address: string
+    full_name: string;
+    phone: string;
     DonGia: number
-    product_name: string
-    size: string
-    SĐT: number
-    Sale: number
-    DonGiaGoc: number
-    Img: string
-    Mota: string
-    user: LoginModel
-    DiaChi: string
+    category_id: number;
+    Size: string;
+    Img: string;
+    color: string;
+    product_name: string;
 
 }

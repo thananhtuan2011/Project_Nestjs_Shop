@@ -2,7 +2,6 @@ import { Body, Controller, NotFoundException, Param, Post, Query, Req, Get } fro
 import { ProductService } from './product.service';
 import { ProductModel } from 'src/dto/product.dto';
 import { OrderModel } from 'src/dto/order.dto';
-import { OrderService } from './order/order.service';
 import { MediaService } from './media/media/media.service';
 import { PageOptionsDto } from 'src/share/Pagination/PageOption';
 
@@ -11,7 +10,7 @@ import { PageOptionsDto } from 'src/share/Pagination/PageOption';
 export class ProductController {
 
 
-    constructor(private _product_service: ProductService, private _order_service: OrderService,
+    constructor(private _product_service: ProductService,
         private _media_service: MediaService
     ) {
 
@@ -36,32 +35,28 @@ export class ProductController {
     async AllProduct(@Query() pageOptionsDto: PageOptionsDto,) {
         return await this._product_service.AllProduct(pageOptionsDto.page, pageOptionsDto.take)
     }
-    @Post("OrderProduct")
-    async OrderProduct(@Body() body: OrderModel) {
-        return await this._order_service.CreaedOrder(body)
-    }
+
     @Get("GetProductDetail/:id")
     async GetProductDetail(@Param("id") id: string) {
         return await this._product_service.GetProductDetail(id)
     }
 
 
-    @Post("GetOrder/:id")
-    async GetOrder(@Param("id") id: string) {
-        return await this._order_service.OrderDetail(id)
+    @Get("GetDSSlideMini")
+    async GetDSSlideMini() {
+        return await this._product_service.GetDSSlideMini()
+    }
+    @Get("GetDSBest")
+    async GetDSBest() {
+        return await this._product_service.GetDSBest()
     }
 
-
-    @Post("DeleteProductInOrder/:id/:id_pro")
-    async DeleteProductInOrder(@Param("id") id: string, @Param("id_pro") id_pro: string) {
-        return await this._order_service.DeleteProductInOrder(id, id_pro)
+    @Post("UpdateLuotMua/:id/:amount")
+    async UpdateLuotMua(@Param("id") id: string,
+        @Param("amount") amount: number) {
+        await this._product_service.UpdateLuotMua(id, amount)
+        return await this._product_service.findById(id)
     }
-
-    @Post("UpdateProductInOrder/:id/:id_pro")
-    async UpdateProductInOrder(@Param("id") id: string, @Param("id_pro") id_pro: string) {
-        return await this._order_service.UpdateProductInOrder(id, id_pro)
-    }
-
     @Post("UpdateProduct/:id/:media_id")
     async UpdateProduct(@Param("id") id: string,
         @Param("media_id") media_id: number) {

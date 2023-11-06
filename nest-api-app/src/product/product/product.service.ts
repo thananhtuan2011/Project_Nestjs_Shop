@@ -22,10 +22,28 @@ export class ProductService extends BaseRepository<Product> {
         return await this.promodel.updateOne({ _id: objectId, "Media._id": Number.parseInt(media_id.toString()) }, { $set: { "Media.$.url": "cccccccccccc" } });
 
     }
+    async UpdateLuotMua(objectId: string, amount: number) {
+        let amountup = amount - 1;
+        console.log("amountup", amountup)
+        console.log("amount", amount)
+        return await this.promodel.updateOne({ _id: objectId }, { $set: { amount: amountup } });
+
+    }
+
     async GetDSSPHome() {
         var data = await this.promodel.find().limit(8);
         return { status: 1, data }
     }
+    async GetDSBest() {
+        var data = await this.promodel.aggregate([{ $sample: { size: 4 } }])
+        return { status: 1, data }
+    }
+    async GetDSSlideMini() {
+        var data = await this.promodel.aggregate([{ $sample: { size: 4 } }])
+        return { status: 1, data }
+    }
+
+
 
     async GetProductDetail(id) {
         var data = await this.promodel.findById(id);

@@ -18,7 +18,9 @@ export class CategoryService extends BaseRepository<Category> {
         return await this.catemodel.create();
 
     }
-
+    async Updatecategory(objectid, category_code, category_name) {
+        return await this.catemodel.updateOne({ _id: objectid }, { $set: { category_code: category_code, category_name: category_name } });
+    }
     public async AllCategory(
         page: number, limit: number
     ) {

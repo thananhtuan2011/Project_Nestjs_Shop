@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Post, Query } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Param, Post, Query } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from 'src/dto/category';
 import { PageOptionsDto } from 'src/share/Pagination/PageOption';
@@ -14,6 +14,11 @@ export class CategoryController {
     async AllCategory(@Query() pageOptionsDto: PageOptionsDto,) {
         return await this._cate_service.AllCategory(pageOptionsDto.page, pageOptionsDto.take)
     }
+    @Post("UpdateCategory")
+    async UpdateCategory(@Body() cate: CategoryDto) {
+        return await this._cate_service.Updatecategory(cate.category_id, cate.category_code, cate.category_name)
+    }
+
     @Post("AddCateGory")
     async AddCateGory(@Body() cate: CategoryDto) {
         try {

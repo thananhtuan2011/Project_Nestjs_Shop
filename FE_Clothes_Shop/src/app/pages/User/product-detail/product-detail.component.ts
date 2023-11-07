@@ -68,11 +68,10 @@ export class ProductDetailComponent implements OnInit {
   ItemOrder(sl): OrderModel {
 
     const item = new OrderModel();
-    item.User = this.User.account_id;
     item.DonGia = Number.parseInt(this.lstProducDetail.DonGia);
     item.Size = this.Size;
     item.phone = this.User.phone
-    item.Category = this.lstProducDetail.category_id
+    item.Category = [{ _id: "6544b23e0050bd3363cbc288" }]
     item.color = this.color;
     item.product_name = this.lstProducDetail.product_name
     item.Img = this.lstProducDetail.Img
@@ -80,7 +79,8 @@ export class ProductDetailComponent implements OnInit {
     item.full_name = this.User.full_name;
     item.soluong = sl
     item.Pay = false;
-    item.Product = this.product_id;
+    item.Product = [{ _id: this.product_id }];
+    item.User = { _id: this.User.account_id }
 
     return item
   }

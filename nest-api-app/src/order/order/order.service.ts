@@ -9,6 +9,7 @@ import { Order } from 'src/modelSchema/OrderModelSchema';
 @Injectable()
 export class OrderService extends BaseRepository<Order> {
 
+
     constructor(@InjectModel('Order')
     private ordermodel: Model<Order>) {
         super(ordermodel)
@@ -27,9 +28,9 @@ export class OrderService extends BaseRepository<Order> {
     OrderDetail(order_id: string) {
         const order = this.ordermodel.findById(order_id);
         if (order) {
-            order.populate({ path: "User", select: "username " })
-            order.populate({ path: "Product", select: "DonGiaGoc" })
-
+            order.populate({ path: "User", select: "username createdAt" })
+            order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
+            order.populate({ path: "Catefory", select: "category_code category_name" })
             return order;
         }
         else {

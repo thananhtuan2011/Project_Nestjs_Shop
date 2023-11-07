@@ -11,7 +11,7 @@ const CategorySchema = new Schema(
     },
     {
         timestamps: true,
-        collection: 'Catefory',
+        collection: 'Category',
     }
 
 

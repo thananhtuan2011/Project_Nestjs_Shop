@@ -10,7 +10,7 @@ export class OrderModel {
     Img: string;
     color: string;
     product_name: string;
-    Category: {};
-    Product: {};
+    Category: [any];
+    Product: [any];
     User: {}
 }

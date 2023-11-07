@@ -39,7 +39,7 @@ export class UpdatecategoryComponent implements OnInit {
   submit() {
 
     var item = {
-      category_id: this.data.item.category_id,
+      category_id: this.data.item._id,
       category_name: this.tenloai,
       category_code: this.maloai
     }

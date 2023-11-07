@@ -1,6 +1,4 @@
-
 export class OrderModel {
-
     soluong: number
     address: string
     full_name: string;
@@ -10,5 +8,7 @@ export class OrderModel {
     Img: string;
     color: string;
     product_name: string;
-
+    Category: [];
+    Product: [];
+    User: {}
 }

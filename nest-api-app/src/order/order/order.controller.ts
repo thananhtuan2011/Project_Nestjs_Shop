@@ -1,4 +1,4 @@
-import { Body, Controller, Param, Post, Req, UseGuards, Request } from '@nestjs/common';
+import { Body, Controller, Param, Post, Req, UseGuards, Get } from '@nestjs/common';
 import { OrderModel } from 'src/dto/order.dto';
 import { OrderService } from './order.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -13,16 +13,14 @@ export class OrderController {
     ) {
 
     }
+
     @Post("GetOrder/:id")
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth('JWT')
-    async GetOrder(@Param("id") id: string) {
-        // const jwt = req
-        // console.log("jwt", jwt);
-        //   const decodedToken = await this.jwtService.decode("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InR1YW50YSIsIl9pZCI6IjY1NDIxOGUwOWRlM2QxZDY0MmRlM2JmNSIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMDFUMDk6MjI6NDAuMzY2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMDZUMDM6MDQ6MjkuMTY4WiIsImlhdCI6MTY5OTI2MzQ4NywiZXhwIjoxNjk5MjY5NDg3fQ.gBYghZgT42t4o76Cm26HRSCEqufKYXDzcLOLp62u-lI") as JwtData;
+    async GetOrder(@Param("id") id: string, @Req() request) {
+        const accessToken = request.cookies.accessToken
+        const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
 
-        //console.log("decodedToken", decodedToken);
-        // console.log("username", decodedToken.username);
         return await this._order_service.OrderDetail(id)
     }
 

@@ -51,7 +51,7 @@ export class LoginController {
         let data = {
             username: userInDb.username,
             roles: userInDb.roles,
-            _id: userInDb._id,
+            account_id: userInDb._id,
             fullname: userInDb.fullname
         }
         return {

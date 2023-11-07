@@ -42,6 +42,7 @@ export class ProductDetailComponent implements OnInit {
     this.product_services.GetProductDetail(id).subscribe((res: any) => {
       if (res) {
         this.lstProducDetail = res.data;
+        console.log("lstProducDetail", this.lstProducDetail)
         this.changeDetectorRefs.detectChanges();
       }
     })
@@ -67,11 +68,11 @@ export class ProductDetailComponent implements OnInit {
   ItemOrder(sl): OrderModel {
 
     const item = new OrderModel();
-    item.account_id = this.User.account_id;
+    item.User = this.User.account_id;
     item.DonGia = Number.parseInt(this.lstProducDetail.DonGia);
     item.Size = this.Size;
     item.phone = this.User.phone
-    item.category_id = this.lstProducDetail.category_id
+    item.Category = this.lstProducDetail.category_id
     item.color = this.color;
     item.product_name = this.lstProducDetail.product_name
     item.Img = this.lstProducDetail.Img
@@ -79,7 +80,7 @@ export class ProductDetailComponent implements OnInit {
     item.full_name = this.User.full_name;
     item.soluong = sl
     item.Pay = false;
-    item.product_id = this.product_id;
+    item.Product = this.product_id;
 
     return item
   }
@@ -110,6 +111,7 @@ export class ProductDetailComponent implements OnInit {
 
 
         let item = this.ItemOrder(this.sl);
+        console.log("itemitemitem", item)
         this.order_services.InsertOrder(item).subscribe((res: any) => {
           if (res) {
             this.product_services.UpdateLuotMua(this.product_id, this.lstProducDetail.amount).subscribe(res => {

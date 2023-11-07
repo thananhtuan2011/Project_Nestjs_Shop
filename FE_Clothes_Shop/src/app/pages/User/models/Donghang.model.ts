@@ -10,7 +10,7 @@ export class DonHangModel {
     Size: string;
     email: string;
     Img: string;
-    Tongtien: string;
+    Tongtien: number;
     color: string;
     product_name: string;
     ListProduct: [];

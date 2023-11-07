@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import { NotifyService } from 'src/app/_metronic/partials/layout/extras/offcanvas/quick-panel-offcanvas/notify.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { AccService } from '../services/acc.service';
 
 @Component({
   selector: 'app-thanh-toan',
@@ -23,7 +24,7 @@ export class ThanhToanComponent implements OnInit {
   isKeyXaNhan: boolean = false;
   User: any;
   phisip: number = 0
-  ship: string;
+  ship: number = 0;
   hoten: string;
   diachi: string;
   sdt: string;
@@ -32,12 +33,17 @@ export class ThanhToanComponent implements OnInit {
   hasError: boolean;
   IdDonHang: number;
   isLoading$: Observable<boolean>;
-  constructor(private fb: FormBuilder, private notify: NotifyService, private router: Router, private order_services: OrderService, private layoutUtilsService: LayoutUtilsService, private translate: TranslateService, private product: ProductService, private topbar_services: TopbarService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private acc_services: AccService, private fb: FormBuilder, private notify: NotifyService, private router: Router, private order_services: OrderService, private layoutUtilsService: LayoutUtilsService, private translate: TranslateService, private product: ProductService, private topbar_services: TopbarService, private changeDetectorRefs: ChangeDetectorRef) {
 
     this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
   }
   tien: number = 0;
-  tongtien: string;
+  tongtien: number;
+  GetInforUser() {
+    this.acc_services.GetInforUser().subscribe(res => {
+      console.log("ress")
+    })
+  }
   GetCartByAcount() {
     this.topbar_services.GetCartByAcount().subscribe((res: any) => {
       this.tien = 0;
@@ -46,19 +52,12 @@ export class ThanhToanComponent implements OnInit {
       this.listOrder.forEach(element => {
         this.tien = this.tien + Number.parseInt(element.DonGia) * element.soluong
       })
-      if ((this.tien * 1000) > 500000) {
-        this.phisip = 0;
 
-        this.tongtien = ((this.tien).toLocaleString('vi', { style: 'currency', currency: 'VND' }));
+      this.tongtien = (this.tien)
 
-      }
-      else {
-        if (this.listOrder.length > 0) {
-          this.phisip = 50000;
-          this.ship = ((this.phisip).toLocaleString('vi', { style: 'currency', currency: 'VND' }));
-        }
-        this.tongtien = (((this.tien) + this.phisip).toLocaleString('vi', { style: 'currency', currency: 'VND' }));
-
+      if (this.listOrder.length == 0) {
+        this.tongtien = 0;
+        this.tien = 0
       }
 
       this.changeDetectorRefs.detectChanges();
@@ -145,8 +144,8 @@ export class ThanhToanComponent implements OnInit {
               this.order_services.SendGmail("Mã Xác Nhận", 'Mã xác nhận của quý khách: ' + ma, this.registrationForm.controls["email"].value).subscribe(res => {
 
               })
-              this.tongtien = '0';
-              this.ship = '0'
+              this.tongtien = 0;
+              this.ship = 0
               this.IdDonHang = res.data.Id_Donhang;
               this.product.RecountCart$.next(true);
               this.GetCartByAcount();
@@ -253,6 +252,7 @@ export class ThanhToanComponent implements OnInit {
     this.diachi = this.User.address
     this.sdt = this.User.phone
     this.GetCartByAcount();
+    this.GetInforUser();
     this.initForm();
   }
 

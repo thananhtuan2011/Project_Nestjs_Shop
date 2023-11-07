@@ -37,10 +37,22 @@ export class OrderService extends BaseRepository<Order> {
             throw new NotFoundException(order_id)
         }
     }
+    GetCart(objectId_user: string) {
+        const order = this.ordermodel.find({ User: objectId_user, Pay: false });
+        if (order) {
+            order.populate({ path: "User", select: "username createdAt" })
+            order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
+            order.populate({ path: "Category", select: "category_code category_name" })
+            return order;
+        }
+        else {
+            throw new NotFoundException(objectId_user)
+        }
+    }
 
     async GetCartByAcount(objectId_user) {
 
-        return await this.ordermodel.findOne({ User: objectId_user, Pay: false }).count();
+        return await this.ordermodel.find({ User: objectId_user, Pay: false }).count();
     }
     async DeleteProductInOrder(objectId: string, _id: string) {
         const order = await this.ordermodel.updateMany({ _id: objectId }, { $pull: { Product: { $in: [_id] } } });

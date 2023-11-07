@@ -1,5 +1,5 @@
 export class JwtData {
-    username: String
-    _id: String
-    exp: String
+    username: string
+    _id: string
+    exp: string
 }

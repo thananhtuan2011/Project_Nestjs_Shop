@@ -1,15 +1,17 @@
 import { User } from 'src/modelSchema/UserModelSchema';
-import { Body, Controller, HttpException, HttpStatus, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { LoginModel, LoginUserDto } from 'src/dto/login.dto';
 import { LoginService } from './services/login/login.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { catchError } from 'rxjs';
 import { error } from 'console';
+import { JwtService } from '@nestjs/jwt';
+import { JwtData } from 'src/dto/jwt';
 @Controller('login')
 export class LoginController {
 
-    constructor(private login_services: LoginService) {
+    constructor(private login_services: LoginService, private readonly jwtService: JwtService) {
 
     }
 
@@ -81,6 +83,16 @@ export class LoginController {
     @UseGuards(AuthGuard('jwt'))
     DeleteUser(@Param('id') id: string) {
         return this.login_services.deleteOne(id)
+    }
+    @Get("GetInforUser")
+    @UseGuards(AuthGuard('jwt'))
+    @ApiBearerAuth('JWT')
+    async GetInforUser(@Req() request) {
+
+        const accessToken = request.headers['authorization'].split(' ')[1];
+        const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
+        var data = await this.login_services.findById(decodedToken._id)
+        return { status: 1, data }
     }
 
     @Post("FindUserById/:id")

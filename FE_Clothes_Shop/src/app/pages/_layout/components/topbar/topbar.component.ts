@@ -48,7 +48,6 @@ export class TopbarComponent implements OnInit, AfterViewInit {
     if (this.User) {
 
       this.topbar_services.GetCountCart().subscribe((res: any) => {
-        console.log("GetCountCartGetCountCartGetCountCart", res)
         if (res) {
 
           this.countorder = res.data;

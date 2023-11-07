@@ -24,6 +24,15 @@ export class OrderController {
         return await this._order_service.OrderDetail(id)
     }
 
+    @Get("GetCartByAcount")
+    @ApiBearerAuth('JWT')
+    async GetCartByAcount(@Req() request) {
+        const accessToken = request.headers['authorization'].split(' ')[1];
+        const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
+        var data = await this._order_service.GetCart(decodedToken._id)
+        return { status: 1, data }
+    }
+
     @Get("GetCountCart")
     @ApiBearerAuth('JWT')
     async GetCountCart(@Req() request) {

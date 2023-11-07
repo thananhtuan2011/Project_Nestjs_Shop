@@ -30,7 +30,7 @@ export class OrderService extends BaseRepository<Order> {
         if (order) {
             order.populate({ path: "User", select: "username createdAt" })
             order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
-            order.populate({ path: "Catefory", select: "category_code category_name" })
+            order.populate({ path: "Category", select: "category_code category_name" })
             return order;
         }
         else {
@@ -38,8 +38,9 @@ export class OrderService extends BaseRepository<Order> {
         }
     }
 
-    async GetCartByAcount() {
+    async GetCartByAcount(objectId_user) {
 
+        return await this.ordermodel.findOne({ User: objectId_user, Pay: false }).count();
     }
     async DeleteProductInOrder(objectId: string, _id: string) {
         const order = await this.ordermodel.updateMany({ _id: objectId }, { $pull: { Product: { $in: [_id] } } });

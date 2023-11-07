@@ -13,7 +13,7 @@ const OrderSchema = new Schema(
         color: String,
         product_name: String,
         Pay: Boolean,
-        Category: [{ type: Schema.Types.ObjectId, ref: "Product" }],
+        Category: [{ type: Schema.Types.ObjectId, ref: "Category" }],
         Product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
         User: { type: Schema.Types.ObjectId, ref: 'User' },
     },

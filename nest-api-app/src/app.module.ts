@@ -11,6 +11,7 @@ import { KafkaModule } from './kafka/kafka/kafka.module';
 import { KafkaConsumer } from './kafka/kafka.consumer';
 import { CategoryModule } from './category/category/category.module';
 import { OrderModule } from './order/order/order.module';
+import { DonHangModule } from './DonHang/don_hang/don_hang.module';
 
 @Module({
   imports: [AuthModule,
@@ -21,6 +22,7 @@ import { OrderModule } from './order/order/order.module';
     ProductModule,
     OrderModule,
     CategoryModule,
+    DonHangModule
     // KafkaModule
   ],
 

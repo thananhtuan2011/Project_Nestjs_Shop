@@ -11,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AccService {
   constructor(private router: Router, private http: HttpClient, private cookie: CookieService) { }
-  baseUrlAcount = environment.apiUrl + 'acount/';
+  baseUrlAcount = environment.apiUrl + 'login/';
   getHttpHeaders() {
 
 
@@ -27,7 +27,7 @@ export class AccService {
   GetInforUser(): Observable<any> {
     const httpHeader = this.getHttpHeaders();
     return this.http
-      .get<any>(this.baseUrlAcount + `api/GetInforUser`, { headers: httpHeader })
+      .get<any>(this.baseUrlAcount + `GetInforUser`, { headers: httpHeader })
 
   }
   login(req: any): Observable<any> {

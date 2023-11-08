@@ -71,7 +71,7 @@ export class DetailCartComponent implements OnInit {
   ItemDonHang(): DonHangModel {
 
     const item = new DonHangModel();
-    item.account_id = this.User.account_id;
+    // item.account_id = this.User.account_id;
     item.address = this.registrationForm.controls["address"].value;;
     item.phone = this.registrationForm.controls["phone"].value;;
     item.full_name = this.registrationForm.controls["fullname"].value;;

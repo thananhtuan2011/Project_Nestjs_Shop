@@ -88,10 +88,10 @@ export class LoginController {
     @UseGuards(AuthGuard('jwt'))
     @ApiBearerAuth('JWT')
     async GetInforUser(@Req() request) {
-
+        // { name: 1, refreshToken: 0 } 1 là hiện còn 0 là không hiện
         const accessToken = request.headers['authorization'].split(' ')[1];
         const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
-        var data = await this.login_services.findById(decodedToken._id)
+        var data = await this.login_services.findById(decodedToken._id, { refreshToken: 0 })
         return { status: 1, data }
     }
 

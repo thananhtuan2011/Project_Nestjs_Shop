@@ -1,19 +1,16 @@
 export class DonHangModel {
-    account_id: number;
-    product_id: number
+    User: any;
     soluong: number
     address: string
     full_name: string;
     phone: string;
     DonGia: number
-    category_id: number;
+    status: number;
     Size: string;
     email: string;
-    Img: string;
     Tongtien: number;
+    _idOrder: string;
     color: string;
-    product_name: string;
-    ListProduct: [];
-    ListOrderIteam: any[];
-
+    Product: any[];
+    ListOrderIteam: any[]
 }

@@ -9,6 +9,7 @@ import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductSchema } from 'src/modelSchema/ProductModelSchema';
 import { UserSchema } from 'src/modelSchema/UserModelSchema';
+import { OrderModel } from 'src/dto/order.dto';
 
 @Module({
   imports: [MongooseModule.forFeature(
@@ -19,12 +20,12 @@ import { UserSchema } from 'src/modelSchema/UserModelSchema';
         schema: OrderSchema
       },
 
-
     ]
   ),
 
   ],
   controllers: [OrderController],
-  providers: [OrderService, JwtService]
+  providers: [OrderService, JwtService],
+  exports: [OrderService]
 })
 export class OrderModule { }

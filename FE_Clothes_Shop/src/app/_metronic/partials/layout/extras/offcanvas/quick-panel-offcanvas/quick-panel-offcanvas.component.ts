@@ -28,7 +28,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   GetDSNotify() {
     if (this.User) {
 
-      this.notyfi.GetDonHangXacNhanByAcount(this.User.account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangXacNhanByAcount().subscribe((res: any) => {
         if (res) {
           this.listNotify = res.data;
           console.log(" this.listNotify", this.listNotify)
@@ -41,12 +41,14 @@ export class QuickPanelOffcanvasComponent implements OnInit {
 
   }
   GetDSNotifyVanchuyen() {
-    console.log()
+
     if (this.User) {
 
-      this.notyfi.GetDonHangXacNhanByAcountDangVanChuyen(this.User.account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangXacNhanByAcountDangVanChuyen().subscribe((res: any) => {
         if (res) {
+          console.log("resss", res)
           this.listVanChuyen = res.data;
+          console.log("this.listVanChuyen", this.listVanChuyen)
           this.changeDetectorRefs.detectChanges();
         }
       })
@@ -58,7 +60,7 @@ export class QuickPanelOffcanvasComponent implements OnInit {
   GetDSNotifyXacNhan() {
     if (this.User) {
 
-      this.notyfi.GetDonHangChoXacNhan(this.User.account_id).subscribe((res: any) => {
+      this.notyfi.GetDonHangChoXacNhan().subscribe((res: any) => {
         if (res) {
           this.listXacNhan = res.data;
           this.changeDetectorRefs.detectChanges();

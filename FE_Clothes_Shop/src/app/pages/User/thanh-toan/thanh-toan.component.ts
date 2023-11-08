@@ -39,9 +39,19 @@ export class ThanhToanComponent implements OnInit {
   }
   tien: number = 0;
   tongtien: number;
+  Infor: any;
+  listIdProduct: any[] = [];
   GetInforUser() {
     this.acc_services.GetInforUser().subscribe(res => {
-      console.log("ress")
+      this.Infor = res.data;
+      console.log(" this.Infor", this.Infor)
+      this.isKeyXaNhan = false
+      this.hoten = this.Infor.fullname
+      this.email = this.Infor.email
+      // this.diachi = this.Infor.address
+      this.sdt = this.Infor.phone
+      this.initForm();
+      this.changeDetectorRefs.detectChanges();
     })
   }
   GetCartByAcount() {
@@ -50,9 +60,10 @@ export class ThanhToanComponent implements OnInit {
       this.listOrder = res.data;
       console.log(" this.listOrder", this.listOrder)
       this.listOrder.forEach(element => {
+        this.listIdProduct.push(element.Product[0]._id)
         this.tien = this.tien + Number.parseInt(element.DonGia) * element.soluong
       })
-
+      console.log("listIdProduct", this.listIdProduct)
       this.tongtien = (this.tien)
 
       if (this.listOrder.length == 0) {
@@ -85,20 +96,17 @@ export class ThanhToanComponent implements OnInit {
 
     const item = new DonHangModel();
 
-    // item.full_name = this.registrationForm.controls["fullname"].value;
-    // item.password = this.registrationForm.controls["password"].value;
-    // item.phone = this.registrationForm.controls["phone"].value.toString();
-    // item.email = this.registrationForm.controls["email"].value;
-    // item.address = this.registrationForm.controls["address"].value;
-    // item.user_name = this.registrationForm.controls["username"].value;
 
 
-    item.account_id = this.User.account_id;
+
+    item.User = this.User.account_id;
     item.Tongtien = this.tongtien;
     item.address = this.registrationForm.controls["address"].value;
     item.phone = this.registrationForm.controls["phone"].value.toString();
     item.full_name = this.registrationForm.controls["fullname"].value;
+    item.Product = this.listIdProduct
     item.ListOrderIteam = this.listOrder;
+    item.status = 0
     item.email = this.registrationForm.controls["email"].value;;
     // item.DonGia = Number.parseInt(this.lstProducDetail[0].DonGia) * 1000;
     // item.Size = this.Size;
@@ -134,32 +142,32 @@ export class ThanhToanComponent implements OnInit {
         else {
 
           let item = this.ItemDonHang();
-          this.order_services.InsertDonHang(item, this.User.account_id).subscribe((res: any) => {
+          this.order_services.InsertDonHang(item).subscribe((res: any) => {
             console.log("resss", res)
             if (res && res.status == 1) {
-
+              this.product.RecountCart$.next(true);
               this.isKeyXaNhan = true;
               this.changeDetectorRefs.detectChanges();
               let ma = Math.floor(Math.random() * 90000) + 10000;
-              this.order_services.SendGmail("Mã Xác Nhận", 'Mã xác nhận của quý khách: ' + ma, this.registrationForm.controls["email"].value).subscribe(res => {
+              // this.order_services.SendGmail("Mã Xác Nhận", 'Mã xác nhận của quý khách: ' + ma, this.registrationForm.controls["email"].value).subscribe(res => {
 
-              })
+              // })
               this.tongtien = 0;
               this.ship = 0
               this.IdDonHang = res.data.Id_Donhang;
-              this.product.RecountCart$.next(true);
+
               this.GetCartByAcount();
-              this.notify.sendThanhToan(item);
+              // this.notify.sendThanhToan(item);
+              this.layoutUtilsService.showActionNotification("Đặt hàng thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
 
 
-              this.order_services.SaveKeyGmail(res.data.Id_Donhang, ma).subscribe(res => {
+              // this.order_services.SaveKeyGmail(res.data.Id_Donhang, ma).subscribe(res => {
 
-              })
+              // })
               // lưu mã vào table
 
 
               // this.router.navigate(['/Home/All']);
-              this.layoutUtilsService.showActionNotification("Đặt hàng thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
 
 
             }
@@ -246,14 +254,10 @@ export class ThanhToanComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.isKeyXaNhan = false
-    this.hoten = this.User.full_name
-    this.email = this.User.email
-    this.diachi = this.User.address
-    this.sdt = this.User.phone
+
     this.GetCartByAcount();
     this.GetInforUser();
-    this.initForm();
+
   }
 
 }

@@ -11,7 +11,7 @@ export class OrderService extends BaseRepository<Order> {
 
 
     constructor(@InjectModel('Order')
-    private ordermodel: Model<Order>) {
+    public ordermodel: Model<Order>) {
         super(ordermodel)
     }
 
@@ -48,6 +48,9 @@ export class OrderService extends BaseRepository<Order> {
         else {
             throw new NotFoundException(objectId_user)
         }
+    }
+    async UpdatePay(id) {
+        return await this.ordermodel.findByIdAndUpdate(id, { $set: { Pay: true } })
     }
 
     async GetCartByAcount(objectId_user) {

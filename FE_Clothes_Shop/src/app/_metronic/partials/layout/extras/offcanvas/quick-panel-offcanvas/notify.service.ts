@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as signalR from '@microsoft/signalr';
 
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
+import { CookieService } from 'ngx-cookie-service';
 
 import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -78,7 +79,7 @@ export class NotifyService {
     // OpenmessageUsername$ = this.OpenmessageUsernameSource.asObservable();
     public OpenmessageUsernameSource = new Subject<any>();
     constructor(private router: Router,
-        private http: HttpClient
+        private http: HttpClient, private cookie: CookieService
     ) {
 
 
@@ -100,26 +101,26 @@ export class NotifyService {
     getHttpHeaders() {
 
 
-        // console.log('auth.token',auth.access_token)
         let result = new HttpHeaders({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${this.cookie.get("accessToken")}`,
             'Access-Control-Allow-Headers': 'Content-Type'
         });
         return result;
     }
 
-    GetDonHangXacNhanByAcount(acount_id) {
+    GetDonHangXacNhanByAcount() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlDonhang + `GetDonHangXacNhanByAcount?acount_id=${acount_id}`, { headers: httpHeader });
+        return this.http.get(this.baseUrlDonhang + `GetDonHangXacNhanByAcount`, { headers: httpHeader });
     }
-    GetDonHangChoXacNhan(acount_id) {
+    GetDonHangChoXacNhan() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlDonhang + `GetDonHangChoXacNhan?acount_id=${acount_id}`, { headers: httpHeader });
+        return this.http.get(this.baseUrlDonhang + `GetDonHangChoXacNhan`, { headers: httpHeader });
     }
-    GetDonHangXacNhanByAcountDangVanChuyen(acount_id) {
+    GetDonHangXacNhanByAcountDangVanChuyen() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlDonhang + `GetDonHangXacNhanByAcountDangVanChuyen?acount_id=${acount_id}`, { headers: httpHeader });
+        return this.http.get(this.baseUrlDonhang + `GetDonHangXacNhanByAcountDangVanChuyen`, { headers: httpHeader });
     }
     connectToken() {
         this.hubConnection = new HubConnectionBuilder()

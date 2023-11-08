@@ -36,9 +36,9 @@ export class OrderService {
     return this.http.get(this.baseUrlAcount + `SendGmail?title=${title}&body=${body}&emaireciver=${gmail}`, { headers: httpHeader });
   }
 
-  GetDonHangAcountDetail(acount_id, iddonhang) {
+  GetDonHangAcountDetail(iddonhang) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.get(this.baseUrlDonhang + `GetDonHangAcountDetail?acount_id=${acount_id}&iddonhang=${iddonhang}`, { headers: httpHeader });
+    return this.http.get(this.baseUrlDonhang + `GetDonHangAcountDetail/${iddonhang}`, { headers: httpHeader });
   }
   GetDonHangXacNhanByAcountDetail(acount_id) {
     const httpHeader = this.getHttpHeaders();

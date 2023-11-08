@@ -53,16 +53,49 @@
          <div  *ngIf="!isUpdate" style="display: flex;
          flex-direction: column;">
          <span>Họ tên</span>
-          <input  [disabled]=true type="text"  [(ngModel)]="hoten"  class="input2" >
+          <input  [disabled]=isUpdate type="text"  [(ngModel)]="hoten"  class="input2" >
           <span>SĐT</span>
-          <input [disabled]=true  type="text"  [(ngModel)]="sdt" class="input2" >
+          <input [disabled]=isUpdate  type="text"  [(ngModel)]="sdt" class="input2" >
           <span>Địa chỉ</span>
-          <input [disabled]=true  type="text"  [(ngModel)]="diachi" class="input2"  >
+          <input [disabled]=isUpdate  type="text"  [(ngModel)]="diachi" class="input2"  >
           <span>Email</span>
-          <input [disabled]=true  type="text"   [(ngModel)]="email"  class="input2">
+          <input [disabled]=isUpdate  type="text"   [(ngModel)]="email"  class="input2">
           <span></span>
-        
-        <h3 style="font-family: 'Quicksand', sans-serif!important;">Chú ý : Đơn hàng đã chỉnh sửa 1 lần !!!</h3>
+          <form
+          class="form"
+          style="    width: 470px;"
+          novalidate="novalidate"
+          id="kt_login_signup_form"
+          *ngIf="!isUpdate"
+          [formGroup]="registrationForm"
+          (ngSubmit)="CreatedPay()"
+        >
+        <div class="form-group d-flex flex-wrap pb-lg-0 pb-3"  >
+          <button
+            type="submit"
+            id="kt_login_signup_submit"
+            [disabled]="
+              registrationForm.invalid
+            "
+            class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
+          >
+          Lưu chỉnh sửa
+          </button>
+          <a
+            routerLink="/Home/All"
+            type="button"
+            id="kt_login_signup_cancel"
+            class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
+          >
+            Quay lại
+          </a>
+    
+          <ng-container *ngIf="isLoading$ | async">
+            <span class="spinner spinner-primary ml-5"></span>
+          </ng-container>
+        </div>
+      </form>
+    
          </div> 
             <form
             class="form"
@@ -183,7 +216,7 @@
                 name="address"
                 formControlName="address"
                 placeholder="address"
-                [ngStyle]="{'background-color': isUpdate ? '#fff' : '#d1d3e0' }"
+                style="background-color:#d1d3e0 !important"
                 autocomplete="off"
                 [ngClass]="{
                   'is-invalid': registrationForm.controls['address'].invalid
@@ -247,47 +280,11 @@
                 }"
               ></ng-container>
             </div>
-            <!--end::Form group-->
-        
-            <!--begin::Form group-->
-          
-            <!--end::Form group-->
-        
-            <!--begin::Form group-->
-          
-            <!--end::Form group-->
-        
-            <!--begin::Form group-->
-           
-            <!--end::Form group-->
-        
-            <!--begin::Form group-->
-            <div class="form-group d-flex flex-wrap pb-lg-0 pb-3" *ngIf="status!=null">
-              <button
-                type="submit"
-                id="kt_login_signup_submit"
-                [disabled]="
-                  registrationForm.invalid
-                "
-                class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
-              >
-              Lưu chỉnh sửa
-              </button>
-              <a
-                routerLink="/Home/All"
-                type="button"
-                id="kt_login_signup_cancel"
-                class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
-              >
-                Quay lại
-              </a>
-        
-              <ng-container *ngIf="isLoading$ | async">
-                <span class="spinner spinner-primary ml-5"></span>
-              </ng-container>
-            </div>
-            <!--end::Form group-->
+     
+            <h3  style="font-family: 'Quicksand', sans-serif!important;">Chú ý : Đơn hàng đã chỉnh sửa 1 lần !!!</h3>
           </form>
+        
+       
         </div>
         <div class="col-md-6">
             <perfect-scrollbar
@@ -300,9 +297,9 @@
                 <div style="font-size: 24px;">
                   <mat-icon *ngIf="item.status==1" (click)="RemoveOrder(item.Id_Donhang)" style="cursor: pointer;">clear</mat-icon>
                   
-                  Mã đơn hàng :{{item.Id_Donhang}}
+                  Mã đơn hàng :{{item._id}}
               </div>
-              <span style="font-size: 15px;">Ngày tạo: {{item.created_at| date : 'yyyy/M/dd h:mm'}}</span>
+              <span style="font-size: 15px;">Ngày tạo: {{item.createdAt| date : 'yyyy/M/dd h:mm'}}</span>
            <div *ngFor="let pro of item.Product">
 
           
@@ -322,7 +319,7 @@
                  
                   <div class="d-flex align-items-center mt-2">
                     <span class="font-weight-bold mr-1 text-dark-75 font-size-lg"
-                      >{{pro.DonGia |number}} đ</span
+                      >{{pro.DonGiaGoc |number}} đ</span
                     >
                     <br>
                             <span *ngIf="item.status==1" style="  padding: 5px;

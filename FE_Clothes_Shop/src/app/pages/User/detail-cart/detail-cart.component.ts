@@ -37,9 +37,10 @@ export class DetailCartComponent implements OnInit {
   tongtien: string;
   status: number;
   GetDonHangAcountDetail(id) {
-    this.order_services.GetDonHangAcountDetail(this.User.account_id, id).subscribe((res: any) => {
+    this.order_services.GetDonHangAcountDetail(id).subscribe((res: any) => {
+      console.log("this.resresresres", res)
       this.listOrder = res.data;
-
+      console.log("this.listOrder", this.listOrder)
       localStorage.setItem("DetailCart", JSON.stringify(this.listOrder));
       this.changeDetectorRefs.detectChanges();
       if (this.listOrder) {
@@ -140,8 +141,9 @@ export class DetailCartComponent implements OnInit {
   initForm() {
     this.DetailCart = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('DetailCart'))));
     console.log("DetailCart", this.DetailCart)
-    if (this.DetailCart[0].updated_at == null) {
+    if (this.DetailCart[0].updatedAt != this.DetailCart[0].createdAt) {
       this.isUpdate = true;
+      this.changeDetectorRefs.detectChanges();
     }
     else {
       this.isUpdate = false
@@ -149,6 +151,7 @@ export class DetailCartComponent implements OnInit {
       this.email = this.DetailCart[0].email
       this.diachi = this.DetailCart[0].address
       this.sdt = this.DetailCart[0].phone
+
     }
 
     this.registrationForm = this.fb.group(
@@ -168,7 +171,7 @@ export class DetailCartComponent implements OnInit {
         address: [
           {
             value: this.DetailCart[0].address,
-            disabled: false
+            disabled: true
           },
 
         ],
@@ -191,7 +194,8 @@ export class DetailCartComponent implements OnInit {
       }
     })
     this.route.params.subscribe(params => {
-      this.iddonhang = +params.IdDonHang;
+      console.log("params", params)
+      this.iddonhang = params.IdDonHang;
       this.GetDonHangAcountDetail(this.iddonhang);
       this.initForm()
 

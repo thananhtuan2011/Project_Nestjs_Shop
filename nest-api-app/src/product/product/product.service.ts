@@ -24,8 +24,7 @@ export class ProductService extends BaseRepository<Product> {
     }
     async UpdateLuotMua(objectId: string, amount: number) {
         let amountup = amount - 1;
-        console.log("amountup", amountup)
-        console.log("amount", amount)
+
         return await this.promodel.updateOne({ _id: objectId }, { $set: { amount: amountup } });
 
     }

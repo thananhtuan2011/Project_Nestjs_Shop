@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { DonHangService } from './don_hang.service';
 import { JwtService } from '@nestjs/jwt';
 import { ApiBearerAuth } from '@nestjs/swagger';
@@ -30,7 +30,7 @@ export class DonHangController {
         }
 
     }
-    @Get("GetDonHangXacNhanByAcountDangVanChuyen")
+    @Get("GetDonHangXacNhanByAcount")
     @ApiBearerAuth('JWT')
     async GetDonHangXacNhanByAcount(@Req() request) {
         try {
@@ -46,6 +46,20 @@ export class DonHangController {
 
     }
 
+    @Get("GetDonHangAcountDetail/:id")
+    @ApiBearerAuth('JWT')
+    async GetDonHangAcountDetail(@Param("id") id: string, @Req() request) {
+        try {
+            const accessToken = request.headers['authorization'].split(' ')[1];
+            const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
+
+            var data = await this._donhang_services.GetDonHangAcountDetail(decodedToken._id, id)
+            return { status: 1, data }
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+    }
     @Get("GetDonHangChoXacNhan")
     @ApiBearerAuth('JWT')
     async GetDonHangChoXacNhan(@Req() request) {

@@ -35,9 +35,23 @@ export class DonHangService extends BaseRepository<DonHang> {
             return { status: 0, message: e.message || 'my error' }
         }
     }
+    GetDonHangAcountDetail(idacount, id) {
+        try {
+            const data = this.dhmodel.find({ User: idacount, _id: id })
+            if (data) {
+                data.populate({ path: "User", select: "username createdAt" })
+                data.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
+                return data;
+            }
+            return data;
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
     async GetDonHangXacNhanByAcount(id) {
         try {
-            var data = await this.dhmodel.find({ User: id, status: 0 })
+            var data = await this.dhmodel.find({ User: id })
 
             return { status: 1, data }
         }

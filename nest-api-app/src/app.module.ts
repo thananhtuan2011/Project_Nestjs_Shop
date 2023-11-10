@@ -12,6 +12,7 @@ import { KafkaConsumer } from './kafka/kafka.consumer';
 import { CategoryModule } from './category/category/category.module';
 import { OrderModule } from './order/order/order.module';
 import { DonHangModule } from './DonHang/don_hang/don_hang.module';
+import { MinioClientModule } from './Minio/nest-minio-client/nest-minio-client.module';
 
 @Module({
   imports: [AuthModule,
@@ -22,6 +23,7 @@ import { DonHangModule } from './DonHang/don_hang/don_hang.module';
     ProductModule,
     OrderModule,
     CategoryModule,
+    MinioClientModule,
     DonHangModule
     // KafkaModule
   ],

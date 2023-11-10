@@ -48,9 +48,9 @@ export class OrderService {
     const httpHeader = this.getHttpHeaders();
     return this.http.post(this.baseUrlDonhang + `AddDonHang`, item, { headers: httpHeader });
   }
-  EditDonHang(item, IdDonHang) {
+  EditDonHang(item) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlDonhang + `EditDonHang?IdDonHang=${IdDonHang}`, item, { headers: httpHeader });
+    return this.http.post(this.baseUrlDonhang + `EditDonHang?`, item, { headers: httpHeader });
   }
   RemoveOrder(order_id) {
     const httpHeader = this.getHttpHeaders();

@@ -36,6 +36,10 @@ export class ProductController {
         return await this._product_service.AllProduct(pageOptionsDto.page, pageOptionsDto.take)
     }
 
+    @Post("AllProductType/:id")
+    async AllProductType(@Query() pageOptionsDto: PageOptionsDto, @Param("id") id: string) {
+        return await this._product_service.AllProductType(pageOptionsDto.page, pageOptionsDto.take, id)
+    }
     @Get("GetProductDetail/:id")
     async GetProductDetail(@Param("id") id: string) {
         return await this._product_service.GetProductDetail(id)

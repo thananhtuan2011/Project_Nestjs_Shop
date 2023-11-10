@@ -295,7 +295,7 @@
             <div *ngFor="let item of listOrder">
   
                 <div style="font-size: 24px;">
-                  <mat-icon *ngIf="item.status==1" (click)="RemoveOrder(item.Id_Donhang)" style="cursor: pointer;">clear</mat-icon>
+                  <mat-icon *ngIf="item.status==1" (click)="RemoveOrder(item._id)" style="cursor: pointer;">clear</mat-icon>
                   
                   Mã đơn hàng :{{item._id}}
               </div>

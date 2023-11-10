@@ -3,6 +3,7 @@ import { CategoryService } from './category.service';
 import { CategoryController } from './category.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CategorySchema } from 'src/modelSchema/CategoryModelSchema';
+import { CategorySubSchema } from 'src/modelSchema/CategorySubModelSchema';
 
 @Module({
   imports: [MongooseModule.forFeature(
@@ -11,7 +12,10 @@ import { CategorySchema } from 'src/modelSchema/CategoryModelSchema';
         name: 'Category',
         schema: CategorySchema
       },
-
+      {
+        name: 'CategorySub',
+        schema: CategorySubSchema
+      },
     ]
 
   ),

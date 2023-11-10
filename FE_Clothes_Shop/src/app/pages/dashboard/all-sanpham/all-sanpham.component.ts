@@ -59,7 +59,8 @@ export class AllSanphamComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.catogy_id = +params.id;
+
+      this.catogy_id = params.id;
       this.namecatego = params.type;
       this.LoadAllProductType()
 

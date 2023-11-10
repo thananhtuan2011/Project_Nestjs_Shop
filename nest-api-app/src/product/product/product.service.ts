@@ -82,5 +82,37 @@ export class ProductService extends BaseRepository<Product> {
             return { status: 0, message: e.message || 'my error' }
         }
     }
+    public async AllProductType(
+        page: number, limit: number, id: string
+    ) {
+        try {
+            let pageSizes = [];
+            const itemCount = await this.promodel.countDocuments({ category_id: id });
+            let count_page = (itemCount / limit).toFixed()
+            const data = await this.promodel.find({ category_id: id })
+                .skip((page - 1) * limit)
+                .limit(limit);
 
+            if (!Number.isNaN(count_page)) {
+                count_page = "0";
+            }
+
+            range(1, Number(count_page == "0" ? 1 : count_page)).subscribe(res => {
+                pageSizes.push(res)
+            });
+            let panigator =
+            {
+                "total": itemCount,
+                "totalpage": limit,
+                "page": page,
+                "pageSize": count_page,
+                "pageSizes": pageSizes
+            }
+            // console.log("ffff", panigator)
+            return { status: 1, panigator, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
 }

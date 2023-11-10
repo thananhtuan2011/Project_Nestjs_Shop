@@ -26,7 +26,9 @@ export class HeaderMenuComponent implements OnInit {
   getListLoai() {
     this.category.getListLoai().subscribe((res: any) => {
       if (res) {
+        console.log("đưqdưq", res)
         this.listLoai = res.data;
+
         this.changeDetectorRefs.detectChanges()
       }
     })

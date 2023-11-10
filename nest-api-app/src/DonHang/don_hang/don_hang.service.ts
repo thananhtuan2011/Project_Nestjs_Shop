@@ -49,6 +49,21 @@ export class DonHangService extends BaseRepository<DonHang> {
             return { status: 0, message: e.message || 'my error' }
         }
     }
+    async EditDonHang(bodyupdate) {
+        console.log("bodyupdate", bodyupdate)
+        try {
+            await this.dhmodel.updateOne({ _id: bodyupdate._idonhang }, {
+                $set: {
+                    phone: bodyupdate.phone, full_name: bodyupdate.full_name
+                    , address: bodyupdate.address, email: bodyupdate.email
+                }
+            });
+            return { status: 1 }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
     async GetDonHangXacNhanByAcount(id) {
         try {
             var data = await this.dhmodel.find({ User: id })

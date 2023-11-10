@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PhukienComponent implements OnInit {
   l
-  apiproduct = environment.apiUrl + "loai/AllProductType";;
+  apiproduct = environment.apiUrl + "product/AllProductType";;
   constructor(
     public product_services: ProductService,
     private layoutUtilsService: LayoutUtilsService,
@@ -41,7 +41,7 @@ export class PhukienComponent implements OnInit {
     this.route.params.subscribe(params => {
       console.log("ressss,", params)
       this.catogy_id = 6;
-      this.idsub = +params.idsub;
+      this.idsub = params.idsub;
 
       this.namecatego = params.type;
       this.LoadAllProductType()

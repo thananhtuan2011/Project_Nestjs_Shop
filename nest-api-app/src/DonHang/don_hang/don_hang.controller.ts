@@ -30,6 +30,22 @@ export class DonHangController {
         }
 
     }
+
+    @Post("EditDonHang")
+    @ApiBearerAuth('JWT')
+    async EditDonHang(@Body() body, @Req() request) {
+        try {
+
+            const accessToken = request.headers['authorization'].split(' ')[1];
+            const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
+            return await this._donhang_services.EditDonHang(body)
+
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+
+    }
     @Get("GetDonHangXacNhanByAcount")
     @ApiBearerAuth('JWT')
     async GetDonHangXacNhanByAcount(@Req() request) {

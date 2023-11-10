@@ -33,7 +33,7 @@
       <ng-container   *ngIf="User" >
         <!-- STATIC MENU -->
         <app-header-menu
-        *ngIf="User.role_code!='1'"
+        *ngIf="User.roles!='1'"
           #ktHeaderMenu
           id="kt_header_menu"
           class="header-menu header-menu-mobile"

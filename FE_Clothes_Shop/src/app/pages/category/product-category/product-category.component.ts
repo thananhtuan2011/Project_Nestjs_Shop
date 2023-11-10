@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductCategoryComponent implements OnInit {
 
-  apiproduct = environment.apiUrl + "loai/AllProductType";;
+  apiproduct = environment.apiUrl + "product/AllProductType";;
   constructor(
     public product_services: ProductService,
     private layoutUtilsService: LayoutUtilsService,
@@ -37,8 +37,7 @@ export class ProductCategoryComponent implements OnInit {
   private subscriptions: Subscription[] = [];
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      console.log("ressss,", params)
-      this.catogy_id = +params.id;
+      this.catogy_id = params.id;
       this.namecatego = params.type;
       this.LoadAllProductType()
 
@@ -67,21 +66,21 @@ export class ProductCategoryComponent implements OnInit {
       const filter = {};
       filter['FullName'] = value
 
-      this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `/${this.catogy_id}`);
     }
     else {
 
       const filter = {};
 
 
-      this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `/${this.catogy_id}`);
     }
 
   }
 
   LoadAllProductType() {
     const filter = {};
-    this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduectType({ filter }, this.apiproduct + `/${this.catogy_id}`);
 
   }
   getHeight(): any {
@@ -91,7 +90,7 @@ export class ProductCategoryComponent implements OnInit {
   }
 
   paginate(paginator: PaginatorState) {
-    this.product_services.patchStateAllProduectType({ paginator }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduectType({ paginator }, this.apiproduct + `/${this.catogy_id}`);
   }
   sort(column: string) {
     const sorting = this.sorting;
@@ -102,7 +101,7 @@ export class ProductCategoryComponent implements OnInit {
     } else {
       sorting.direction = sorting.direction === 'asc' ? 'desc' : 'asc';
     }
-    this.product_services.patchStateAllProduectType({ sorting }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduectType({ sorting }, this.apiproduct + `/${this.catogy_id}`);
   }
 
 

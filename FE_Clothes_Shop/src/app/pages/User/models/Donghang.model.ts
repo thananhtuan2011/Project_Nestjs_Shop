@@ -3,6 +3,7 @@ export class DonHangModel {
     soluong: number
     address: string
     full_name: string;
+    _idonhang: string;
     phone: string;
     DonGia: number
     status: number;

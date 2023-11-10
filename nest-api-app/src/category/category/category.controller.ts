@@ -1,4 +1,4 @@
-import { Body, Controller, HttpStatus, Param, Post, Query } from '@nestjs/common';
+import { Body, Controller, HttpStatus, Param, Post, Query, Get } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from 'src/dto/category';
 import { PageOptionsDto } from 'src/share/Pagination/PageOption';
@@ -9,6 +9,11 @@ export class CategoryController {
     constructor(private _cate_service: CategoryService,
     ) {
 
+    }
+    @Get("GetDSLoai")
+    async GetDSLoai() {
+        var data = await this._cate_service.GetDSLoai()
+        return { status: 1, data }
     }
     @Post("AllCategory")
     async AllCategory(@Query() pageOptionsDto: PageOptionsDto,) {

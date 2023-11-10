@@ -73,12 +73,11 @@ export class DetailCartComponent implements OnInit {
 
     const item = new DonHangModel();
     // item.account_id = this.User.account_id;
-    item.address = this.registrationForm.controls["address"].value;;
-    item.phone = this.registrationForm.controls["phone"].value;;
-    item.full_name = this.registrationForm.controls["fullname"].value;;
-    item.email = this.registrationForm.controls["email"].value;;
-
-
+    item.address = this.diachi;
+    item.phone = this.sdt;;
+    item.full_name = this.hoten;;
+    item.email = this.email;;
+    item._idonhang = this.iddonhang
     return item
   }
   CreatedPay() {
@@ -94,8 +93,9 @@ export class DetailCartComponent implements OnInit {
       }
       else {
         let item = this.ItemDonHang();
-        this.order_services.EditDonHang(item, this.iddonhang).subscribe((res: any) => {
-          console.log("thay đổi", res)
+        console.log("itemitemv", item)
+        this.order_services.EditDonHang(item).subscribe((res: any) => {
+
           if (res && res.status == 1) {
             // this.notify.sendThanhToan(item);
             // this.router.navigate(['/Home']);
@@ -140,9 +140,13 @@ export class DetailCartComponent implements OnInit {
 
   initForm() {
     this.DetailCart = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('DetailCart'))));
-    console.log("DetailCart", this.DetailCart)
+    console.log("this.DetailCart", this.DetailCart)
     if (this.DetailCart[0].updatedAt != this.DetailCart[0].createdAt) {
       this.isUpdate = true;
+      this.hoten = this.DetailCart[0].full_name
+      this.email = this.DetailCart[0].email
+      this.diachi = this.DetailCart[0].address
+      this.sdt = this.DetailCart[0].phone
       this.changeDetectorRefs.detectChanges();
     }
     else {
@@ -188,7 +192,7 @@ export class DetailCartComponent implements OnInit {
   }
   ngOnInit(): void {
     this.notify.getInforDetailCart.subscribe(res => {
-      console.log("resss", res)
+      console.log("ressdưqdqwqds", res)
       if (res == 'load') {
         this.initForm()
       }

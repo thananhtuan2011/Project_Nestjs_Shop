@@ -53,6 +53,15 @@ export class CategoryService extends BaseRepository<Category> {
             return { status: 0, message: e.message || 'my error' }
         }
     }
+    async GetDSLoai() {
+        const cate = this.catemodel.find()
+
+        if (cate) {
+            cate.populate({ path: "CategorySub", select: "_id category_name" })
+
+            return cate;
+        }
+    }
     // public async getUsers(
     //     pageOptionsDto: PageOptionsDto,
     //   ): Promise<PageDto<UserDto>> {

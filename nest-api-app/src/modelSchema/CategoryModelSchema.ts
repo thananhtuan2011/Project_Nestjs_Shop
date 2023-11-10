@@ -6,7 +6,7 @@ const CategorySchema = new Schema(
         category_code: String,
         category_name: String,
         status: String,
-        // Sub: []
+        CategorySub: [{ type: Schema.Types.ObjectId, ref: 'CategorySub' }],
 
     },
     {
@@ -24,4 +24,5 @@ export interface Category extends Document {
     category_code: String,
     category_name: String,
     status: String,
+    CategorySub: []
 }

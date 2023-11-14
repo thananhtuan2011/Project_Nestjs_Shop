@@ -33,7 +33,7 @@ export class DonHangController {
     }
 
 
-    @Get("AllDonHang")
+    @Post("AllDonHang")
     @ApiBearerAuth('JWT')
     async AllDonHang(@Req() request, @Body() pageOptionsDto: QueryParamsModel) {
         try {

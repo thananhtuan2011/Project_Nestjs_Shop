@@ -25,20 +25,21 @@ export class DonHangService extends BaseRepository<DonHang> {
         catch (e) {
             return { status: 0, message: e.message || 'my error' }
         }
-    } public async AllDonHang(
+    }
+
+
+    async AllDonHang(
         pram: any
     ) {
         try {
             let pageSizes = [];
             const itemCount = await this.dhmodel.countDocuments();
             let count_page = (itemCount / pram.paginator.pageSize).toFixed()
-            const data = this.dhmodel.find()
-
-            if (data) {
-                data.populate({ path: "User", select: "username createdAt" })
-                data.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
-            }
-            data.skip((pram.paginator.page - 1) * pram.paginator.pageSize)
+            const data = await this.dhmodel.
+                find().
+                populate({ path: "Product", select: " DonGiaGoc product_name Img Mota " }).
+                populate({ path: "User", select: "username createdAt" })
+                .skip((pram.paginator.page - 1) * pram.paginator.pageSize)
                 .limit(pram.paginator.pageSize);
 
             if (!Number.isNaN(count_page)) {
@@ -55,7 +56,6 @@ export class DonHangService extends BaseRepository<DonHang> {
                 "pageSize": count_page,
                 "pageSizes": pageSizes
             }
-            // console.log("ffff", panigator)
             return { status: 1, panigator, data }
         }
         catch (e) {

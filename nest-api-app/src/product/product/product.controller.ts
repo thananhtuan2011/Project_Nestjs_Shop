@@ -1,3 +1,4 @@
+import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Body, Controller, NotFoundException, Param, Post, Query, Req, Get, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductModel } from 'src/dto/product.dto';
@@ -22,7 +23,6 @@ export class ProductController {
     @UseInterceptors(FileInterceptor('image'))
     async CreateProduct(@Body() body: any, @UploadedFile() image: BufferedFile) {
         var databody = JSON.parse(body["data"]);
-        console.log("vnevdv", databody)
         var ulrfile;
         if (image) {
             console.log("Có file");
@@ -48,8 +48,8 @@ export class ProductController {
         return await this._product_service.GetDSSPHome();
     }
     @Post("AllProduct")
-    async AllProduct(@Query() pageOptionsDto: PageOptionsDto,) {
-        return await this._product_service.AllProduct(pageOptionsDto.page, pageOptionsDto.take)
+    async AllProduct(@Body() pageOptionsDto: QueryParamsModel,) {
+        return await this._product_service.AllProduct2(pageOptionsDto)
     }
 
     @Post("AllProductType/:id")

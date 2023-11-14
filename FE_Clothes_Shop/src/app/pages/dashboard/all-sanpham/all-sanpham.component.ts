@@ -58,13 +58,9 @@ export class AllSanphamComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
 
-      this.catogy_id = params.id;
-      this.namecatego = params.type;
-      this.LoadAllProductType()
+    this.LoadAllProductType()
 
-    })
 
     this.grouping = this.product_services.grouping;
     this.paginator = this.product_services.paginator;
@@ -136,21 +132,21 @@ export class AllSanphamComponent implements OnInit {
       const filter = {};
       filter['product_name'] = value
 
-      this.product_services.patchStateAllProduect({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllProduect({ filter }, this.apiproduct);
     }
     else {
 
       const filter = {};
 
 
-      this.product_services.patchStateAllProduect({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllProduect({ filter }, this.apiproduct);
     }
 
   }
 
   LoadAllProductType() {
     const filter = {};
-    this.product_services.patchStateAllProduect({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduect({ filter }, this.apiproduct);
 
   }
   getHeight(): any {
@@ -160,7 +156,7 @@ export class AllSanphamComponent implements OnInit {
   }
 
   paginate(paginator: PaginatorState) {
-    this.product_services.patchStateAllProduect({ paginator }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduect({ paginator }, this.apiproduct);
   }
   sort(column: string) {
     const sorting = this.sorting;
@@ -171,7 +167,7 @@ export class AllSanphamComponent implements OnInit {
     } else {
       sorting.direction = sorting.direction === 'asc' ? 'desc' : 'asc';
     }
-    this.product_services.patchStateAllProduect({ sorting }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllProduect({ sorting }, this.apiproduct);
   }
 
   RemoveSP(product_id) {

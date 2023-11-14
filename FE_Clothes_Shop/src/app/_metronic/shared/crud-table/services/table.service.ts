@@ -217,6 +217,8 @@ export abstract class TableService<T> {
     const url = routeFind;
     const httpHeader = this.getHttpHeaders();
     this._errorMessage.next('');
+    console.log("vvvvvvvv", tableState)
+    console.log("urlurl", url)
     return this.http.post<any>(url, tableState, { headers: httpHeader }).pipe(
       catchError(err => {
         this._errorMessage.next(err);
@@ -638,6 +640,7 @@ export abstract class TableService<T> {
     const request = this.find_AllProduct(this._tableState$.value, apiRoute)
       .pipe(
         tap((res: any) => {
+          console.log("ress All", res)
           if (res && res.status == 1) {
             resItems = res.data;
             resTotalRow = res.panigator.total;

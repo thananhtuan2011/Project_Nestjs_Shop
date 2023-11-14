@@ -1,3 +1,4 @@
+import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
@@ -60,8 +61,38 @@ export class ProductService extends BaseRepository<Product> {
         var data = await this.promodel.findById(id);
         return { status: 1, data }
     }
+    public async AllProduct2(
+        pram: any
+    ) {
+        try {
+            let pageSizes = [];
+            const itemCount = await this.promodel.countDocuments();
+            let count_page = (itemCount / pram.paginator.pageSize).toFixed()
+            const data = await this.promodel.find()
+                .skip((pram.paginator.page - 1) * pram.paginator.pageSize)
+                .limit(pram.paginator.pageSize);
 
-
+            if (!Number.isNaN(count_page)) {
+                count_page = "0";
+            }
+            range(1, Number(count_page == "0" ? 1 : count_page)).subscribe(res => {
+                pageSizes.push(res)
+            });
+            let panigator =
+            {
+                "total": itemCount,
+                "totalpage": pram.paginator.pageSize,
+                "page": pram.paginator.page,
+                "pageSize": count_page,
+                "pageSizes": pageSizes
+            }
+            // console.log("ffff", panigator)
+            return { status: 1, panigator, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
     public async AllProduct(
         page: number, limit: number
     ) {

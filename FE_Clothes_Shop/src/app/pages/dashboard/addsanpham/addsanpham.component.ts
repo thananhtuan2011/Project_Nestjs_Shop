@@ -78,8 +78,8 @@ export class AddsanphamComponent implements OnInit {
       base64: this.base64,
       filename: this.filename,
     }
+    console.log("rrrr", item)
     this.formData.append('data', JSON.stringify(item));
-    console.log(" this.formData", this.formData)
 
     this.admin_services.AddProduct(this.formData).subscribe(res => {
       if (res) {

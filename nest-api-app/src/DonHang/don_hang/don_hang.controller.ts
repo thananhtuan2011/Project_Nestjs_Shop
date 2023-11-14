@@ -1,3 +1,4 @@
+import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { DonHangService } from './don_hang.service';
 import { JwtService } from '@nestjs/jwt';
@@ -30,6 +31,24 @@ export class DonHangController {
         }
 
     }
+
+
+    @Get("AllDonHang")
+    @ApiBearerAuth('JWT')
+    async AllDonHang(@Req() request, @Body() pageOptionsDto: QueryParamsModel) {
+        try {
+
+            const accessToken = request.headers['authorization'].split(' ')[1];
+            const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
+            return await this._donhang_services.AllDonHang(pageOptionsDto)
+
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+
+    }
+
 
     @Post("EditDonHang")
     @ApiBearerAuth('JWT')

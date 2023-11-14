@@ -1,4 +1,3 @@
-import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Types } from 'mongoose';
@@ -126,15 +125,15 @@ export class ProductService extends BaseRepository<Product> {
         }
     }
     public async AllProductType(
-        page: number, limit: number, id: string
+        pram: any, id: string
     ) {
         try {
             let pageSizes = [];
             const itemCount = await this.promodel.countDocuments({ category_id: id });
-            let count_page = (itemCount / limit).toFixed()
+            let count_page = (itemCount / pram.paginator.pageSize).toFixed()
             const data = await this.promodel.find({ category_id: id })
-                .skip((page - 1) * limit)
-                .limit(limit);
+                .skip((pram.paginator.page - 1) * pram.paginator.pageSize)
+                .limit(pram.paginator.pageSize);
 
             if (!Number.isNaN(count_page)) {
                 count_page = "0";
@@ -146,8 +145,8 @@ export class ProductService extends BaseRepository<Product> {
             let panigator =
             {
                 "total": itemCount,
-                "totalpage": limit,
-                "page": page,
+                "totalpage": pram.paginator.pageSize,
+                "page": pram.paginator.page,
                 "pageSize": count_page,
                 "pageSizes": pageSizes
             }

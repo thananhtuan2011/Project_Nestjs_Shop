@@ -1,10 +1,11 @@
 import { QueryParamsModel } from './../../share/Pagination/Querypram';
+
 import { Body, Controller, NotFoundException, Param, Post, Query, Req, Get, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { ProductModel } from 'src/dto/product.dto';
 import { OrderModel } from 'src/dto/order.dto';
 import { MediaService } from './media/media/media.service';
-import { PageOptionsDto } from 'src/share/Pagination/PageOption';
+
 import { MinioClientService } from 'src/Minio/nest-minio-client/minio-client/minio-client.service';
 import { config } from 'src/Minio/config';
 import { BufferedFile } from 'src/Minio/file.model';
@@ -25,14 +26,14 @@ export class ProductController {
         var databody = JSON.parse(body["data"]);
         var ulrfile;
         if (image) {
-            console.log("Có file");
+
             ulrfile = await this._file_service.upload(image, this.baseBucket)
 
             databody["Img"] = {};
             databody["Img"] = "http://" + ulrfile.url.toString();
 
         }
-
+        console.log("databody", databody)
         const data = await this._product_service.create(databody)
         if (data) {
             return data;
@@ -53,8 +54,8 @@ export class ProductController {
     }
 
     @Post("AllProductType/:id")
-    async AllProductType(@Query() pageOptionsDto: PageOptionsDto, @Param("id") id: string) {
-        return await this._product_service.AllProductType(pageOptionsDto.page, pageOptionsDto.take, id)
+    async AllProductType(@Body() pageOptionsDto: QueryParamsModel, @Param("id") id: string) {
+        return await this._product_service.AllProductType(pageOptionsDto, id)
     }
     @Post("RemoveSp/:id")
     async RemoveSp(@Param("id") id: string) {

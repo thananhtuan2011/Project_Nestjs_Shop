@@ -1,7 +1,7 @@
+import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Body, Controller, HttpStatus, Param, Post, Query, Get } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryDto } from 'src/dto/category';
-import { PageOptionsDto } from 'src/share/Pagination/PageOption';
 
 @Controller('loai')
 export class CategoryController {
@@ -16,8 +16,8 @@ export class CategoryController {
         return { status: 1, data }
     }
     @Post("AllCategory")
-    async AllCategory(@Query() pageOptionsDto: PageOptionsDto,) {
-        return await this._cate_service.AllCategory(pageOptionsDto.page, pageOptionsDto.take)
+    async AllCategory(@Body() pageOptionsDto: QueryParamsModel) {
+        return await this._cate_service.AllCategory(pageOptionsDto)
     }
     @Post("UpdateCategory")
     async UpdateCategory(@Body() cate: CategoryDto) {

@@ -5,6 +5,7 @@ export class ProductModel {
     DonGia: number
     product_name: string
     size: string
+    category_id: string
     Sale: number
     DonGiaGoc: number
     Img: string

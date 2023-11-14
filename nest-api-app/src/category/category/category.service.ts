@@ -22,15 +22,15 @@ export class CategoryService extends BaseRepository<Category> {
         return await this.catemodel.updateOne({ _id: objectid }, { $set: { category_code: category_code, category_name: category_name } });
     }
     public async AllCategory(
-        page: number, limit: number
+        pram: any
     ) {
         try {
             let pageSizes = [];
             const itemCount = await this.catemodel.countDocuments();
-            let count_page = (itemCount / limit).toFixed()
+            let count_page = (itemCount / pram.paginator.pageSize).toFixed()
             const data = await this.catemodel.find()
-                .skip((page - 1) * limit)
-                .limit(limit);
+                .skip((pram.paginator.page - 1) * pram.paginator.pageSize)
+                .limit(pram.paginator.pageSize);
 
             if (!Number.isNaN(count_page)) {
                 count_page = "0";
@@ -41,8 +41,8 @@ export class CategoryService extends BaseRepository<Category> {
             let panigator =
             {
                 "total": itemCount,
-                "totalpage": limit,
-                "page": page,
+                "totalpage": pram.paginator.pageSize,
+                "page": pram.paginator.page,
                 "pageSize": count_page,
                 "pageSizes": pageSizes
             }

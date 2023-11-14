@@ -4,6 +4,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BaseRepository } from 'src/base.model';
+import { range } from 'rxjs';
 
 @Injectable()
 export class DonHangService extends BaseRepository<DonHang> {
@@ -20,6 +21,42 @@ export class DonHangService extends BaseRepository<DonHang> {
             var data = await this.dhmodel.find({ User: id, status: 0 })
 
             return { status: 1, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    } public async AllDonHang(
+        pram: any
+    ) {
+        try {
+            let pageSizes = [];
+            const itemCount = await this.dhmodel.countDocuments();
+            let count_page = (itemCount / pram.paginator.pageSize).toFixed()
+            const data = this.dhmodel.find()
+
+            if (data) {
+                data.populate({ path: "User", select: "username createdAt" })
+                data.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
+            }
+            data.skip((pram.paginator.page - 1) * pram.paginator.pageSize)
+                .limit(pram.paginator.pageSize);
+
+            if (!Number.isNaN(count_page)) {
+                count_page = "0";
+            }
+            range(1, Number(count_page == "0" ? 1 : count_page)).subscribe(res => {
+                pageSizes.push(res)
+            });
+            let panigator =
+            {
+                "total": itemCount,
+                "totalpage": pram.paginator.pageSize,
+                "page": pram.paginator.page,
+                "pageSize": count_page,
+                "pageSizes": pageSizes
+            }
+            // console.log("ffff", panigator)
+            return { status: 1, panigator, data }
         }
         catch (e) {
             return { status: 0, message: e.message || 'my error' }

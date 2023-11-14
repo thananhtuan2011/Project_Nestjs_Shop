@@ -6,6 +6,7 @@ const ProductSchema = new Schema(
         DonGia: Number,
         product_name: String,
         size: String,
+        category_id: String,
         SĐT: Number,
         Sale: Number,
         DonGiaGoc: Number,
@@ -29,6 +30,7 @@ export interface Product extends Document {
     product_name: string
     size: string
     SĐT: number
+    category_id: string,
     Sale: number
     DonGiaGoc: number
     Img: string

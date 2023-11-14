@@ -5,6 +5,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/modelSchema/UserModelSchema';
 import { LoginModel } from 'src/dto/login.dto';
+import { range } from 'rxjs';
 
 @Injectable()
 export class LoginService extends BaseRepository<User> {
@@ -77,6 +78,39 @@ export class LoginService extends BaseRepository<User> {
         return await this.loginmodel.findOne(
             { username: username }
         );
+    }
+    public async AllAcount(
+        page: number, limit: number
+    ) {
+        try {
+            let pageSizes = [];
+            const itemCount = await this.loginmodel.countDocuments();
+            let count_page = (itemCount / limit).toFixed()
+            const data = await this.loginmodel.find({}, { password: 0 })
+                .skip((page - 1) * limit)
+                .limit(limit);
+
+            if (!Number.isNaN(count_page)) {
+                count_page = "0";
+            }
+
+            range(1, Number(count_page == "0" ? 1 : count_page)).subscribe(res => {
+                pageSizes.push(res)
+            });
+            let panigator =
+            {
+                "total": itemCount,
+                "totalpage": limit,
+                "page": page,
+                "pageSize": count_page,
+                "pageSizes": pageSizes
+            }
+            // console.log("ffff", panigator)
+            return { status: 1, panigator, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
     }
 
 }

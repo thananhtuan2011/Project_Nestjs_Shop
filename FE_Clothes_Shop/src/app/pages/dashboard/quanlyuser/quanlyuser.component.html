@@ -160,7 +160,7 @@
                 </td> -->
                 <td>
                   <div>
-                    <span class="cssusername">{{ r.account_id }}</span>
+                    <span class="cssusername">{{ r._id }}</span>
                   </div>
                 </td>
                 <td>
@@ -172,20 +172,20 @@
                   <span class="cssJobtitle">{{ r.admin }}</span>
                 </td>
                 <td>
-                  <span class="cssJobtitle">{{ r.created_at| date : 'yyyy/M/dd h:mm' }}</span>
+                  <span class="cssJobtitle">{{ r.createdAt| date : 'yyyy/M/dd h:mm' }}</span>
                 </td>
                 <td>
                   <span class="cssJobtitle">{{ r.email }}</span>
                 </td>
                
                 <td>
-                  <span class="cssJobtitle">{{ r.full_name }}</span>
+                  <span class="cssJobtitle">{{ r.fullname }}</span>
                 </td>
                 <td>
                   <span class="cssJobtitle">{{ r.phone }}</span>
                 </td>
                 <td>
-                  <span class="cssJobtitle">{{ r.user_name }}</span>
+                  <span class="cssJobtitle">{{ r.username }}</span>
                 </td>
               
                 <!-- <td style="text-align: center">
@@ -193,7 +193,7 @@
                 </td> -->
                 
                 <td style="text-align: center">
-                  <mat-icon (click)="RemoveUser(r.account_id)"  mat style="cursor: pointer; color: #e43541; font-size: 16px" aria-hidden="false">
+                  <mat-icon (click)="RemoveUser(r._id)"  mat style="cursor: pointer; color: #e43541; font-size: 16px" aria-hidden="false">
                     delete_forever</mat-icon
                   >
                     

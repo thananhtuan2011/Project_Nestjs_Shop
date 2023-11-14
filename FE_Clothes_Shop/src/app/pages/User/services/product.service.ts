@@ -57,7 +57,7 @@ export class ProductService extends TableService<any>  {
 
   RemoveSp(produt_id) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlAcount + `RemoveSp?product_id=${produt_id}`, null, { headers: httpHeader });
+    return this.http.post(this.baseUrlAcount + `RemoveSp/${produt_id}`, null, { headers: httpHeader });
   }
 
 

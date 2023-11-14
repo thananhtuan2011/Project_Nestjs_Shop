@@ -28,6 +28,18 @@ export class ProductService extends BaseRepository<Product> {
         return await this.promodel.updateOne({ _id: objectId }, { $set: { amount: amountup } });
 
     }
+    async RemoveSp(objectId: string) {
+        try {
+            await this.promodel.deleteOne({ _id: objectId });
+
+            return { status: 1 }
+        }
+        catch (ex) {
+            return { status: 0, error: ex }
+        }
+
+    }
+
 
     async GetDSSPHome() {
         var data = await this.promodel.find().limit(8);

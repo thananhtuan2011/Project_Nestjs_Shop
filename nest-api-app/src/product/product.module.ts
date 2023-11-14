@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { ProductSchema } from 'src/modelSchema/ProductModelSchema';
 import { MediaSchema } from 'src/modelSchema/MediaModelSchema';
 import { MediaService } from './product/media/media/media.service';
+import { MinioClientModule } from 'src/Minio/nest-minio-client/nest-minio-client.module';
 
 @Module({
   imports: [MongooseModule.forFeature(
@@ -21,6 +22,7 @@ import { MediaService } from './product/media/media/media.service';
     ]
 
   ),
+    MinioClientModule,
   ],
   controllers: [ProductController],
   providers: [ProductService, MediaService]

@@ -32,7 +32,7 @@
                 <mat-icon class="sizeiconreaction">add_photo_alternate</mat-icon>
               </button>
             <input type='file' accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .heic, .heif, .tiff|image/*"
-            id="PDFInpdd" #hiddenfileinput_image (change)="onSelectFile_PDF($event)" multiple
+            id="PDFInpdd" #hiddenfileinput_image (change)="onSelectFile_PDF($event.target.files)" multiple
             style="display: none;">
             <img style="width: 200px;" src="{{img}}" >
         </div>
@@ -42,7 +42,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Chọn loại</mat-label>
           <mat-select  [(ngModel)]="selected" (ngModelChange)="onGiaSelection()">
-            <mat-option *ngFor="let item of listCate" [value]="item.category_id">
+            <mat-option *ngFor="let item of listCate" [value]="item._id">
               {{ item.category_name }}
             </mat-option>
           </mat-select>

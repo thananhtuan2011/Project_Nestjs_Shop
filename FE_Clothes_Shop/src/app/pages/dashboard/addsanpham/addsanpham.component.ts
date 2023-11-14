@@ -19,6 +19,7 @@ export class AddsanphamComponent implements OnInit {
   GiaGoc: number
   Mota: string;
   filename: string;
+  formData: any;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private layoutUtilsService: LayoutUtilsService,
@@ -34,59 +35,13 @@ export class AddsanphamComponent implements OnInit {
 
   }
   img: any
-  onSelectFile_PDF(event) {
-
-
-
-
-
-
-
-    if (event.target.files && event.target.files[0]) {
-
-      var filesAmountcheck = event.target.files[0];
-
-
-      var file_name = event.target.files;
-      var filesAmount = event.target.files.length;
-
-
-      // for (let i = 0; i < filesAmount; i++) {
-      var reader = new FileReader();
-      //this.FileAttachName = filesAmount.name;
-      let base64Str: any;
-      let cat: any;
-      reader.onload = (event) => {
-        cat = file_name[0].name.substr(file_name[0].name.indexOf('.'));
-        this.img = event.target.result;
-
-        var metaIdx1 = event.target.result.toString().indexOf(';base64,');
-        base64Str = event.target.result.toString().substr(metaIdx1 + 8);
-        this.base64 = base64Str;
-        console.log('ssss', this.base64)
-        this.filename = file_name[0].name,
-          // this.AttachFileChat.push({ filename: file_name[0].name, type: file_name[0].type, size: file_name[0].size, strBase64: base64Str });
-
-
-
-
-
-          this.changeDetectorRefs.detectChanges();
-
-      }
-
-
-      //  console.log('this.list_image_Edit',this.list_image_Edit)
-      reader.readAsDataURL(event.target.files[0]);
-
-
-
-
-    }
-    setTimeout(() => {
-      event.srcElement.value = "";
-
-    }, 1000);
+  onSelectFile_PDF(files: File[]) {
+    console.log(files)
+    this.formData = new FormData();
+    Array.from(files).forEach(f => this.formData.append('image', f))
+    // this.admin_services.AddFile(formData).subscribe(res => {
+    //   console.log("ressssss fle", res)
+    // });
   }
 
   GetLoai() {
@@ -121,11 +76,12 @@ export class AddsanphamComponent implements OnInit {
       DonGiaGoc: Number.parseInt(this.GiaGoc.toString()),
       Mota: this.Mota,
       base64: this.base64,
-      filename: this.filename
+      filename: this.filename,
     }
-    console.log("item", item)
+    this.formData.append('data', JSON.stringify(item));
+    console.log(" this.formData", this.formData)
 
-    this.admin_services.AddProduct(item).subscribe(res => {
+    this.admin_services.AddProduct(this.formData).subscribe(res => {
       if (res) {
         this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
         this.CloseDia(res);

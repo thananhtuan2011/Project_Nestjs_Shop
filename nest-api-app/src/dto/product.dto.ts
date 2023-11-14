@@ -1,3 +1,5 @@
+import { BufferedFile } from "src/Minio/file.model"
+
 export class ProductModel {
     amount: number
     DonGia: number
@@ -7,5 +9,6 @@ export class ProductModel {
     DonGiaGoc: number
     Img: string
     Mota: string
+
 
 }

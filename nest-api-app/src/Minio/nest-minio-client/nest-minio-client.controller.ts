@@ -12,6 +12,7 @@ export class NestMinioClientController {
     async uploadSingle(
         @UploadedFile() image: BufferedFile
     ) {
+        console.log("image", image)
         return await this.fileUploadService.uploadSingle(image)
     }
     @Post('many')

@@ -20,7 +20,7 @@ import { UpdaterolseComponent } from '../updaterolse/updaterolse.component';
 })
 export class QuanlyuserComponent implements OnInit {
   User: any;
-  apiproduct = environment.apiUrl + "acount/AllAcount";
+  apiproduct = environment.apiUrl + "login/AllAcount";
   constructor(
     public product_services: ProductService,
     private layoutUtilsService: LayoutUtilsService,
@@ -70,21 +70,21 @@ export class QuanlyuserComponent implements OnInit {
       const filter = {};
       filter['FullName'] = value
 
-      this.product_services.patchStateAllAcount({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllAcount({ filter }, this.apiproduct);
     }
     else {
 
       const filter = {};
 
 
-      this.product_services.patchStateAllAcount({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+      this.product_services.patchStateAllAcount({ filter }, this.apiproduct);
     }
 
   }
 
   LoadAllAcount() {
     const filter = {};
-    this.product_services.patchStateAllAcount({ filter }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllAcount({ filter }, this.apiproduct);
 
   }
   getHeight(): any {
@@ -94,7 +94,7 @@ export class QuanlyuserComponent implements OnInit {
   }
 
   paginate(paginator: PaginatorState) {
-    this.product_services.patchStateAllAcount({ paginator }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllAcount({ paginator }, this.apiproduct);
   }
   sort(column: string) {
     const sorting = this.sorting;
@@ -105,7 +105,7 @@ export class QuanlyuserComponent implements OnInit {
     } else {
       sorting.direction = sorting.direction === 'asc' ? 'desc' : 'asc';
     }
-    this.product_services.patchStateAllAcount({ sorting }, this.apiproduct + `?category_id=${this.catogy_id}`);
+    this.product_services.patchStateAllAcount({ sorting }, this.apiproduct);
   }
 
   UpdateRoles(item) {

@@ -20,13 +20,25 @@ export class AdminService {
 
         // console.log('auth.token',auth.access_token)
         let result = new HttpHeaders({
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
+            "Accept": '*/*',
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Headers': 'Content-Type'
         });
         return result;
     }
+    getHttpHeaderFiles() {
 
+        let result = new HttpHeaders({
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+        });
+        return result;
+    }
+    AddFile(formData: FormData) {
+        const httpHeader = this.getHttpHeaderFiles();
+        return this.http.post("http://localhost:3000/file/single", formData, { headers: httpHeader });
+    }
     UpdateTTDonHang(IdDonHang, key) {
         const httpHeader = this.getHttpHeaders();
         return this.http.post(this.baseUrlDonhang + `UpdateTTDonHang?IdDonHang=${IdDonHang}&key=${key}`, null, { headers: httpHeader });
@@ -59,7 +71,7 @@ export class AdminService {
 
     GetCategory() {
         const httpHeader = this.getHttpHeaders();
-        return this.http.get(this.baseUrlLoai + `GetCategory`, { headers: httpHeader });
+        return this.http.get(this.baseUrlLoai + `GetDSLoai`, { headers: httpHeader });
     }
     GetDoanhthu(key) {
         const httpHeader = this.getHttpHeaders();

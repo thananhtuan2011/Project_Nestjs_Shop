@@ -1,5 +1,5 @@
 import { User } from 'src/modelSchema/UserModelSchema';
-import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Post, Query, Req, UseGuards } from '@nestjs/common';
 import { LoginModel, LoginUserDto } from 'src/dto/login.dto';
 import { LoginService } from './services/login/login.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -8,6 +8,7 @@ import { catchError } from 'rxjs';
 import { error } from 'console';
 import { JwtService } from '@nestjs/jwt';
 import { JwtData } from 'src/dto/jwt';
+import { PageOptionsDto } from 'src/share/Pagination/PageOption';
 @Controller('login')
 export class LoginController {
 
@@ -79,6 +80,10 @@ export class LoginController {
 
     }
 
+    @Post("AllAcount")
+    async AllProductType(@Query() pageOptionsDto: PageOptionsDto) {
+        return await this.login_services.AllAcount(pageOptionsDto.page, pageOptionsDto.take)
+    }
     @Post("DeleteUser/:id")
     @UseGuards(AuthGuard('jwt'))
     DeleteUser(@Param('id') id: string) {

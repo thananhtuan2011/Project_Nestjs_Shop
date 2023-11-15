@@ -114,7 +114,7 @@ export class ProductDetailComponent implements OnInit {
         console.log("itemitemitem", item)
         this.order_services.InsertOrder(item).subscribe((res: any) => {
           if (res) {
-            this.product_services.UpdateLuotMua(this.product_id, this.lstProducDetail.amount).subscribe(res => {
+            this.product_services.UpdateLuotMua(this.product_id, this.lstProducDetail.amount, this.sl).subscribe(res => {
 
               // update lượt mua 
               this.GetProduct_Detail(this.product_id)

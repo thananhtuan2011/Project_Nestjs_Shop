@@ -95,6 +95,33 @@ export class DonHangController {
             return { status: 0, error: e.message }
         }
     }
+
+    @Post("RemoveDonHang/:id")
+    @ApiBearerAuth('JWT')
+    async RemoveDonHang(@Param("id") id: string) {
+        try {
+            var data = await this._donhang_services.RemoveDonHang(id)
+            return { status: 1, data }
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+    }
+
+    @Post("UpdateTTDonHang/:id/:status")
+    @ApiBearerAuth('JWT')
+    async UpdateTTDonHang(@Param("id") id: string, @Param("status") status: string) {
+        try {
+
+            var data = await this._donhang_services.UpdateTTDonHang(id, status);
+            return { status: 1, data }
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+    }
+
+
     @Get("GetDonHangChoXacNhan")
     @ApiBearerAuth('JWT')
     async GetDonHangChoXacNhan(@Req() request) {

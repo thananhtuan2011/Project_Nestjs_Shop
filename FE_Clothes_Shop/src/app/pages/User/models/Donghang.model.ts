@@ -9,7 +9,7 @@ export class DonHangModel {
     status: number;
     Size: string;
     email: string;
-    Tongtien: number;
+    TongTien: number;
     _idOrder: string;
     color: string;
     Product: any[];

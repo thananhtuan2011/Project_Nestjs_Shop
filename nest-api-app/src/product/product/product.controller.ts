@@ -76,10 +76,11 @@ export class ProductController {
         return await this._product_service.GetDSBest()
     }
 
-    @Post("UpdateLuotMua/:id/:amount")
+    @Post("UpdateLuotMua/:id/:amount/:slmua")
     async UpdateLuotMua(@Param("id") id: string,
-        @Param("amount") amount: number) {
-        await this._product_service.UpdateLuotMua(id, amount)
+        @Param("amount") amount: number, @Param("slmua") slmua: number) {
+        console.log("amount", amount)
+        await this._product_service.UpdateLuotMua(id, amount, slmua)
         return await this._product_service.findById(id)
     }
     @Post("UpdateProduct/:id/:media_id")

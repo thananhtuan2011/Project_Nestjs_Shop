@@ -18,7 +18,7 @@ export class DonHangService extends BaseRepository<DonHang> {
     }
     async GetDonHangXacNhanByAcountDangVanChuyen(id) {
         try {
-            var data = await this.dhmodel.find({ User: id, status: 0 })
+            var data = await this.dhmodel.find({ User: id, status: 1 })
 
             return { status: 1, data }
         }
@@ -27,6 +27,30 @@ export class DonHangService extends BaseRepository<DonHang> {
         }
     }
 
+    async UpdateTTDonHang(id, keystatus) {
+        try {
+            await this.dhmodel.updateOne({ _id: id }, {
+                $set: {
+                    status: keystatus
+
+                }
+            });
+            return { status: 1 }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
+    async RemoveDonHang(id) {
+        try {
+            var data = await this.dhmodel.deleteOne({ _id: id })
+
+            return { status: 1, data }
+        }
+        catch (e) {
+            return { status: 0, message: e.message || 'my error' }
+        }
+    }
 
     async AllDonHang(
         pram: any
@@ -64,7 +88,7 @@ export class DonHangService extends BaseRepository<DonHang> {
     }
     async GetDonHangChoXacNhan(id) {
         try {
-            var data = await this.dhmodel.find({ User: id, status: 1 })
+            var data = await this.dhmodel.find({ User: id, status: 0 })
 
             return { status: 1, data }
         }
@@ -87,7 +111,6 @@ export class DonHangService extends BaseRepository<DonHang> {
         }
     }
     async EditDonHang(bodyupdate) {
-        console.log("bodyupdate", bodyupdate)
         try {
             await this.dhmodel.updateOne({ _id: bodyupdate._idonhang }, {
                 $set: {

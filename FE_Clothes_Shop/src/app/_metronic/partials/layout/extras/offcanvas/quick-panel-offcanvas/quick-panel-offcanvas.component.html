@@ -68,13 +68,13 @@
         <div class="mb-15">
           <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
           <!--begin: Item-->
-          <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listNotify">
-            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+          <div class="d-flex align-items-center mb-5" *ngFor="let item of listNotify">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
               <span class="symbol-label">
                <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
               </span>
             </div>
-            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
               <span class="symbol-label" style="    color: red;
               background: lightgoldenrodyellow;
               height: 30px  !important">
@@ -101,7 +101,7 @@
             </div>
             <span
               class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
-              >{{item.TongTien}}</span
+              >{{item.TongTien|number}}đ</span
             >
           </div>
           <!--end: Item-->
@@ -142,13 +142,13 @@
         <div class="mb-15">
           <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
           <!--begin: Item-->
-          <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listVanChuyen">
-            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+          <div class="d-flex align-items-centermb-5" *ngFor="let item of listVanChuyen">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
               <span class="symbol-label">
                <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
               </span>
             </div>
-            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+            <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
               <span class="symbol-label" style="    color: red;
               background: lightgoldenrodyellow;
               height: 30px  !important">
@@ -168,7 +168,7 @@
             </div>
             <span
               class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
-              >{{item.TongTien}}</span
+              >{{item.TongTien|number}}đ</span
             >
           </div>
           <!--end: Item-->
@@ -203,13 +203,13 @@
       <div class="mb-15">
         <!-- <h5 class="font-weight-bold mb-5">System Messages</h5> -->
         <!--begin: Item-->
-        <div class="d-flex align-items-center flex-wrap mb-5" *ngFor="let item of listXacNhan">
-          <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
+        <div class="d-flex align-items-center mb-5" *ngFor="let item of listXacNhan">
+          <div class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
             <span class="symbol-label">
              <img style="    width: 70px;" src="../../../../../../../assets/gif/vanchuyen.gif">
             </span>
           </div>
-          <div  style="display: flex;" class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==1">
+          <div  style="display: flex;" class="symbol symbol-50 symbol-light mr-5" *ngIf="item.status==0">
             <span class="symbol-label" style="    color: red;
             background: lightgoldenrodyellow;
             height: 30px  !important">
@@ -231,7 +231,7 @@
   
           <span
             class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
-            >{{item.TongTien}}</span
+            >{{item.TongTien|number}}đ</span
           >
         </div>
         <!--end: Item-->

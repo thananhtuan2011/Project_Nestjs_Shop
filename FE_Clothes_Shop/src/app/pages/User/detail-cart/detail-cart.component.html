@@ -322,21 +322,21 @@
                       >{{pro.DonGiaGoc |number}} đ</span
                     >
                     <br>
-                            <span *ngIf="item.status==1" style="  padding: 5px;
+                            <span *ngIf="item.status==0" style="  padding: 5px;
                             margin-left: 20px;
                             border-radius: 5px;
                             border: 1px solid;
                             font-weight: bold;
                             color: red;
                         ">Chưa xác nhận</span>
-                          <span *ngIf="item.status==0" style="  padding: 5px;
+                          <span *ngIf="item.status==1" style="  padding: 5px;
                           margin-left: 20px;
                           border-radius: 5px;
                           border: 1px solid;
                           font-weight: bold;
                           color: rgb(9, 168, 134);
                       ">Đang vận chuyển</span>
-                 <span *ngIf="item.status==null" style="  padding: 5px;
+                 <span *ngIf="item.status==2" style="  padding: 5px;
                  margin-left: 20px;
                  border-radius: 5px;
                  border: 1px solid;

@@ -118,6 +118,15 @@
                   (sort)="sort($event)"
                 ></app-sort-icon>
               </th>
+              <th >
+                <span>Update</span>
+                <app-sort-icon
+                  column="tinhtrang"
+                  [activeColumn]="sorting.column"
+                  [activeDirection]="sorting.direction"
+                  (sort)="sort($event)"
+                ></app-sort-icon>
+              </th>
               <!-- <th style="min-width: 100px; text-align: center">
                 <span>nhân viên</span>
               </th> -->
@@ -151,7 +160,7 @@
                 </td> -->
                 <td>
                   <div>
-                    <span class="cssusername">{{ r.Id_Donhang }}</span>
+                    <span class="cssusername">{{ r._id }}</span>
                   </div>
                 </td>
                 <td>
@@ -178,9 +187,9 @@
                   <span class="cssJobtitle" style="    background: aliceblue;
                   border-radius: 5px;
                   border: 1px solid lightgreen;">
-                    <span style="padding: 10px;" *ngIf="r.status==1">Chờ xác nhận</span>
-                    <span style="padding: 10px; color: blueviolet !important;" *ngIf="r.status==0" >Đã xác nhận</span>
-                    <span style="padding: 10px; color: red;" *ngIf="r.status==null" >Từ chối </span>
+                    <span style="padding: 10px;" *ngIf="r.status==1"> Đã xác nhận</span>
+                    <span style="padding: 10px; color: blueviolet !important;" *ngIf="r.status==0" > Chờ xác nhận </span>
+                    <span style="padding: 10px; color: red;" *ngIf="r.status==2" >Từ chối </span>
                   </span>
                 </td>
                 <!-- <td style="text-align: center">
@@ -191,7 +200,13 @@
                   <mat-icon (click)="XacNhan(r)"  mat style="cursor: pointer; color: #1bc5bd; font-size: 16px" aria-hidden="false">
                     settings</mat-icon
                   >
-                    
+                 
+                </td>
+                <td style="text-align: center">
+               
+                  <mat-icon (click)="RemoveDonHang(r._id)"  mat style="cursor: pointer; color: #c51b51; font-size: 16px" aria-hidden="false">
+                    clear</mat-icon
+                  >
                 </td>
               </tr>
             </tbody>

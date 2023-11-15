@@ -22,8 +22,8 @@ export class ProductService extends BaseRepository<Product> {
         return await this.promodel.updateOne({ _id: objectId, "Media._id": Number.parseInt(media_id.toString()) }, { $set: { "Media.$.url": "cccccccccccc" } });
 
     }
-    async UpdateLuotMua(objectId: string, amount: number) {
-        let amountup = amount - 1;
+    async UpdateLuotMua(objectId: string, amount: number, slmua: number) {
+        let amountup = amount - slmua;
 
         return await this.promodel.updateOne({ _id: objectId }, { $set: { amount: amountup } });
 

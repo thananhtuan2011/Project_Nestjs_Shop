@@ -81,13 +81,20 @@ export class LoginController {
     }
 
     @Post("AllAcount")
-    async AllProductType(@Query() pageOptionsDto: QueryParamsModel) {
+    async AllProductType(@Body() pageOptionsDto: QueryParamsModel) {
         return await this.login_services.AllAcount(pageOptionsDto)
     }
-    @Post("DeleteUser/:id")
+    @Post("RemoveACount/:id")
     @UseGuards(AuthGuard('jwt'))
-    DeleteUser(@Param('id') id: string) {
-        return this.login_services.deleteOne(id)
+    async DeleteUser(@Param('id') id: string) {
+        try {
+            await this.login_services.deleteOne(id);
+            return { status: 1 }
+
+        }
+        catch (ex) {
+            return { stauts: 0, ex }
+        }
     }
     @Get("GetInforUser")
     @UseGuards(AuthGuard('jwt'))

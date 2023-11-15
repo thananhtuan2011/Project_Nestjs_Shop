@@ -59,11 +59,11 @@ export class OrderService {
 
   RemoveSpOrder(order_id) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlorder + `RemoveSpOrder?orderid=${order_id}`, null, { headers: httpHeader });
+    return this.http.post(this.baseUrlorder + `RemoveSpOrder/${order_id}`, null, { headers: httpHeader });
   }
-  UpdateSpOrder(order_id, color, sl, Size) {
+  UpdateSpOrder(item) {
     const httpHeader = this.getHttpHeaders();
-    return this.http.post(this.baseUrlorder + `UpdateSpOrder?orderid=${order_id}&color=${color}&sl=${sl}&Size=${Size}`, null, { headers: httpHeader });
+    return this.http.post(this.baseUrlorder + `UpdateSpOrder`, item, { headers: httpHeader });
   }
 
   SaveKeyGmail(IdDonHang, key) {

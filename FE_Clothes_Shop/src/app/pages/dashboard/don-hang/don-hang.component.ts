@@ -10,6 +10,8 @@ import { GroupingState, SortState } from 'src/app/_metronic/shared/crud-table';
 import { ActivatedRoute } from '@angular/router';
 import { XacNhanComponent } from '../xac-nhan/xac-nhan.component';
 import { NotifyService } from 'src/app/_metronic/partials/layout/extras/offcanvas/quick-panel-offcanvas/notify.service';
+import { AdminService } from '../admin.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-don-hang',
@@ -27,10 +29,13 @@ export class DonHangComponent implements OnInit {
   selected: any
 
   apiproduct = environment.apiUrl + "donhang/AllDonHang";
+  apidonhang = environment.apiUrl + "donhang";
   constructor(
     public product_services: ProductService,
     private layoutUtilsService: LayoutUtilsService,
     private notyfi: NotifyService,
+    private translate: TranslateService,
+    private _admin_services: AdminService,
     private dialog: MatDialog, private changeDetectorRefs: ChangeDetectorRef, private route: ActivatedRoute,) {
     this.User = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('User'))));
   }
@@ -58,6 +63,32 @@ export class DonHangComponent implements OnInit {
 
     })
   }
+  RemoveDonHang(_id) {
+    const _title = this.translate.instant('Xóa đơn hàng');
+    const _description = this.translate.instant('Bạn có muốn xóa không ?');
+    const _waitDesciption = this.translate.instant('Dữ liệu đang được xử lý');
+    const _deleteMessage = this.translate.instant('Xóa thành công !');
+    const _erroMessage = this.translate.instant('Thất bại !');
+    const dialogRef = this.layoutUtilsService.deleteElement(_title, _description, _waitDesciption);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (!res) {
+        return;
+      }
+      else {
+        this._admin_services.removeDonHang(_id).subscribe((res: any) => {
+          if (res && res.status == 1) {
+            this.LoadAllProductType();
+            this.layoutUtilsService.showActionNotification("Xóa đơn hàng thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
+
+          }
+        })
+      }
+
+
+    });
+  }
+
+
   onGiaSelection() {
     const sorting = this.sorting;
     console.log(this.selected);
@@ -93,7 +124,7 @@ export class DonHangComponent implements OnInit {
     this.Quaylai.emit()
   }
   XacNhan(item) {
-    if (item.status == 0) {
+    if (item.status == 1) {
       this.layoutUtilsService.showActionNotification("Đơn hàng đã xác nhận", MessageType.Delete, 4000, true, false, 3000, 'top', 0);
     }
     else {

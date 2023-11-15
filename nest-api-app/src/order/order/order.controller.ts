@@ -57,4 +57,16 @@ export class OrderController {
     async AddOrder(@Body() body: OrderModel) {
         return await this._order_service.CreaedOrder(body)
     }
+    @Post("UpdateSpOrder")
+    @UseGuards(AuthGuard('jwt'))
+    async UpdateSpOrder(@Body() body: any
+    ) {
+        return await this._order_service.UpdateSpOrder(body)
+    }
+    @Post("RemoveSpOrder/:id")
+    async RemoveSpOrder(@Param("id") id: string) {
+        return await this._order_service.RemoveSpOrder(id)
+    }
+
+
 }

@@ -15,6 +15,12 @@ export class CategoryController {
         var data = await this._cate_service.GetDSLoai()
         return { status: 1, data }
     }
+    @Post("RemoveLoai/:id")
+    async RemoveLoai(@Param("id") id: string) {
+        var data = await this._cate_service.RemoveLoai(id)
+        return { status: 1, data }
+    }
+
     @Post("AllCategory")
     async AllCategory(@Body() pageOptionsDto: QueryParamsModel) {
         return await this._cate_service.AllCategory(pageOptionsDto)

@@ -4,25 +4,25 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AdminService {
     public Bieudo = new Subject<any>();
-    constructor(private router: Router, private http: HttpClient) { }
+    constructor(private router: Router, private http: HttpClient, private cookie: CookieService) { }
     baseUrlDonhang = environment.apiUrl + 'donhang/';
-    baseUrlacount = environment.apiUrl + 'acount/';
+    baseUrlacount = environment.apiUrl + 'login/';
     baseUrlLoai = environment.apiUrl + 'loai/';
     baseUrlProduct = environment.apiUrl + 'product/';
     getHttpHeaders() {
 
 
-        // console.log('auth.token',auth.access_token)
         let result = new HttpHeaders({
-            'Content-Type': 'multipart/form-data',
-            "Accept": '*/*',
+            'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*',
+            Authorization: `Bearer ${this.cookie.get("accessToken")}`,
             'Access-Control-Allow-Headers': 'Content-Type'
         });
         return result;
@@ -35,17 +35,21 @@ export class AdminService {
         });
         return result;
     }
+    removeDonHang(_id) {
+        const httpHeader = this.getHttpHeaders();
+        return this.http.post(this.baseUrlDonhang + "RemoveDonHang/" + _id, null, { headers: httpHeader });
+    }
     AddFile(formData: FormData) {
         const httpHeader = this.getHttpHeaderFiles();
         return this.http.post("http://localhost:3000/file/single", formData, { headers: httpHeader });
     }
     UpdateTTDonHang(IdDonHang, key) {
         const httpHeader = this.getHttpHeaders();
-        return this.http.post(this.baseUrlDonhang + `UpdateTTDonHang?IdDonHang=${IdDonHang}&key=${key}`, null, { headers: httpHeader });
+        return this.http.post(this.baseUrlDonhang + `UpdateTTDonHang/${IdDonHang}/${key}`, null, { headers: httpHeader });
     }
     RemoveACount(acount_id) {
         const httpHeader = this.getHttpHeaders();
-        return this.http.post(this.baseUrlacount + `RemoveACount?account_id=${acount_id}`, null, { headers: httpHeader });
+        return this.http.post(this.baseUrlacount + `RemoveACount/${acount_id}`, null, { headers: httpHeader });
     }
     UpdateRoles(acount_id, valueupdate) {
         const httpHeader = this.getHttpHeaders();
@@ -53,7 +57,7 @@ export class AdminService {
     }
     RemoveLoai(category_id) {
         const httpHeader = this.getHttpHeaders();
-        return this.http.post(this.baseUrlLoai + `RemoveLoai?category_id=${category_id}`, null, { headers: httpHeader });
+        return this.http.post(this.baseUrlLoai + `RemoveLoai/${category_id}`, null, { headers: httpHeader });
     }
 
     Addloai(item) {

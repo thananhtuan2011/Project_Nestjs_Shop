@@ -31,12 +31,12 @@ export class XacNhanComponent implements OnInit {
   submit() {
     console.log("valueradio", this.valueradio)
     if (this.valueradio == 1) {
-      this.admin_services.UpdateTTDonHang(this.data.item.Id_Donhang, this.valueradio).subscribe(res => {
+      this.admin_services.UpdateTTDonHang(this.data.item._id, this.valueradio).subscribe(res => {
         if (res) {
-          this.notify.XacNhanDon(this.data.item.account_id)
-          this.admin_services.SendGmail("Đơn hàng của quý khách đã được xác nhận", "Đơn hàng" + this.data.item.Id_Donhang + 'đã được xác nhận vào giao hàng trong khoảng 2 ngày', this.data.item.email).subscribe(res => {
+          // this.notify.XacNhanDon(this.data.item.account_id)
+          // this.admin_services.SendGmail("Đơn hàng của quý khách đã được xác nhận", "Đơn hàng" + this.data.item._id + 'đã được xác nhận vào giao hàng trong khoảng 2 ngày', this.data.item.email).subscribe(res => {
 
-          })
+          // })
           this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
           this.CloseDia(res);
         }
@@ -44,10 +44,10 @@ export class XacNhanComponent implements OnInit {
     }
     else if (this.valueradio == 2) {
       // từ chối
-      this.admin_services.UpdateTTDonHang(this.data.item.Id_Donhang, this.valueradio).subscribe(res => {
+      this.admin_services.UpdateTTDonHang(this.data.item._id, this.valueradio).subscribe(res => {
         if (res) {
           this.notify.XacNhanDon(this.data.item.account_id)
-          this.admin_services.SendGmail("Đơn hàng của quý khách đã bị từ chối", "Đơn hàng" + this.data.item.Id_Donhang + 'đã bị từ chối vì nhiều lý do thông tin không chính xấc', this.data.item.email).subscribe(res => {
+          this.admin_services.SendGmail("Đơn hàng của quý khách đã bị từ chối", "Đơn hàng" + this.data.item._id + 'đã bị từ chối vì nhiều lý do thông tin không chính xấc', this.data.item.email).subscribe(res => {
 
           })
           this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);

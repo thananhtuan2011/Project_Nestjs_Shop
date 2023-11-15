@@ -25,6 +25,14 @@ export class OrderService extends BaseRepository<Order> {
         }
     }
 
+    async UpdateSpOrder(body) {
+        return await this.ordermodel.findByIdAndUpdate(body._id, { $set: { soluong: body.sl, color: body.color.trim(), Size: body.size.trim() } })
+    }
+    async RemoveSpOrder(id,) {
+        return await this.ordermodel.deleteOne({ _id: id });
+    }
+
+
     OrderDetail(order_id: string) {
         const order = this.ordermodel.findById(order_id);
         if (order) {
@@ -37,15 +45,16 @@ export class OrderService extends BaseRepository<Order> {
             throw new NotFoundException(order_id)
         }
     }
-    GetCart(objectId_user: string) {
-        const order = this.ordermodel.find({ User: objectId_user, Pay: false });
-        if (order) {
-            order.populate({ path: "User", select: "username createdAt" })
-            order.populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
-            order.populate({ path: "Category", select: "category_code category_name" })
+    async GetCart(objectId_user: string) {
+        try {
+
+            const order = await this.ordermodel.find({ User: objectId_user, Pay: false })
+                .populate({ path: "User", select: "username createdAt" })
+                .populate({ path: "Product", select: "DonGiaGoc product_name Img Mota " })
+                .populate({ path: "Category", select: "category_code category_name" })
             return order;
         }
-        else {
+        catch {
             throw new NotFoundException(objectId_user)
         }
     }

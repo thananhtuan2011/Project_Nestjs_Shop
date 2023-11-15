@@ -6,7 +6,7 @@ import { OrderService } from '../services/order.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ProductService } from '../services/product.service';
 import { TopbarService } from '../../_layout/components/topbar/topbar.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DonHangModel } from '../models/Donghang.model';
 
@@ -17,7 +17,13 @@ import { DonHangModel } from '../models/Donghang.model';
 })
 export class DetailCartComponent implements OnInit {
   listOrder: any[] = []
-  registrationForm: FormGroup;
+  // registrationForm: FormGroup;
+  registrationForm = new FormGroup({
+    fullname: new FormControl(),
+    phone: new FormControl(),
+    address: new FormControl(),
+    email: new FormControl()
+  });
   hasError: boolean;
   isUpdate: boolean;
   isLoading$: Observable<boolean>;
@@ -55,13 +61,13 @@ export class DetailCartComponent implements OnInit {
           this.sdt = this.listOrder[0].phone
         }
 
-        if (this.listOrder[0].status == 0) {
+        if (this.listOrder[0].status == 1) {
           this.isxacnhan = true
         }
         else {
           this.isxacnhan = false
         }
-
+        this.initForm()
 
       }
 
@@ -140,7 +146,8 @@ export class DetailCartComponent implements OnInit {
 
   initForm() {
     this.DetailCart = JSON.parse(JSON.parse(JSON.stringify(localStorage.getItem('DetailCart'))));
-    console.log("this.DetailCart", this.DetailCart)
+    console.log("DetailCart", this.DetailCart)
+
     if (this.DetailCart[0].updatedAt != this.DetailCart[0].createdAt) {
       this.isUpdate = true;
       this.hoten = this.DetailCart[0].full_name
@@ -189,14 +196,18 @@ export class DetailCartComponent implements OnInit {
       {
       }
     );
+    this.changeDetectorRefs.detectChanges();
   }
   ngOnInit(): void {
-    this.notify.getInforDetailCart.subscribe(res => {
-      console.log("ressdưqdqwqds", res)
-      if (res == 'load') {
-        this.initForm()
-      }
-    })
+    // this.notify.getInforDetailCart.subscribe(res => {
+    //   console.log("ressdưqdqwqds", res)
+    //   if (res == 'load') {
+    //     setTimeout(() => {
+    //       this.initForm()
+
+    //     }, 1000);
+    //   }
+    // })
     this.route.params.subscribe(params => {
       console.log("params", params)
       this.iddonhang = params.IdDonHang;

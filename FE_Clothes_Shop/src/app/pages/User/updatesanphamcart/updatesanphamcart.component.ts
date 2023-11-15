@@ -53,17 +53,29 @@ export class UpdatesanphamcartComponent implements OnInit {
   onChangeSize($event: any) {
 
     this.Size = $event.value
-    console.log('Selected chip: ', this.Size);
+    console.log('Selected chip: ', this.Size.trim());
   }
   onChange($event: any) {
     this.color = $event.value
   }
 
   ngOnInit(): void {
-    console.log("data", this.data)
     this.sl = this.data.item.soluong;
     this.color = this.data.item.color;
     this.Size = this.data.item.Size;
+
+    let index = this.ListSize.findIndex(x => x.name == this.Size);
+    if (index > 0) {
+      this.ListSize[0].selected = false
+      this.ListSize[index].selected = true
+      this.changeDetectorRefs.detectChanges();
+    }
+    let indexcolor = this.ListColor.findIndex(x => x.name == this.color);
+    if (indexcolor > 0) {
+      this.ListColor[0].selected = false
+      this.ListColor[indexcolor].selected = true
+      this.changeDetectorRefs.detectChanges();
+    }
 
   }
   CloseDia(data = undefined) {
@@ -75,7 +87,14 @@ export class UpdatesanphamcartComponent implements OnInit {
     }
     else {
 
-      this.order_services.UpdateSpOrder(this.data.item.order_id, this.color, this.sl, this.Size).subscribe(res => {
+      var item =
+      {
+        _id: this.data.item._id,
+        color: this.color.trim(),
+        sl: this.sl,
+        size: this.Size.trim()
+      }
+      this.order_services.UpdateSpOrder(item).subscribe(res => {
         if (res) {
           this.layoutUtilsService.showActionNotification("Thành công", MessageType.Delete, 4000, true, false, 3000, 'top', 1);
           this.CloseDia(res);

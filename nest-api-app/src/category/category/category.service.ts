@@ -62,6 +62,10 @@ export class CategoryService extends BaseRepository<Category> {
             return cate;
         }
     }
+    async RemoveLoai(id) {
+        await this.catemodel.deleteOne({ _id: id })
+
+    }
     // public async getUsers(
     //     pageOptionsDto: PageOptionsDto,
     //   ): Promise<PageDto<UserDto>> {

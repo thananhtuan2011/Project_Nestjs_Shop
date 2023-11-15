@@ -100,7 +100,7 @@ export class ThanhToanComponent implements OnInit {
 
 
     item.User = this.User.account_id;
-    item.Tongtien = this.tongtien;
+    item.TongTien = this.tongtien;
     item.address = this.registrationForm.controls["address"].value;
     item.phone = this.registrationForm.controls["phone"].value.toString();
     item.full_name = this.registrationForm.controls["fullname"].value;
@@ -142,6 +142,7 @@ export class ThanhToanComponent implements OnInit {
         else {
 
           let item = this.ItemDonHang();
+          console.log("fffff", item)
           this.order_services.InsertDonHang(item).subscribe((res: any) => {
             console.log("resss", res)
             if (res && res.status == 1) {

@@ -13,6 +13,7 @@ import { CategoryModule } from './category/category/category.module';
 import { OrderModule } from './order/order/order.module';
 import { DonHangModule } from './DonHang/don_hang/don_hang.module';
 import { MinioClientModule } from './Minio/nest-minio-client/nest-minio-client.module';
+import { SocketModule } from './SocketGetWay/socket/socket.module';
 
 @Module({
   imports: [AuthModule,
@@ -24,7 +25,8 @@ import { MinioClientModule } from './Minio/nest-minio-client/nest-minio-client.m
     OrderModule,
     CategoryModule,
     MinioClientModule,
-    DonHangModule
+    DonHangModule,
+    SocketModule
     // KafkaModule
   ],
 

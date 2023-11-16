@@ -1,3 +1,4 @@
+import { SocketGateway } from './../../SocketGetWay/socket/socket.gateway';
 import { QueryParamsModel } from './../../share/Pagination/Querypram';
 import { Body, Controller, Get, Inject, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { DonHangService } from './don_hang.service';
@@ -11,7 +12,7 @@ import { OrderService } from 'src/order/order/order.service';
 export class DonHangController {
 
     constructor(
-
+        private socket: SocketGateway,
         private _donhang_services: DonHangService, private readonly jwtService: JwtService, private _order_services: OrderService) { }
 
 
@@ -25,6 +26,19 @@ export class DonHangController {
             const decodedToken = await this.jwtService.decode(accessToken) as JwtData;
             return await this._donhang_services.GetDonHangXacNhanByAcountDangVanChuyen(decodedToken._id)
 
+        }
+        catch (e) {
+            return { status: 0, error: e.message }
+        }
+
+    }
+    @Post("testsocket/:mess")
+    @ApiBearerAuth('JWT')
+    async testsocket(@Param("mess") mess: string,) {
+        try {
+            console.log("fffewfw", mess)
+
+            this.socket.sendNotify(mess)
         }
         catch (e) {
             return { status: 0, error: e.message }

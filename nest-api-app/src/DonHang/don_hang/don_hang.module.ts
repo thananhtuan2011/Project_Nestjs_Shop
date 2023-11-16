@@ -1,3 +1,4 @@
+import { SocketModule } from './../../SocketGetWay/socket/socket.module';
 import { OrderModule } from './../../order/order/order.module';
 import { OrderService } from 'src/order/order/order.service';
 import { Module } from '@nestjs/common';
@@ -17,8 +18,8 @@ import { JwtService } from '@nestjs/jwt';
       },
     ]
   ),
-    OrderModule
-
+    OrderModule,
+    SocketModule
 
   ],
   controllers: [DonHangController],

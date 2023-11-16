@@ -1,3 +1,4 @@
+import { SocketioService } from './../../_metronic/core/services/socketio.service';
 import { NotifyService } from './../../_metronic/partials/layout/extras/offcanvas/quick-panel-offcanvas/notify.service';
 import {
   Component,
@@ -48,6 +49,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
     private router: Router,
     private initService: LayoutInitService,
     private layout: LayoutService,
+    private socketService: SocketioService
 
   ) {
     this.initService.init();
@@ -56,7 +58,10 @@ export class LayoutComponent implements OnInit, AfterViewInit {
   role: string
 
   ngOnInit(): void {
-
+    this.socketService.connect();
+    this.socketService.listen().subscribe((res: any) => {
+      console.log("resss", res)
+    })
     this.role = localStorage.getItem("role")
     if (this.role) {
 

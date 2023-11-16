@@ -24,6 +24,7 @@ import { LayoutUserComponent } from './User/layout-user/layout-user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { SocketioService } from '../_metronic/core/services/socketio.service';
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -52,5 +53,6 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
     NgbProgressbarModule,
     CoreModule,
   ],
+  providers: [SocketioService]
 })
 export class LayoutModule { }
